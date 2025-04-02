@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Tahoma;
+}
+
+.header-nav {
+    width: 100%;
+    padding: 0 30px;
+    background-color: rgba(0, 205, 225, 255);
+    height: 90px;
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-list {
+    width: 220px;
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    color: whitesmoke;
+}
+
+.logo {
+    border-radius: 50%;
+    width: 90px;
+}
