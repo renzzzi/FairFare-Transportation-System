@@ -7,7 +7,7 @@
 
 .header-nav {
     width: 100%;
-    padding: 0 30px;
+    padding: 0 80px;
     background-color: rgba(0, 205, 225, 255);
     height: 90px;
     position: fixed;
@@ -22,7 +22,28 @@
     display: flex;
     justify-content: space-between;
     font-size: 20px;
-    color: whitesmoke;
+    color: rgb(244, 244, 244);
+}
+
+.nav-list a {
+    display: flex;
+    width: 5em;
+    height: 4.5em;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s, border-bottom-color 0.2s ease;
+    border-bottom: 4px solid transparent;
+}
+
+.nav-list a:hover {
+    background-color: rgba(0, 220, 225, 255);
+    border-bottom-color: rgb(255, 255, 255);
+}
+
+.nav-list a:active {
+    background-color: rgba(0, 240, 225, 255);
 }
 
 .logo {
