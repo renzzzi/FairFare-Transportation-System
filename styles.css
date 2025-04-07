@@ -3,17 +3,22 @@
 	src: url("montserrat.ttf") format("truetype");
 }
 
+:root {
+	--primary-color: #00cde1;
+	--light-primary-color: #DDFCFF;
+	--font-color: #424242;
+}
+
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 	font-family: "Montserrat", sans-serif;
 	scroll-behavior: smooth;
+	color: var(--font-color);
 }
 
-:root {
-	--primary-color: #00cde1;
-}
+
 
 /* HEADER */
 
@@ -177,4 +182,35 @@
 	white-space: nowrap;
 	text-align: center;
 	font-weight: 650;
+}
+
+/* PARTNER COMPANIES */
+
+.partner-companies-content{
+	background-color: var(--light-primary-color);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	text-align: center;
+	height: 297px;
+	padding: 3vh;
+}
+
+.partner-companies-title{
+	font-size: 2.25rem;
+}
+
+.image-partner-companies{
+	height: 60px;
+	margin: 4vh 0.3vw;
+}
+
+.image-partner-companies:first-child{
+	width: 200px;
+	border-radius: 10px;
+}
+
+.partner-companies-description{
+	max-width: 55vw;
 }
