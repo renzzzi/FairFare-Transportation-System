@@ -3,17 +3,23 @@
 	src: url("montserrat.ttf") format("truetype");
 }
 
+:root {
+	--primary-color: #00cde1;
+	--secondary-color: #E18702;
+	--light-primary-color: #DDFCFF;
+	--font-color: #424242;
+}
+
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 	font-family: "Montserrat", sans-serif;
 	scroll-behavior: smooth;
+	color: var(--font-color);
 }
 
-:root {
-	--primary-color: #00cde1;
-}
+
 
 /* HEADER */
 
@@ -134,6 +140,7 @@
 	position: relative; /* Needed for absolute positioning inside */
 	width: 100%;
 	height: auto;
+	overflow: hidden; 	/* The Circles will not go beyond the picture */
 }
 
 .image-landingpage {
@@ -235,3 +242,95 @@
     background-color: var(--primary-color);;
     color: white;
 }
+
+
+/* PARTNER COMPANIES */
+
+.partner-companies-content{
+	background-color: var(--light-primary-color);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	text-align: center;
+	height: 300px;
+	padding: 50px;
+
+}
+
+.partner-companies-title{
+	font-size: 2.25rem;
+}
+
+.image-partner-companies{
+	height: 60px;
+	margin: 20px 10px;
+}
+
+.image-partner-companies:first-child{
+	width: 200px;
+	border-radius: 10px;
+}
+
+.partner-companies-description{
+	max-width: 670px;
+}
+
+/* FEATURES */
+
+.features-content{
+	margin: 120px;
+}
+
+.features-header{
+	display: flex;
+	align-items: center;
+}
+
+.first-feature, .second-feature{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 50px;
+}
+
+.line-design{
+	height: 110px;
+	width: 10px;
+	border-radius: 50px;
+}
+
+.first-feature-info .line-design{
+	background-color: var(--secondary-color);
+	margin-right: 30px;
+}
+
+.second-feature-info .line-design{ 
+	background-color: var(--primary-color);
+	margin-left: 30px;
+}
+
+.first-feature-info .features-header h2, .second-feature-info .features-header h2{
+	font-size: 2.25rem;
+	max-width: 450px;
+}
+
+.second-feature-info .features-header h2{
+	text-align: right;
+}
+
+.first-feature-info p, .second-feature-info p{
+	font-size: 1.25rem;
+	max-width: 450px;
+	margin: 20px 0 20px 40px;
+}
+
+.second-feature-info p{
+	text-align: right;
+}
+
+.features-images{
+	width:600px;
+	height: auto;
+}
+
