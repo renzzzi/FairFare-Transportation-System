@@ -142,10 +142,11 @@
     position: absolute; 
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -100%);
     z-index: 2;
     width: auto;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: rgba(0, 0, 0, 0.329);
@@ -163,5 +164,13 @@
 
 .logo-landing .logo-text {
     font-size: 55px;
+}
+
+.landing-content h1 {
+    color: white;
+    font-size: 80px;
+    white-space: nowrap;
+    text-align: center;
+    font-weight: 650;
 }
 
