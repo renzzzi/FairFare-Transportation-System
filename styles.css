@@ -1,145 +1,145 @@
 @font-face {
-    font-family: 'Montserrat';
-    src: url('montserrat.ttf') format('truetype');
+	font-family: "Montserrat";
+	src: url("montserrat.ttf") format("truetype");
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
-    scroll-behavior: smooth;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Montserrat", sans-serif;
+	scroll-behavior: smooth;
 }
 
-:root{
-    --primary-color: #00CDE1;
+:root {
+	--primary-color: #00cde1;
 }
 
 /* HEADER */
 
 .header-nav {
-    width: 100%;
-    background-color: var(--primary-color);
-    height: 90px;
-    position: sticky;
-    top: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 100px;
-    z-index: 100;
+	width: 100%;
+	background-color: var(--primary-color);
+	height: 90px;
+	position: sticky;
+	top: 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 100px;
+	z-index: 100;
 }
 
-.left-side, .right-side {
-    display: flex;
-    align-items: center;
+.left-side,
+.right-side {
+	display: flex;
+	align-items: center;
 }
 
 .logo-header {
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    cursor: pointer;
+	display: flex;
+	align-items: center;
+	overflow: hidden;
+	cursor: pointer;
 }
 
 .logo-header img {
-    width: 60px;
-    height: 60px;
+	width: 60px;
+	height: 60px;
 }
 
 .logo-text {
-    font-size: 24px;
-    font-weight: 550;
-    color: white;
-    white-space: nowrap;
-    overflow: hidden;
+	font-size: 24px;
+	font-weight: 550;
+	color: white;
+	white-space: nowrap;
+	overflow: hidden;
 }
 
 .nav-list {
-    list-style: none;
-    display: flex;
-    gap: 30px;
-    font-size: 20px;
+	list-style: none;
+	display: flex;
+	gap: 30px;
+	font-size: 20px;
 }
 
 .nav-list a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    cursor: pointer;
-    font-weight: 550;
-    padding: 10px 15px;
-    color: white;
-    text-decoration: none;
-    border-bottom: 4px solid transparent;
-    transition: background-color 0.2s, border-bottom-color 0.2s;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	cursor: pointer;
+	font-weight: 550;
+	padding: 10px 15px;
+	color: white;
+	text-decoration: none;
+	border-bottom: 4px solid transparent;
+	transition: background-color 0.2s, border-bottom-color 0.2s;
 }
 
 .nav-list a:hover {
-    background-color: #23daeb;
-    border-bottom-color: white;
+	background-color: #23daeb;
+	border-bottom-color: white;
 }
 
 .nav-list a:active {
-    background-color: #52e6f3;
+	background-color: #52e6f3;
 }
 
 .nav-list li:last-of-type a {
-    background-color: white;
-    color: #00CDE1;
-    border: 0;
-    border-radius: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    margin-top: 2px;
-    height: auto;
-    width: 150%;
-    border: 3px solid transparent;
+	background-color: white;
+	color: #00cde1;
+	border-radius: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin-top: 2px;
+	height: auto;
+	width: 150%;
+	border: 3px solid transparent;
 }
 
 .nav-list li:last-of-type a:hover {
-    border-color: white;
-    background-color: var(--primary-color);;
-    color: white;
+	border-color: white;
+	background-color: var(--primary-color);
+	color: white;
 }
 
 .search-icon {
-    width: 50px;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-bottom: 5px;
-    border-bottom: 4px solid transparent;
+	width: 50px;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-bottom: 5px;
+	border-bottom: 4px solid transparent;
 }
 
 .search-icon:hover {
-    background-color: #23daeb;
-    border-bottom-color: white;
-    cursor: pointer;
+	background-color: #23daeb;
+	border-bottom-color: white;
+	cursor: pointer;
 }
 
 .search-icon:active {
-    background-color: #52e6f3;
+	background-color: #52e6f3;
 }
 
 .search-icon img {
-    width: 30px;
+	width: 30px;
 }
 
 /* MAIN */
 
 .landing {
-    position: relative; /* Needed for absolute positioning inside */
-    width: 100%;
-    height: auto;
+	position: relative; /* Needed for absolute positioning inside */
+	width: 100%;
+	height: auto;
 }
 
 .image-landingpage {
-    width: 100%;
-    height: auto;
-    display: block;
+	width: 100%;
+	height: auto;
+	display: block;
 }
 
 .landing-content {
