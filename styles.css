@@ -132,7 +132,7 @@
 	width: 30px;
 }
 
-/* MAIN */
+/* LANDING */
 
 .landing {
 	position: relative; /* Needed for absolute positioning inside */
@@ -165,8 +165,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-80%, -40%);
-    width: 1000px;
-    height: 1000px;
+    width: clamp(300px, 55vw, 1000px);
+	height: clamp(300px, 55vw, 1000px);
     background-color: blue;
     z-index: 1;
     background: radial-gradient(ellipse 50.00% 50.00% at 50.00% 50.00%, #00CDE1 0%, rgba(0, 205, 225, 0.94) 32%, rgba(0, 205, 225, 0.73) 71%, rgba(0, 205, 225, 0.70) 76%, rgba(0, 205, 225, 0) 100%);
@@ -177,8 +177,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-30%, -40%);
-    width: 1000px;
-    height: 1000px;
+    width: clamp(300px, 55vw, 1000px);
+	height: clamp(300px, 55vw, 1000px);
     z-index: 1;
     background: radial-gradient(ellipse 50.00% 50.00% at 50.00% 50.00%, #E18702 0%, rgba(225, 135, 2, 0) 100%);
 }
@@ -194,12 +194,15 @@
 .logo-landing img:first-of-type {
     width: 150px;
     z-index: 2;
+	filter: drop-shadow(0px 5px 7px rgba(0, 0, 0, 0.400));
 }
 
 .logo-landing .logo-text {
     font-size: 55px;
     z-index: 2;
-    text-shadow: 0px 7px 7px rgba(0, 0, 0, 0.473);
+    text-shadow: 0px 7px 7px rgba(0, 0, 0, 0.400);
+	margin: 0;
+	font-weight: 550;
 }
 
 .landing-content h1 {
@@ -241,6 +244,92 @@
     color: white;
 }
 
+/* ABOUT US */
+  
+.about-content {
+	margin: 120px 120px 120px 80px;
+}
+
+.about-header{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	margin-bottom: 30px;
+}
+
+.about-section h2 {
+	font-size: 2.25rem;
+}
+
+.about-header .line-design{
+	background-color: var(--secondary-color);
+	margin-top: 10px;
+	height: 10px;
+	width: 200px;
+	border-radius: 50px;
+}
+
+.image-box {
+	background-color: #ccc;
+	border-radius: 5px;
+	min-height: 120px;
+}
+
+.about-description{
+	display: flex;
+}
+
+.large-box{
+	height: 300px;
+	width: 600px;
+}
+
+
+.small-box-1{
+	height: 200px;
+	width: 1450px;
+}
+.small-box-2{
+	height: 200px;
+	width: 1500px;
+}
+
+.about-description-one{
+	display: flex;
+	flex-direction: column;
+	max-width: 600px;
+}
+
+.about-description-one p{
+	text-align: justify;
+	margin: 20px;
+	text-indent: 50px;
+}
+
+.about-description-right{
+	display: flex;
+	flex-direction: column;
+	margin-left: 50px;
+}
+
+.about-description-two, .about-description-three {
+	display: flex;
+	max-width: 600px;
+	margin-bottom: 20px;
+}
+
+.about-description-one p{
+	text-align: justify;
+	margin: 20px;
+	text-indent: 50px;
+}
+
+.about-description-two p, .about-description-three p{
+	text-align: justify;
+	margin: 20px;
+	text-indent: 50px;
+}
 
 /* PARTNER COMPANIES */
 
@@ -330,93 +419,6 @@
 .features-images{
 	width:600px;
 	height: auto;
-}
-
-/* ABOUT US */
-  
-.about-content {
-	margin: 120px 120px 120px 80px;
-}
-
-.about-header{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	margin-bottom: 30px;
-}
-
-.about-section h2 {
-	font-size: 2.25rem;
-}
-
-.about-header .line-design{
-	background-color: var(--secondary-color);
-	margin-top: 10px;
-	height: 10px;
-	width: 200px;
-	border-radius: 50px;
-}
-
-.image-box {
-	background-color: #ccc;
-	border-radius: 5px;
-	min-height: 120px;
-}
-
-.about-description{
-	display: flex;
-}
-
-.large-box{
-	height: 300px;
-	width: 600px;
-}
-
-
-.small-box-1{
-	height: 200px;
-	width: 1450px;
-}
-.small-box-2{
-	height: 200px;
-	width: 1500px;
-}
-
-.about-description-one{
-	display: flex;
-	flex-direction: column;
-	max-width: 600px;
-}
-
-.about-description-one p{
-	text-align: justify;
-	margin: 20px;
-	text-indent: 50px;
-}
-
-.about-description-right{
-	display: flex;
-	flex-direction: column;
-	margin-left: 50px;
-}
-
-.about-description-two, .about-description-three {
-	display: flex;
-	max-width: 600px;
-	margin-bottom: 20px;
-}
-
-.about-description-one p{
-	text-align: justify;
-	margin: 20px;
-	text-indent: 50px;
-}
-
-.about-description-two p, .about-description-three p{
-	text-align: justify;
-	margin: 20px;
-	text-indent: 50px;
 }
 
 /* FOOTER */
