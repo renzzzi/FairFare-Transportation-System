@@ -377,9 +377,12 @@
 .first-feature, .second-feature{
 	display: flex;
 	justify-content: space-between;
+	flex-wrap: wrap;
 	align-items: center;
 	margin-bottom: 30px;
 }
+
+
 
 .line-design{
 	height: 110px;
@@ -417,7 +420,7 @@
 }
 
 .features-images{
-	width:600px;
+	max-width:600px;
 	height: auto;
 }
 
@@ -433,11 +436,10 @@ h3{
 	justify-content: center;
 }
 
-
 .footer-inside{
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-between;
+	justify-items: space-around;
 	column-gap: 100px;
 	row-gap: 50px;
 	max-width: 1250px;
