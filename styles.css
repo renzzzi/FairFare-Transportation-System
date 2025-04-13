@@ -46,7 +46,7 @@
 }
 
 .navigation h1 {
-	font-size: 24px;
+	font-size: 2.5vw;
 	font-weight: 550;
 	color: white;
 	white-space: nowrap;
@@ -137,12 +137,12 @@
 
 .mobile-nav.upper h1 {
 	color: white;
-	font-size: 24px;
+	font-size: clamp(20px, 2.5vw, 2.5vw);
 	font-weight: 550;
 }
 
 .burger-icon {
-	width: 30px;
+	min-width: 30px;
 	height: 25px;
 	margin-right: 60px;
 	display: flex;
@@ -254,22 +254,23 @@
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	transform: translate(-50%, -60%);
+	transform: translate(-53%, -60%);
 	z-index: 2;
 	width: auto;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	margin: 20px;
 }
 
 .blue-circle {
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	transform: translate(-80%, -40%);
+	transform: translate(-70%, -40%);
 	width: clamp(300px, 55vw, 1000px);
-	height: clamp(300px, 55vw, 1000px);
+	height: clamp(300px, 40vw, 1000px);
 	z-index: 1;
 	background: radial-gradient(
 		ellipse 50% 50% at 50% 50%,
@@ -285,9 +286,9 @@
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	transform: translate(-30%, -40%);
+	transform: translate(-20%, -40%);
 	width: clamp(300px, 55vw, 1000px);
-	height: clamp(300px, 55vw, 1000px);
+	height: clamp(300px, 50vw, 1000px);
 	z-index: 1;
 	background: radial-gradient(
 		ellipse 50% 50% at 50% 50%,
@@ -295,6 +296,7 @@
 		rgba(225, 135, 2, 0) 100%
 	);
 }
+
 
 .logo-landing {
 	display: flex;
@@ -304,13 +306,13 @@
 }
 
 .logo-landing img:first-of-type {
-	width: 150px;
+	width: 10vw;
 	z-index: 2;
 	filter: drop-shadow(0px 5px 7px rgba(0, 0, 0, 0.4));
 }
 
 .logo-landing .logo-text {
-	font-size: 55px;
+	font-size: 3.5vw;
 	z-index: 2;
 	text-shadow: 0px 7px 7px rgba(0, 0, 0, 0.4);
 	margin: 0;
@@ -319,11 +321,11 @@
 
 .landing-content h1 {
 	color: white;
-	font-size: 80px;
+	font-size: 5vw;
 	white-space: nowrap;
 	text-align: center;
 	font-weight: 650;
-	margin-bottom: 50px;
+	margin-bottom: 3vw;
 	z-index: 2;
 	text-shadow: 0px 6px 7px rgba(0, 0, 0, 0.384);
 }
@@ -331,17 +333,18 @@
 .landing-content h2 {
 	color: white;
 	font-weight: 400;
-	margin-bottom: 15px;
+	margin-bottom: 2vw;
 	z-index: 2;
 	text-shadow: 0px 7px 6px rgba(0, 0, 0, 0.548);
+	font-size: 1.7vw;
 }
 
 .buy-tickets {
-	font-size: 20px;
+	font-size: 1.5vw;
 	font-weight: 600;
 	color: var(--primary-color);
-	padding: 10px;
-	width: 250px;
+	padding: 1vw;
+	width: 18vw;
 	border-radius: 10px;
 	border: 3px solid transparent;
 	cursor: pointer;
@@ -355,6 +358,7 @@
 	background-color: var(--primary-color);
 	color: white;
 }
+	
 
 /* ABOUT US */
 
