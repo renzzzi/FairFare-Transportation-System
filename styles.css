@@ -132,6 +132,8 @@
 	width: 30px;
 }
 
+/* BURGER CONTENTS */
+
 .burger-icon {
 	width: 25px;
 	height: 25px;
@@ -222,7 +224,6 @@
 		rgba(0, 205, 225, 0.7) 76%,
 		rgba(0, 205, 225, 0) 100%
 	);
-	background-color: blue;
 }
 
 .orange-circle {
