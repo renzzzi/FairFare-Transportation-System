@@ -5,8 +5,8 @@
 
 :root {
 	--primary-color: #00cde1;
-	--secondary-color: #E18702;
-	--light-primary-color: #DDFCFF;
+	--secondary-color: #e18702;
+	--light-primary-color: #ddfcff;
 	--font-color: #424242;
 }
 
@@ -184,7 +184,7 @@
 	position: relative; /* Needed for absolute positioning inside */
 	width: 100%;
 	height: auto;
-	overflow: hidden; 	/* The Circles will not go beyond the picture */
+	overflow: hidden; /* The Circles will not go beyond the picture */
 }
 
 .image-landingpage {
@@ -194,109 +194,119 @@
 }
 
 .landing-content {
-    position: absolute; 
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -60%);
-    z-index: 2;
-    width: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -60%);
+	z-index: 2;
+	width: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 
 .blue-circle {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-80%, -40%);
-    width: clamp(300px, 55vw, 1000px);
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-80%, -40%);
+	width: clamp(300px, 55vw, 1000px);
 	height: clamp(300px, 55vw, 1000px);
-    background-color: blue;
-    z-index: 1;
-    background: radial-gradient(ellipse 50.00% 50.00% at 50.00% 50.00%, #00CDE1 0%, rgba(0, 205, 225, 0.94) 32%, rgba(0, 205, 225, 0.73) 71%, rgba(0, 205, 225, 0.70) 76%, rgba(0, 205, 225, 0) 100%);
+	z-index: 1;
+	background: radial-gradient(
+		ellipse 50% 50% at 50% 50%,
+		#00cde1 0%,
+		rgba(0, 205, 225, 0.94) 32%,
+		rgba(0, 205, 225, 0.73) 71%,
+		rgba(0, 205, 225, 0.7) 76%,
+		rgba(0, 205, 225, 0) 100%
+	);
+	background-color: blue;
 }
 
 .orange-circle {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-30%, -40%);
-    width: clamp(300px, 55vw, 1000px);
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-30%, -40%);
+	width: clamp(300px, 55vw, 1000px);
 	height: clamp(300px, 55vw, 1000px);
-    z-index: 1;
-    background: radial-gradient(ellipse 50.00% 50.00% at 50.00% 50.00%, #E18702 0%, rgba(225, 135, 2, 0) 100%);
+	z-index: 1;
+	background: radial-gradient(
+		ellipse 50% 50% at 50% 50%,
+		#e18702 0%,
+		rgba(225, 135, 2, 0) 100%
+	);
 }
 
-
 .logo-landing {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 2;
 }
 
 .logo-landing img:first-of-type {
-    width: 150px;
-    z-index: 2;
-	filter: drop-shadow(0px 5px 7px rgba(0, 0, 0, 0.400));
+	width: 150px;
+	z-index: 2;
+	filter: drop-shadow(0px 5px 7px rgba(0, 0, 0, 0.4));
 }
 
 .logo-landing .logo-text {
-    font-size: 55px;
-    z-index: 2;
-    text-shadow: 0px 7px 7px rgba(0, 0, 0, 0.400);
+	font-size: 55px;
+	z-index: 2;
+	text-shadow: 0px 7px 7px rgba(0, 0, 0, 0.4);
 	margin: 0;
 	font-weight: 550;
 }
 
 .landing-content h1 {
-    color: white;
-    font-size: 80px;
-    white-space: nowrap;
-    text-align: center;
-    font-weight: 650;
-    margin-bottom: 50px;
-    z-index: 2;
-    text-shadow: 0px 6px 7px rgba(0, 0, 0, 0.384);
+	color: white;
+	font-size: 80px;
+	white-space: nowrap;
+	text-align: center;
+	font-weight: 650;
+	margin-bottom: 50px;
+	z-index: 2;
+	text-shadow: 0px 6px 7px rgba(0, 0, 0, 0.384);
 }
 
 .landing-content h2 {
-    color: white;
-    font-weight: 400;
-    margin-bottom: 15px;
-    z-index: 2;
-    text-shadow: 0px 7px 6px rgba(0, 0, 0, 0.548);
+	color: white;
+	font-weight: 400;
+	margin-bottom: 15px;
+	z-index: 2;
+	text-shadow: 0px 7px 6px rgba(0, 0, 0, 0.548);
 }
 
 .buy-tickets {
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--primary-color);
-    padding: 10px;
-    width: 250px;
-    border-radius: 10px;
-    border: 3px solid transparent;
-    cursor: pointer;
-    z-index: 2;
-    box-shadow: 0px 7px 6px rgba(0, 0, 0, 0.199);
-    transition: background-color 0.2s ease;
+	font-size: 20px;
+	font-weight: 600;
+	color: var(--primary-color);
+	padding: 10px;
+	width: 250px;
+	border-radius: 10px;
+	border: 3px solid transparent;
+	cursor: pointer;
+	z-index: 2;
+	box-shadow: 0px 7px 6px rgba(0, 0, 0, 0.199);
+	transition: background-color 0.2s ease;
 }
 
 .buy-tickets:hover {
-    border-color: white;
-    background-color: var(--primary-color);;
-    color: white;
+	border-color: white;
+	background-color: var(--primary-color);
+	color: white;
 }
 
 /* ABOUT US */
-  
+
 .about-content {
 	margin: 120px 120px 120px 80px;
 }
 
-.about-header{
+.about-header {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -308,7 +318,7 @@
 	font-size: 2.25rem;
 }
 
-.about-header .line-design{
+.about-header .line-design {
 	background-color: var(--secondary-color);
 	margin-top: 10px;
 	height: 10px;
@@ -322,56 +332,51 @@
 	min-height: 120px;
 }
 
-.about-description{
+.about-description {
 	display: flex;
 }
 
-.large-box{
+.large-box {
 	height: 300px;
 	width: 600px;
 }
 
-
-.small-box-1{
+.small-box-1 {
 	height: 200px;
 	width: 1450px;
 }
-.small-box-2{
+.small-box-2 {
 	height: 200px;
 	width: 1500px;
 }
 
-.about-description-one{
+.about-description-one {
 	display: flex;
 	flex-direction: column;
 	max-width: 600px;
 }
 
-.about-description-one p{
+.about-description-one p {
 	text-align: justify;
 	margin: 20px;
 	text-indent: 50px;
 }
 
-.about-description-right{
+.about-description-right {
 	display: flex;
 	flex-direction: column;
 	margin-left: 50px;
 }
 
-.about-description-two, .about-description-three {
+.about-description-two,
+.about-description-three {
 	display: flex;
 	max-width: 600px;
 	margin-bottom: 20px;
 }
 
-.about-description-one p{
-	text-align: justify;
-	margin: 20px;
-	text-indent: 50px;
-}
-
-.about-description-two p, .about-description-three p{
+.about-description-two p,
+.about-description-three p {
 	text-align: justify;
 	margin: 20px;
 	text-indent: 50px;
@@ -379,7 +384,7 @@
 
 /* PARTNER COMPANIES */
 
-.partner-companies-content{
+.partner-companies-content {
 	background-color: var(--light-primary-color);
 	display: flex;
 	justify-content: center;
@@ -388,99 +393,100 @@
 	text-align: center;
 	height: 300px;
 	padding: 50px;
-
 }
 
-.partner-companies-title{
+.partner-companies-title {
 	font-size: 2.25rem;
 }
 
-.image-partner-companies{
+.image-partner-companies {
 	height: 60px;
 	margin: 20px 10px;
 }
 
-.image-partner-companies:first-child{
+.image-partner-companies:first-child {
 	width: 200px;
 	border-radius: 10px;
 }
 
-.partner-companies-description{
+.partner-companies-description {
 	max-width: 670px;
 }
 
 /* FEATURES */
 
-.features-content{
+.features-content {
 	margin: 120px 120px 120px 80px;
 }
 
-.features-header{
+.features-header {
 	display: flex;
 	align-items: center;
 }
 
-.first-feature, .second-feature{
+.first-feature,
+.second-feature {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	margin-bottom: 30px;
 }
 
-.line-design{
+.line-design {
 	height: 110px;
 	width: 10px;
 	border-radius: 50px;
 }
 
-.first-feature-info .line-design{
+.first-feature-info .line-design {
 	background-color: var(--secondary-color);
 	margin-right: 30px;
 }
 
-.second-feature-info .line-design{ 
+.second-feature-info .line-design {
 	background-color: var(--primary-color);
 	margin-left: 30px;
 }
 
-.first-feature-info .features-header h2, .second-feature-info .features-header h2{
+.first-feature-info .features-header h2,
+.second-feature-info .features-header h2 {
 	font-size: 2.25rem;
 	max-width: 450px;
 }
 
-.second-feature-info .features-header h2{
+.second-feature-info .features-header h2 {
 	text-align: right;
 }
 
-.first-feature-info p, .second-feature-info p{
+.first-feature-info p,
+.second-feature-info p {
 	font-size: 1.25rem;
 	max-width: 450px;
 	margin: 20px 0 20px 40px;
 }
 
-.second-feature-info p{
+.second-feature-info p {
 	text-align: right;
 }
 
-.features-images{
-	width:600px;
+.features-images {
+	width: 600px;
 	height: auto;
 }
 
 /* FOOTER */
-h3{
+h3 {
 	font-size: 1.5rem;
 }
 
 .footer {
 	padding: 40px 40px;
-	background-color: #DDFCFF;
+	background-color: #ddfcff;
 	display: flex;
 	justify-content: center;
 }
 
-
-.footer-inside{
+.footer-inside {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
@@ -489,13 +495,13 @@ h3{
 	max-width: 1250px;
 }
 
-.footer-left{
+.footer-left {
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
 }
 
-.footer-logo{
+.footer-logo {
 	filter: brightness(20%);
 }
 
@@ -503,13 +509,13 @@ h3{
 	fill: #424242;
 	width: 30px;
 	height: 30px;
-  }
+}
 
-li{
+li {
 	list-style-type: none;
 }
 
-.submit-btn{
+.submit-btn {
 	background-color: var(--secondary-color);
 	border: none;
 	padding: 10px;
@@ -520,12 +526,12 @@ li{
 	transition: all 0.2s ease;
 }
 
-.submit-btn:hover{
+.submit-btn:hover {
 	background-color: var(--primary-color);
 	color: white;
 }
 
-.inputs{
+.inputs {
 	width: 100%;
 	height: 70px;
 	padding: 20px;
@@ -533,42 +539,42 @@ li{
 	border: none;
 }
 
-.email-in{
+.email-in {
 	height: 10px;
 }
 
-.footer-form{
+.footer-form {
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
 }
 
-.form-inputs{
+.form-inputs {
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 20px;
 	gap: 10px;
 }
 
-.quick-links{
+.quick-links {
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
 }
 
-.accounts{
+.accounts {
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
 }
 
-.link-list{
+.link-list {
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
 }
 
-.bottom-bar{
+.bottom-bar {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
