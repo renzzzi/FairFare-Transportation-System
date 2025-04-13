@@ -9,31 +9,43 @@
 </head>
 
 <body>
-    <header class="header-nav">
-        <div class="left-side">
+    <header>
+        <nav class="navigation">
             <div class="logo-header">
                 <img src="logo/logo-white.png" alt="FairFare logo">
-                <h2 class="logo-text">FAIR FARE</h2>
+                <h1>FAIR FARE</h1>
             </div>
-        </div>
-        <div class="right-side">
-            <ul class="nav-list">
-                <li><a>Home </a></li>
-                <li><a>About Us</a></li>
-                <li><a>Contact</a></li>
-                <li>
-                    <div class="search-icon">
-                        <img src="icon/icon-search.png" alt="search icon">
-                    </div>
-                </li>
-                <li><a class="login-header">Log In</a></li>
-                <li>
-                    <div class="burger-icon">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
-                </li>
+            <div class="nav-container">
+                <ul>
+                    <li class="nav-menu"><a href="">Home</a></li>
+                    <li class="nav-menu"><a href="">About Us</a></li>
+                    <li class="nav-menu"><a href="">Contact</a></li>
+                    <li class="nav-menu search-icon">
+                        <img src="icon/icon-search.png" alt="search icon" />
+                    </li>
+                    <li class="nav-menu login-header">Log In</li>
+                </ul>
+            </div>
+        </nav>
+    
+        <nav class="mobile-nav upper">
+            <div class="logo-header">
+                <img src="logo/logo-white.png" alt="FairFare logo">
+                <h1>FAIR FARE</h1>
+            </div>
+            <div class="burger-icon" onclick="toggleMobileMenu()">
+                <div class="row"></div>
+                <div class="row"></div>
+                <div class="row"></div>
+            </div>
+        </nav>
+    
+        <div class="mobile-nav lower" id="mobileMenu">
+            <ul>
+                <li class="mobnav-menu"><a href="">Home</a></li>
+                <li class="mobnav-menu"><a href="">About Us</a></li>
+                <li class="mobnav-menu"><a href="">Contact</a></li>
+                <li class="mobnav-menu"><a href="">Log In</a></li>
             </ul>
         </div>
     </header>
@@ -41,16 +53,16 @@
     <main>
         <section class="landing">
             <img class="image-landingpage" src="image/landing-page.png" alt="people sitting in a bus">
+            <div class="blue-circle"></div>
+            <div class="orange-circle"></div>
             <div class="landing-content">
-                <div class="blue-circle"></div>
-                <div class="orange-circle"></div>
                 <div class="logo-landing">
                     <img src="logo/logo-white.png" alt="FairFare logo">
                     <h2 class="logo-text">FAIR FARE</h2>
                 </div>
-                <h1>Philippines' #1 Bus<br>Transport Booking Site</h1>
-                <h2>Going somewhere?</h2>
-                <button type="button" class="buy-tickets">Buy Tickets now</button>
+                    <h1>Philippines' #1 Bus<br>Transport Booking Site</h1>
+                    <h2>Going somewhere?</h2>
+                    <button type="button" class="buy-tickets">Buy Tickets now</button>
             </div>
         </section>
 
