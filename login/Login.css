@@ -168,6 +168,11 @@ h2{
     font-size: 1.2rem;
 }
 
+.loginform{
+    padding: 3rem;
+    grid-area: loginform;
+}
+
 @media (max-width: 768px) {
     .login-container {
         grid-template-columns: 1fr;
@@ -185,11 +190,9 @@ h2{
     h1{
         display: none;
     }
-}
-
-.loginform{
-    padding: 3rem;
-    grid-area: loginform;
+    .loginform{
+        padding: 3rem 2rem;
+    }
 }
 
 h3{
