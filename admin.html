@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard | FairFare</title>
+  <link rel="stylesheet" href="admin-styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header class="admin-header">
+    <div class="navbar">
+      <div class="nav-container">
+        <div class="nav-logo-container">
+          <img src="logo/logo-color(1).png" alt="FairFare Logo" class="nav-logo" />
+          <h1>FAIR FARE Admin</h1>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="admin-dashboard">
+    <div class="admin-container">
+      <aside class="side-panel">
+        <h2>Menu</h2>
+        <ul>
+          <li>Dashboard</li>
+          <li>User Requests</li>
+          <li>Complaints</li>
+          <li>Reports</li>
+          <li>Settings</li>
+          <li>Log Out</li>
+        </ul>
+      </aside>
+
+      <main class="dashboard-content">
+        <h2>Dashboard Overview</h2>
+
+        <section class="timeline-graph">
+          <h3>User Activity (Last 6 Months)</h3>
+          <canvas id="activityChart"></canvas>
+        </section>
+
+        <section class="user-table">
+          <h3>User Requests / Complaints</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>User ID</th>
+                <th>Type</th>
+                <th>Message</th>
+                <th>Status</th>
+                <th>Submitted On</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>#1024</td><td>Request</td><td>Need refund for overcharged ticket</td><td>Pending</td><td>April 12, 2025</td></tr>
+              <tr><td>#1025</td><td>Complaint</td><td>Driver arrived late at terminal</td><td>Reviewed</td><td>April 13, 2025</td></tr>
+              <tr><td>#1026</td><td>Request</td><td>Change destination of booked trip</td><td>Resolved</td><td>April 14, 2025</td></tr>
+              <tr><td>#1027</td><td>Complaint</td><td>AC not working in bus</td><td>Pending</td><td>April 14, 2025</td></tr>
+              <tr><td>#1028</td><td>Request</td><td>Payment failure during booking</td><td>Resolved</td><td>April 15, 2025</td></tr>
+              <tr><td>#1029</td><td>Complaint</td><td>Conductor was rude</td><td>Reviewed</td><td>April 15, 2025</td></tr>
+            </tbody>
+          </table>
+        </section>
+      </main>
+    </div>
+  </section>
+
+  <script>
+    const ctx = document.getElementById('activityChart').getContext('2d');
+    const activityChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr'],
+        datasets: [{
+          label: 'User Activity',
+          data: [320, 450, 390, 520, 610, 740],
+          borderColor: 'var(--primary-color)',
+          backgroundColor: 'rgba(0, 205, 225, 0.2)',
+          tension: 0.3,
+          fill: true,
+          pointBackgroundColor: 'var(--secondary-color)',
+          pointBorderColor: '#fff'
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        },
+        plugins: {
+          legend: { display: false }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
