@@ -60,7 +60,7 @@
                         <label for="password">Password:</label>
                         <input type="password" id="password" name="password" required class="input-field">
                     </div>
-                    <button type="submit" class="login-button">Login</button>
+                    <button type="submit" class="login-button" id="login-btn">Login</button>
                 </form>
                 <p>Don't have an account? <a href="register.html" class="reg-here">Register here</a></p>
             </div>
@@ -129,10 +129,10 @@
         <p>© Fair Fare 2025–2025</p>
     </div>
 
-    <script src="jquery-3.7.1.min.js"></script>
+    <script src="../jquery-3.7.1.min.js"></script>
     <script>
-        $(document).ready(function () {
-            $('.login-button').on("click", function (event) {
+        $(document).ready( function () {
+            $('#login-btn').on("click", function (event) {
                 event.preventDefault(); // Prevent the default form submission
                 const username = $("#username").val();
                 const password = $("#password").val();
@@ -144,7 +144,7 @@
                 const clientpassword = "1234";
 
                 if (username === adminusername && password === adminpassword){
-                    window.location.href = "../dashboard/";
+                    window.location.href = "../admin.html";
                 }
                 else if (username === clientusername && password === clientpassword){
                     window.location.href = "../booking/";
