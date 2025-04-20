@@ -1,39 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fair Fare</title>
+    <script src="../js/font-loader.js" defer></script>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 </head>
+
 <body>
     <header>
-        <nav class="navbar">
+        <nav aria-label="navigation bar" class="navbar">
             <div class="nav-container">
                 <div class="nav-logo-container">
                     <img src="../logo/logo-color(1).png" alt="Logo" class="nav-logo">
                     <h1>FAIR FARE</h1>
                 </div>
                 <ul class="nav-links">
-                    <li class="nav-btn"><a >Home</a></li>
-                    <li class="nav-btn"><a >About</a></li>
-                    <li class="nav-btn"><a >Contact</a></li>
+                    <li class="nav-btn"><a>Home</a></li>
+                    <li class="nav-btn"><a>About</a></li>
+                    <li class="nav-btn"><a>Contact</a></li>
                 </ul>
                 <div class="menu-btn">
                     <svg class="menu-btn" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
-                    <path d="M19 4a1 1 0 01-1 1H2a1 1 0 010-2h16a1 1 0 011 1zm0 6a1 1 0 01-1 1H2a1 1 0 110-2h16a1 1 0 011 1zm-1 7a1 1 0 100-2H2a1 1 0 100 2h16z"/>
+                        <path
+                            d="M19 4a1 1 0 01-1 1H2a1 1 0 010-2h16a1 1 0 011 1zm0 6a1 1 0 01-1 1H2a1 1 0 110-2h16a1 1 0 011 1zm-1 7a1 1 0 100-2H2a1 1 0 100 2h16z" />
                     </svg>
                 </div>
             </div>
         </nav>
-        <nav class="mob">
+        <nav aria-label="mob navigation" class="mob">
             <div class="mob-nav-container">
                 <ul class="mob-nav-links">
-                    <li class="mob-nav-btn"><a >Home</a></li>
-                    <li class="mob-nav-btn"><a >About</a></li>
-                    <li class="mob-nav-btn"><a >Contact</a></li>
+                    <li class="mob-nav-btn"><a>Home</a></li>
+                    <li class="mob-nav-btn"><a>About</a></li>
+                    <li class="mob-nav-btn"><a>Contact</a></li>
                 </ul>
             </div>
         </nav>
@@ -58,19 +62,22 @@
                             </div>
                             <div class="col-12 col-md-2 input-group-1 mb-3">
                                 <label for="dropoff" class="row">Dropoff Bus Terminal:</label>
-                                <input type="text" id="dropoff" name="dropoff" required class="input-field form-control">
+                                <input type="text" id="dropoff" name="dropoff" required
+                                    class="input-field form-control">
                             </div>
                             <div class="col-12 col-md-2 input-group-2 mb-3">
                                 <div class="label">
                                     <label for="number" class="row">Adult:</label>
                                 </div>
-                                <input type="number" id="number" name="number" required class="input-field form-control">
+                                <input type="number" id="number" name="number" required
+                                    class="input-field form-control">
                             </div>
                             <div class="col-12 col-md-2 input-group-2 mb-3">
                                 <div class="label">
                                     <label for="children" class="row">Children/Senior:</label>
                                 </div>
-                                <input type="number" id="children" name="children" required class="input-field form-control">
+                                <input type="number" id="children" name="children" required
+                                    class="input-field form-control">
                             </div>
                             <div class="col-12 col-md-2 input-group-2 mb-3">
                                 <div class="label">
@@ -78,7 +85,7 @@
                                 </div>
                                 <input type="date" id="date" name="date" required class="input-field form-control">
                             </div>
-                        </div>                        
+                        </div>
                         <button type="submit" class="search-btn">Search</button>
                     </form>
                 </div>
@@ -160,4 +167,5 @@
         });
     </script>
 </body>
+
 </html>

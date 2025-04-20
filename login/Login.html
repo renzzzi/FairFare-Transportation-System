@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fair Fare</title> 
+    <title>Fair Fare</title>
+    <script src="../js/font-loader.js" defer></script>
     <link rel="stylesheet" href="Login.css">
 </head>
 
@@ -16,13 +18,14 @@
                     <h1>FAIR FARE</h1>
                 </div>
                 <ul class="nav-links">
-                    <li class="nav-btn"><a >Home</a></li>
-                    <li class="nav-btn"><a >About</a></li>
-                    <li class="nav-btn"><a >Contact</a></li>
+                    <li class="nav-btn"><a>Home</a></li>
+                    <li class="nav-btn"><a>About</a></li>
+                    <li class="nav-btn"><a>Contact</a></li>
                 </ul>
                 <div class="menu-btn">
                     <svg class="menu-btn" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
-                    <path d="M19 4a1 1 0 01-1 1H2a1 1 0 010-2h16a1 1 0 011 1zm0 6a1 1 0 01-1 1H2a1 1 0 110-2h16a1 1 0 011 1zm-1 7a1 1 0 100-2H2a1 1 0 100 2h16z"/>
+                        <path
+                            d="M19 4a1 1 0 01-1 1H2a1 1 0 010-2h16a1 1 0 011 1zm0 6a1 1 0 01-1 1H2a1 1 0 110-2h16a1 1 0 011 1zm-1 7a1 1 0 100-2H2a1 1 0 100 2h16z" />
                     </svg>
                 </div>
             </div>
@@ -30,9 +33,9 @@
         <nav class="mob">
             <div class="mob-nav-container">
                 <ul class="mob-nav-links">
-                    <li class="mob-nav-btn"><a >Home</a></li>
-                    <li class="mob-nav-btn"><a >About</a></li>
-                    <li class="mob-nav-btn"><a >Contact</a></li>
+                    <li class="mob-nav-btn"><a>Home</a></li>
+                    <li class="mob-nav-btn"><a>About</a></li>
+                    <li class="mob-nav-btn"><a>Contact</a></li>
                 </ul>
             </div>
         </nav>
@@ -45,7 +48,8 @@
                     <h2>FAIR FARE</h2>
                 </div>
                 <div class="loginfo-2">
-                    <p>Your one-stop solution for all your transportation needs.<br><br>Login to access your account and manage your bookings.</p>
+                    <p>Your one-stop solution for all your transportation needs.<br><br>Login to access your account and
+                        manage your bookings.</p>
                 </div>
             </div>
             <div class="loginform">
@@ -131,7 +135,7 @@
 
     <script src="../jquery-3.7.1.min.js"></script>
     <script>
-        $(document).ready( function () {
+        $(document).ready(function () {
             $('#login-btn').on("click", function (event) {
                 event.preventDefault(); // Prevent the default form submission
                 const username = $("#username").val();
@@ -143,18 +147,18 @@
                 const clientusername = "client@test";
                 const clientpassword = "1234";
 
-                if (username === adminusername && password === adminpassword){
+                if (username === adminusername && password === adminpassword) {
                     window.location.href = "../admin.html";
                 }
-                else if (username === clientusername && password === clientpassword){
+                else if (username === clientusername && password === clientpassword) {
                     window.location.href = "../booking/";
                 }
-                else{
+                else {
                     alert("Incorrect inputs, please try again");
                     window.location.href = "index.html";
                 }
-                });
             });
+        });
     </script>
 
     <script>
@@ -167,6 +171,5 @@
         });
     </script>
 </body>
+
 </html>
-
-

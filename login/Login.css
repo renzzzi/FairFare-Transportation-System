@@ -1,16 +1,10 @@
-@font-face {
-	font-family: "Montserrat";
-	src: url("../montserrat.ttf") format("truetype");
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Montserrat", sans-serif;
+	scroll-behavior: smooth;
 }
-
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Montserrat", sans-serif;
-    scroll-behavior: smooth;
-}
-
 
 :root {
 	--primary-color: #00cde1;
@@ -19,227 +13,226 @@
 	--font-color: #424242;
 }
 
-
 /*navigation*/
 
-header{
-    position: sticky;
-    top: 0;
-    z-index: 1;
-    background-color: whitesmoke;
-    backdrop-filter: blur(10px);
-    background: rgba(255, 255, 255, 0.8);
+header {
+	position: sticky;
+	top: 0;
+	z-index: 1;
+	background-color: whitesmoke;
+	backdrop-filter: blur(10px);
+	background: rgba(255, 255, 255, 0.8);
 }
 
-.navbar{
-    display: flex;
-    justify-content: space-around;
+.navbar {
+	display: flex;
+	justify-content: space-around;
 }
 
 .nav-container {
-    padding: 0 2rem;
-    width: 1200px;
-    display: flex;
-    align-items: center;
+	padding: 0 2rem;
+	width: 1200px;
+	display: flex;
+	align-items: center;
 }
 
-.nav-logo-container{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 0;
+.nav-logo-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 10px 0;
 }
 
-.nav-logo{
-    width: 50px;
-    height: 50px;
-    margin: 10px 10px;
+.nav-logo {
+	width: 50px;
+	height: 50px;
+	margin: 10px 10px;
 }
 
-h1{
-    font-size: 1.5rem;
-    color: var(--primary-color);
+h1 {
+	font-size: 1.5rem;
+	color: var(--primary-color);
 }
 
-.nav-links{
-    margin-left: auto;
-    display: flex;
-    align-items: center;
+.nav-links {
+	margin-left: auto;
+	display: flex;
+	align-items: center;
 }
 
 .nav-btn > a {
-    padding: 40px 20px;
-    transition: all 0.3s ease-in-out;
-    border-radius: 5px;
+	padding: 40px 20px;
+	transition: all 0.3s ease-in-out;
+	border-radius: 5px;
 }
 
 .nav-btn > a:hover {
-    background-color: var(--primary-color);
-    text-decoration: none;
-    color: white;
+	background-color: var(--primary-color);
+	text-decoration: none;
+	color: white;
 }
 
-.menu-btn{
-    width: 30px;
-    height: 30px;
-    color: var(--font-color);
-    display: none;
-    cursor: pointer;
-    margin-left: auto;
+.menu-btn {
+	width: 30px;
+	height: 30px;
+	color: var(--font-color);
+	display: none;
+	cursor: pointer;
+	margin-left: auto;
 }
 
 /*Mobile Nav*/
-.mob{
-    display: none;
-    flex-direction: row;
-    justify-content: center;
+.mob {
+	display: none;
+	flex-direction: row;
+	justify-content: center;
 }
 
 .mob.active {
-    display: block;
+	display: block;
 }
 
-.mob-nav-container{
-    margin: 0rem 1rem 1rem 1rem;
-    width: 100%;
+.mob-nav-container {
+	margin: 0rem 1rem 1rem 1rem;
+	width: 100%;
 }
 
-.mob-nav-links{
-    list-style: none;
-    display: flex;
-    flex-direction: column;
+.mob-nav-links {
+	list-style: none;
+	display: flex;
+	flex-direction: column;
 }
 
-.mob-nav-btn{
-    padding: 20px 20px;
-    width: 100%;
+.mob-nav-btn {
+	padding: 20px 20px;
+	width: 100%;
 }
 
-.mob-nav-btn:hover{
-    background-color: var(--primary-color);
-    text-decoration: none;
-    color: white;
+.mob-nav-btn:hover {
+	background-color: var(--primary-color);
+	text-decoration: none;
+	color: white;
 }
 
 .mob-nav-btn > a {
-    width: 100%;;
-    transition: all 0.3s ease-in-out;
+	width: 100%;
+	transition: all 0.3s ease-in-out;
 }
 
 /*login*/
 
-.login-container{
-    margin: 2rem 1rem 5rem 1rem;
-    justify-self: center;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas: 'logininfo loginform';
-    height: auto;
-    max-width: 1000px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    overflow: hidden;
+.login-container {
+	margin: 2rem 1rem 5rem 1rem;
+	justify-self: center;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-areas: "logininfo loginform";
+	height: auto;
+	max-width: 1000px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
+	overflow: hidden;
 }
 
-.login-logo{
-    width: 5rem;
-    height: auto;
+.login-logo {
+	width: 5rem;
+	height: auto;
 }
 
-h2{
-    font-size: 4rem;
-    color: white;
+h2 {
+	font-size: 4rem;
+	color: white;
 }
 
-.loginfo{
-    height: 100%;
-    padding: 2rem;
-    grid-area: logininfo;
-    background-color: var(--primary-color);
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 20px;
+.loginfo {
+	height: 100%;
+	padding: 2rem;
+	grid-area: logininfo;
+	background-color: var(--primary-color);
+	color: white;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	gap: 20px;
 }
 
-.loginfo p{
-    font-weight: bold;
-    font-size: 1.2rem;
+.loginfo p {
+	font-weight: bold;
+	font-size: 1.2rem;
 }
 
-.loginform{
-    padding: 3rem 3rem;
-    grid-area: loginform;
+.loginform {
+	padding: 3rem 3rem;
+	grid-area: loginform;
 }
 
 @media (max-width: 768px) {
-    .login-container {
-        grid-template-columns: 1fr;
-        grid-template-areas: 'logininfo' 'loginform';
-    }
-    .loginform{
-        padding: 3rem 1rem;
-    }
-    .menu-btn{
-        display: block;
-    }
-    .nav-links{
-        display: none;
-    }
-    h1{
-        display: none;
-    }
-    .loginform{
-        padding: 3rem 2rem;
-    }
+	.login-container {
+		grid-template-columns: 1fr;
+		grid-template-areas: "logininfo" "loginform";
+	}
+	.loginform {
+		padding: 3rem 1rem;
+	}
+	.menu-btn {
+		display: block;
+	}
+	.nav-links {
+		display: none;
+	}
+	h1 {
+		display: none;
+	}
+	.loginform {
+		padding: 3rem 2rem;
+	}
 }
 
-h3{
-    font-size: 2rem;
-    color: var(--font-color);
-    margin-bottom: 1rem;
-    margin-top: 1rem;
+h3 {
+	font-size: 2rem;
+	color: var(--font-color);
+	margin-bottom: 1rem;
+	margin-top: 1rem;
 }
 
-.input-group-1{
-    display: flex;
-    flex-direction: column;
+.input-group-1 {
+	display: flex;
+	flex-direction: column;
 }
 
-.input-group-2{
-    display: flex;
-    flex-direction: column;
+.input-group-2 {
+	display: flex;
+	flex-direction: column;
 }
 
-.input-field{
-    padding: 0.5rem;
-    border: 1px solid rgb(198, 198, 198);
-    border-radius: 5px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    font-size: 1rem;
+.input-field {
+	padding: 0.5rem;
+	border: 1px solid rgb(198, 198, 198);
+	border-radius: 5px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	font-size: 1rem;
 }
 
-.login-button{
-    background-color: var(--primary-color);
-    color: white;
-    margin: 20px 0;
-    width: 100%;
-    padding: 0.5rem;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
+.login-button {
+	background-color: var(--primary-color);
+	color: white;
+	margin: 20px 0;
+	width: 100%;
+	padding: 0.5rem;
+	border: none;
+	border-radius: 5px;
+	font-size: 1rem;
+	cursor: pointer;
+	transition: all 0.3s ease-in-out;
 }
 
-.login-button:hover{
-    background-color: var(--secondary-color);
+.login-button:hover {
+	background-color: var(--secondary-color);
 }
 
-.reg-here{
-    text-decoration: none;
+.reg-here {
+	text-decoration: none;
 }
 
 /*footer*/
