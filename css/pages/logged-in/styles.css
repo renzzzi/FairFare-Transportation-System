@@ -284,6 +284,21 @@ h3 {
 	}
 }
 
+/* SUGGESTED BUS */
+
+.container h1 {
+	font-size: 3rem;
+	font-weight: 600;
+	color: var(--font-color);
+}
+.sug-images {
+	max-height: 200px;
+}
+
+.card-body .btn {
+	background-color: var(--primary-color);
+}
+
 /*footer*/
 
 h4 {
