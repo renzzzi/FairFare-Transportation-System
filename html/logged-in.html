@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fair Fare</title>
-    <script src="../js/font-loader.js" defer></script>
-    <link rel="stylesheet" href="Login.css">
+    <link rel="stylesheet" href="../css/pages/logged-in/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 </head>
 
 <body>
@@ -14,7 +15,7 @@
         <nav class="navbar">
             <div class="nav-container">
                 <div class="nav-logo-container">
-                    <img src="logo-color(1).png" alt="Logo" class="nav-logo">
+                    <img src="../images/logos/logo-color(1).png" alt="Logo" class="nav-logo">
                     <h1>FAIR FARE</h1>
                 </div>
                 <ul class="nav-links">
@@ -40,41 +41,64 @@
             </div>
         </nav>
     </header>
-    <main>
-        <div class="login-container">
-            <div class="loginfo">
-                <div class="loginfo-1">
-                    <p class="wt">Welcome to</p>
-                    <h2>FAIR FARE</h2>
-                </div>
-                <div class="loginfo-2">
-                    <p>Your one-stop solution for all your transportation needs.<br><br>Login to access your account and
-                        manage your bookings.</p>
-                </div>
+
+    <main class="main-container">
+        <div class="first-section">
+            <div class="bg-wpic">
+                <h2>See Philippines for less</h2>
+                <p>Book your ride now and enjoy the best fares in the country.</p>
             </div>
-            <div class="loginform">
-                <img src="logo-color(1).png" alt="Logo" class="login-logo">
-                <h3>Get Started</h3>
-                <form>
-                    <div class="input-group-1">
-                        <label for="username">Username:</label>
-                        <input type="text" id="username" name="username" required class="input-field">
-                    </div>
-                    <div class="input-group-2">
-                        <label for="password">Password:</label>
-                        <input type="password" id="password" name="password" required class="input-field">
-                    </div>
-                    <button type="submit" class="login-button" id="login-btn">Login</button>
-                </form>
-                <p>Don't have an account? <a href="register.html" class="reg-here">Register here</a></p>
+        </div>
+        <div class="second-section">
+            <div class="booking-container">
+                <div class="booking-form">
+                    <h3>Book your ride here</h3>
+                    <form class="dest text-center">
+                        <div class="travel-input row d-flex align-items-center justify-content-center">
+                            <div class="col-12 col-md-2 input-group-1 mb-3">
+                                <label for="pickup" class="row">Pickup Bus Terminal:</label>
+                                <input type="text" id="pickup" name="pickup" required class="input-field form-control">
+                            </div>
+                            <div class="col-12 col-md-2 input-group-1 mb-3">
+                                <label for="dropoff" class="row">Dropoff Bus Terminal:</label>
+                                <input type="text" id="dropoff" name="dropoff" required
+                                    class="input-field form-control">
+                            </div>
+                            <div class="col-12 col-md-2 input-group-2 mb-3">
+                                <div class="label">
+                                    <label for="number" class="row">Adult:</label>
+                                </div>
+                                <input type="number" id="number" name="number" required
+                                    class="input-field form-control">
+                            </div>
+                            <div class="col-12 col-md-2 input-group-2 mb-3">
+                                <div class="label">
+                                    <label for="children" class="row">Children/Senior:</label>
+                                </div>
+                                <input type="number" id="children" name="children" required
+                                    class="input-field form-control">
+                            </div>
+                            <div class="col-12 col-md-2 input-group-2 mb-3">
+                                <div class="label">
+                                    <label for="date" class="row">Date:</label>
+                                </div>
+                                <input type="date" id="date" name="date" required class="input-field form-control">
+                            </div>
+                        </div>
+                        <button type="submit" class="search-btn">Search</button>
+                    </form>
+                </div>
             </div>
         </div>
     </main>
 
+
+
     <footer class="footer">
         <div class="footer-inside">
             <div class="footer-left">
-                <img src="logo-white.png" alt="FairFare logo" class="footer-logo" height="100" width="100">
+                <img src="../images/logos/logo-white.png" alt="FairFare logo" class="footer-logo" height="100"
+                    width="100">
                 <h4>FAIR FARE</h4>
                 <p>Follow us on:</p>
                 <div class="social-icons">
@@ -128,38 +152,12 @@
         </div>
     </footer>
 
-    <div class="bottom-bar">
-        <p>Terms and Policies • Privacy Notice</p>
-        <p>© Fair Fare 2025–2025</p>
-    </div>
-
-    <script src="../jquery-3.7.1.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#login-btn').on("click", function (event) {
-                event.preventDefault(); // Prevent the default form submission
-                const username = $("#username").val();
-                const password = $("#password").val();
-
-                const adminusername = "admin@test";
-                const adminpassword = "1234";
-
-                const clientusername = "client@test";
-                const clientpassword = "1234";
-
-                if (username === adminusername && password === adminpassword) {
-                    window.location.href = "../admin.html";
-                }
-                else if (username === clientusername && password === clientpassword) {
-                    window.location.href = "../booking/";
-                }
-                else {
-                    alert("Incorrect inputs, please try again");
-                    window.location.href = "index.html";
-                }
-            });
-        });
-    </script>
+    <footer class="bg-dark text-white py-2">
+        <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+            <p class="mb-1 mb-md-0 small">Terms and Policies • Privacy Notice</p>
+            <p class="mb-0 small">© Fair Fare 2025–2025</p>
+        </div>
+    </footer>
 
     <script>
         const menuBtn = document.querySelector('.menu-btn');

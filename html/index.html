@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../js/font-loader.js" defer></script>
+  <script src="../js/burgerHandler.js" defer></script>
+  <script src="../js/jquery-3.7.1.min.js" defer></script>
+  <link rel="stylesheet" href="../css/pages/index/styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="container-fluid navigation d-flex align-items-center justify-content-between">
+        <a class="navbar-brand d-flex align-items-center logo-header text-white" href="#">
+          <img src="../images/logos/logo-white.png" alt="FairFare logo" width="60" height="60" class="me-2">
+          <h1 class="logo-name m-0 fw-bold">FAIR FARE</h1>
+        </a>
+
+        <!-- Desktop Nav -->
+        <div class="nav-links-desktop d-none d-lg-flex align-items-center">
+          <ul class="navbar-nav flex-row align-items-center mb-0">
+            <li class="nav-item nav-menu"><a class="nav-link text-white" href="#">Home</a></li>
+            <li class="nav-item nav-menu"><a class="nav-link text-white" href="#">About Us</a></li>
+            <li class="nav-item nav-menu"><a class="nav-link text-white" href="#">Contact</a></li>
+            <li class="nav-item">
+              <a aria-label="icon search" href="#" class="nav-item"><img src="../images/icons/icon-search.png" alt=""></a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="login-header btn btn-light rounded-pill px-3">Log In</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Mobile Nav -->
+        <div class="burger-icon d-lg-none" id="burgerToggle">
+          <div class="row"></div>
+          <div class="row"></div>
+          <div class="row"></div>
+        </div>
+      </div>
+
+
+      <div class="nav-links-mobile d-none flex-column text-center w-100" id="NavLinks">
+        <ul class="navbar-nav gap-3 py-3">
+          <li class="nav-item nav-menu"><a class="nav-link text-white" href="#">Home</a></li>
+          <li class="nav-item nav-menu"><a class="nav-link text-white" href="#">About Us</a></li>
+          <li class="nav-item nav-menu"><a class="nav-link text-white" href="#">Contact</a></li>
+          <li class="nav-item nav-menu"><a class="nav-link text-white" href="#">Log In</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero-section d-flex align-items-center justify-content-center text-center position-relative">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-10 d-flex flex-column align-items-center justify-content-center p-4">
+            <div class="d-flex flex-row align-items-center justify-content-center mb-3">
+              <img src="../images/logos/logo-white.png" alt="FairFare logo" class="me-2 logo-hero">
+              <h2 class="logo-text mb-0">FAIR FARE</h2>
+            </div>
+            <h1 class="fw-bold mb-3">Philippines' #1 Bus<br>Transport Booking Site</h1>
+            <h2 class="fw-normal mb-3">Going somewhere?</h2>
+            <button type="button" class="buy-tickets mt-2">Buy Tickets now</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="blue-circle"></div>
+      <div class="orange-circle"></div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="about-section section-padding">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2 class="title">ABOUT US</h2>
+          <div class="line-design-h mx-auto"></div>
+        </div>
+        <div class="row gx-5">
+          <!-- Left column -->
+          <div class="col-lg-6 d-flex flex-column align-items-start mb-4">
+            <div class="image-box large-box mb-3 w-100"></div>
+            <p class="text-justify">Fair Fare is the Philippines' trusted online bus transport booking platform,
+              designed to make
+              travel more convenient, affordable, and accessible for everyone. Whether you're heading to the city for
+              work or
+              exploring the islands for leisure, we help you get there with just a few clicks.</p>
+          </div>
+
+          <!-- Right column -->
+          <div class="col-lg-6">
+            <div class="row">
+              <div class="d-flex">
+                <div class="image-box small-box-1 mb-3 col-md-6"></div>
+                <p class="text-justify col-md-6">We partner with reliable bus operators nationwide to bring you
+                  real-time schedules,
+                  transparent fares, and secure online bookings – all in one easy-to-use website. Our
+                  mission is simple: to offer a fast, fair, and stress-free way to plan your journey.</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="d-flex">
+                <div class="col-md-6 image-box small-box-2 mb-3"></div>
+                <p class="text-justify col-md-6">At Fair Fare, we believe that every Filipino deserves safe, affordable,
+                  and comfortable
+                  travel. That’s why we’re committed to innovation, providing world-class customer
+                  service, digital security, and making bus travel a smart move. Travel fair. Only with
+                  Fair Fare.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PARTNER COMPANIES SECTION-->
+    <section class="partner-companies-content py-5 text-center .section-padding">
+      <div class="container-fluid">
+        <h2 class="mb-4 title">PARTNER COMPANIES</h2>
+        <div class="d-flex flex-wrap justify-content-center align-items-center mb-3">
+          <img src="../images/partner-companies/jac-liner-inc.png" alt="jac liner logo"
+            class="img-fluid mx-2 mb-3 image-partner-companies">
+          <img src="../images/partner-companies/rural-transit.png" alt="rural transit logo"
+            class="img-fluid mx-2 mb-3 image-partner-companies">
+          <img src="../images/partner-companies/victory-liner.png" alt="victory liner logo"
+            class="img-fluid mx-2 mb-3 image-partner-companies">
+          <img src="../images/partner-companies/vallacar-transit-inc.png" alt="vallacar transit logo"
+            class="img-fluid mx-2 mb-3 image-partner-companies">
+        </div>
+        <p class="mx-auto partner-companies-description">We proudly partner with trusted and reputable bus operators
+          across the Philippines to ensure safe and reliable travel for every passenger.</p>
+      </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section class="section-padding features-content">
+      <div class="features-content container">
+        <div class="row align-items-center mb-5 gx-5">
+          <div class="col-md-6 mb-4 mb-md-0">
+            <div class="d-flex align-items-center mb-3 first-feature">
+              <div class="mr-3 line-design v1 "></div>
+              <h2 class="fs-2 mb-0 first-feature-info">Book your next bus trip in seconds. Fast, easy, and secure!</h2>
+            </div>
+            <p class="fs-5 ms-4 first-feature-info">With our user-friendly platform, you can search, compare, and
+              reserve seats from trusted bus operators all over the Philippines. Enjoy a hassle-free booking experience
+              anytime, anywhere — no long lines, no stress.</p>
+          </div>
+          <div class="col-md-6 text-center">
+            <img src="../images/features-1.png" alt="bus graphics" class="img-fluid"
+              style="max-width: 100%; height: auto;">
+          </div>
+        </div>
+
+        <div class="features-content container">
+          <div class="row gx-5 align-items-center justify-content-center">
+            <div class="col-md-6">
+              <img src="../images/features-2.png" alt="route design" class="img-fluid features-images">
+            </div>
+
+            <div class="col-md-6">
+              <div class="d-flex align-items-center mb-3 first-feature">
+                <h2 class="fs-2 mb-0 second-feature-info mr-4">Travel anywhere in the Philippines with just a few
+                  clicks!</h2>
+                <div class="line-design v2"></div>
+              </div>
+              <p class="second-feature-info text-justify">Whether you're heading to the city or the countryside, our
+                platform connects you to hundreds of routes nationwide. Book your ride online, skip the terminal lines,
+                and focus on enjoying the journey.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer d-flex justify-content-center">
+    <div class="footer-inside">
+      <div class="col-md-2 footer-left">
+        <img src="../images/logos/logo-white.png" alt="FairFare logo" class="footer-logo" height="100" width="100">
+        <h3 class="footer-title">FAIR FARE</h3>
+        <p>Follow us on:</p>
+        <div class="social-icons">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px" class="social-icon"
+            fill="currentColor">
+            <path
+              d="M12,2C6.477,2,2,6.477,2,12c0,5.013,3.693,9.153,8.505,9.876V14.65H8.031v-2.629h2.474v-1.749 c0-2.896,1.411-4.167,3.818-4.167c1.153,0,1.762,0.085,2.051,0.124v2.294h-1.642c-1.022,0-1.379,0.969-1.379,2.061v1.437h2.995 l-0.406,2.629h-2.588v7.247C18.235,21.236,22,17.062,22,12C22,6.477,17.523,2,12,2z" />
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px" class="social-icon"
+            fill="currentColor">
+            <path
+              d="M 8 3 C 5.239 3 3 5.239 3 8 L 3 16 C 3 18.761 5.239 21 8 21 L 16 21 C 18.761 21 21 18.761 21 16 L 21 8 C 21 5.239 18.761 3 16 3 L 8 3 z M 18 5 C 18.552 5 19 5.448 19 6 C 19 6.552 18.552 7 18 7 C 17.448 7 17 6.552 17 6 C 17 5.448 17.448 5 18 5 z M 12 7 C 14.761 7 17 9.239 17 12 C 17 14.761 14.761 17 12 17 C 9.239 17 7 14.761 7 12 C 7 9.239 9.239 7 12 7 z M 12 9 A 3 3 0 0 0 9 12 A 3 3 0 0 0 12 15 A 3 3 0 0 0 15 12 A 3 3 0 0 0 12 9 z" />
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="24px" height="24px" class="social-icon"
+            fill="currentColor">
+            <path
+              d="M 11 4 C 7.134 4 4 7.134 4 11 L 4 39 C 4 42.866 7.134 46 11 46 L 39 46 C 42.866 46 46 42.866 46 39 L 46 11 C 46 7.134 42.866 4 39 4 L 11 4 z M 13.085938 13 L 21.023438 13 L 26.660156 21.009766 L 33.5 13 L 36 13 L 27.789062 22.613281 L 37.914062 37 L 29.978516 37 L 23.4375 27.707031 L 15.5 37 L 13 37 L 22.308594 26.103516 L 13.085938 13 z M 16.914062 15 L 31.021484 35 L 34.085938 35 L 19.978516 15 L 16.914062 15 z" />
+          </svg>
+        </div>
+      </div>
+
+      <div class="col-md-4 footer-form">
+        <h3 class="footer-title">Share something about us!</h3>
+        <p>You can send a direct message to us here.</p>
+        <form class="form-inputs">
+          <div><input class="inputs mess-in" type="text" placeholder="Message"></div>
+          <div><input class="inputs email-in" type="email" placeholder="Email"></div>
+          <div><button class="submit-btn" type="submit">Send</button></div>
+        </form>
+      </div>
+
+      <div class="col-md-3 quick-links">
+        <h3 class="footer-title">Quick Links</h3>
+        <ul class="link-list">
+          <li>Log In</li>
+          <li>Search Bus Terminals</li>
+          <li>Help Centre</li>
+          <li>Available Trips</li>
+        </ul>
+      </div>
+
+      <div class="col-md-3 accounts">
+        <h3 class="footer-title">Accounts</h3>
+        <ul class="link-list">
+          <li>Passenger</li>
+          <li>Bus Driver / Conductor</li>
+          <li>Bus Company</li>
+          <li>Terminal Control</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    $(document).ready(function () {
+      $('#burgerToggle').click(function () {
+        $('#NavLinks').toggleClass('d-none');
+      });
+
+      $(window).on('resize', function () {
+        if ($(window).width() >= 992) {
+          $('#NavLinks').addClass('d-none');
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
