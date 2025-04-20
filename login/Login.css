@@ -1,6 +1,6 @@
 @font-face {
 	font-family: "Montserrat";
-	src: url("montserrat.ttf") format("truetype");
+	src: url("../montserrat.ttf") format("truetype");
 }
 
 *{
@@ -169,7 +169,7 @@ h2{
 }
 
 .loginform{
-    padding: 3rem;
+    padding: 3rem 3rem;
     grid-area: loginform;
 }
 
@@ -179,7 +179,7 @@ h2{
         grid-template-areas: 'logininfo' 'loginform';
     }
     .loginform{
-        padding: 1rem;
+        padding: 3rem 1rem;
     }
     .menu-btn{
         display: block;
