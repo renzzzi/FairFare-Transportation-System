@@ -346,6 +346,33 @@ header {
 	width: 1rem;
 }
 
+
+/* SUGGESTED BUS */
+
+.container h1 {
+	font-size: 3rem;
+	font-weight: 600;
+	color: var(--font-color);
+	margin-top: 100px;
+}
+.sug-images {
+	max-height: 200px;
+}
+
+.button-book {
+	background-color: var(--primary-color);
+	color: var(--light-primary-color);
+	border-radius: 10px;
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+.button-book:hover {
+	background-color: var(--secondary-color);
+	color: white;
+	text-decoration: none;
+}
+
 @media (max-width: 768px) {
 	.line-design.v2 {
 		width: 2rem;
