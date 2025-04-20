@@ -13,6 +13,21 @@
 	--font-color: #424242;
 }
 
+.backdrop-blur {
+	backdrop-filter: blur(10px);
+}
+  
+.navbar-nav .nav-link:hover {
+	background-color: var(--primary-color);
+	color: white !important;
+	border-radius: 5px;
+	transition: all 0.3s ease-in-out;
+}
+
+.nav-h1{
+	color: var(--primary-color) !important; 
+}
+
 header{
     position: sticky;
     top: 0;
@@ -20,6 +35,10 @@ header{
     background-color: whitesmoke;
     backdrop-filter: blur(10px);
     background: rgba(255, 255, 255, 0.8);
+}
+
+.nav-padding{
+	padding: 1rem 1rem;
 }
 
 .navbar{
