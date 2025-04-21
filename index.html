@@ -5,8 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <script src="../js/font-loader.js" defer></script>
-  <link rel="stylesheet" href="styles.css">
+  <script src="/js/font-loader.js" defer></script>
+  <script src="/js/burgerHandler.js" defer></script>
+  <script src="/js/jquery-3.7.1.min.js" defer></script>
+  <link rel="stylesheet" href="/css/pages/index/styles.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
     integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 </head>
@@ -16,7 +18,7 @@
     <nav class="navbar">
       <div class="container-fluid navigation d-flex align-items-center justify-content-between">
         <a class="navbar-brand d-flex align-items-center logo-header text-white" href="#">
-          <img src="logo/logo-white.png" alt="FairFare logo" width="60" height="60" class="me-2">
+          <img src="/images/logos/logo-white.png" alt="FairFare logo" width="60" height="60" class="me-2">
           <h1 class="logo-name m-0 fw-bold">FAIR FARE</h1>
         </a>
 
@@ -27,7 +29,7 @@
             <li class="nav-item nav-menu"><a class="nav-link text-white" href="#">About Us</a></li>
             <li class="nav-item nav-menu"><a class="nav-link text-white" href="#">Contact</a></li>
             <li class="nav-item">
-              <a aria-label="icon search" href="#" class="nav-item"><img src="icon/icon-search.png" alt=""></a>
+              <a aria-label="icon search" href="#" class="nav-item"><img src="/images/icons/icon-search.png" alt=""></a>
             </li>
             <li class="nav-item">
               <a href="#" class="login-header btn btn-light rounded-pill px-3">Log In</a>
@@ -62,7 +64,7 @@
         <div class="row justify-content-center">
           <div class="col-md-10 d-flex flex-column align-items-center justify-content-center p-4">
             <div class="d-flex flex-row align-items-center justify-content-center mb-3">
-              <img src="logo/logo-white.png" alt="FairFare logo" class="me-2 logo-hero">
+              <img src="/images/logos/logo-white.png" alt="FairFare logo" class="me-2 logo-hero">
               <h2 class="logo-text mb-0">FAIR FARE</h2>
             </div>
             <h1 class="fw-bold mb-3">Philippines' #1 Bus<br>Transport Booking Site</h1>
@@ -125,13 +127,13 @@
       <div class="container-fluid">
         <h2 class="mb-4 title">PARTNER COMPANIES</h2>
         <div class="d-flex flex-wrap justify-content-center align-items-center mb-3">
-          <img src="image/partner-companies/jac-liner-inc.png" alt="jac liner logo"
+          <img src="/images/partner-companies/jac-liner-inc.png" alt="jac liner logo"
             class="img-fluid mx-2 mb-3 image-partner-companies">
-          <img src="image/partner-companies/rural-transit.png" alt="rural transit logo"
+          <img src="/images/partner-companies/rural-transit.png" alt="rural transit logo"
             class="img-fluid mx-2 mb-3 image-partner-companies">
-          <img src="image/partner-companies/victory-liner.png" alt="victory liner logo"
+          <img src="/images/partner-companies/victory-liner.png" alt="victory liner logo"
             class="img-fluid mx-2 mb-3 image-partner-companies">
-          <img src="image/partner-companies/vallacar-transit-inc.png" alt="vallacar transit logo"
+          <img src="/images/partner-companies/vallacar-transit-inc.png" alt="vallacar transit logo"
             class="img-fluid mx-2 mb-3 image-partner-companies">
         </div>
         <p class="mx-auto partner-companies-description">We proudly partner with trusted and reputable bus operators
@@ -153,14 +155,15 @@
               anytime, anywhere — no long lines, no stress.</p>
           </div>
           <div class="col-md-6 text-center">
-            <img src="image/features-1.png" alt="bus graphics" class="img-fluid" style="max-width: 100%; height: auto;">
+            <img src="/images/features-1.png" alt="bus graphics" class="img-fluid"
+              style="max-width: 100%; height: auto;">
           </div>
         </div>
 
         <div class="features-content container">
           <div class="row gx-5 align-items-center justify-content-center">
             <div class="col-md-6">
-              <img src="image/features-2.png" alt="route design" class="img-fluid features-images">
+              <img src="/images/features-2.png" alt="route design" class="img-fluid features-images">
             </div>
 
             <div class="col-md-6">
@@ -184,7 +187,7 @@
   <footer class="footer d-flex justify-content-center">
     <div class="footer-inside">
       <div class="col-md-2 footer-left">
-        <img src="logo/logo-white.png" alt="FairFare logo" class="footer-logo" height="100" width="100">
+        <img src="/images/logos/logo-white.png" alt="FairFare logo" class="footer-logo" height="100" width="100">
         <h3 class="footer-title">FAIR FARE</h3>
         <p>Follow us on:</p>
         <div class="social-icons">
@@ -238,8 +241,6 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
-  <script src="jquery-3.7.1.min.js"></script>
   <script>
     $(document).ready(function () {
       $('#burgerToggle').click(function () {
