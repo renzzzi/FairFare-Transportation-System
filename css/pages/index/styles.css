@@ -152,7 +152,7 @@ header {
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	transform: translate(-20%, -40%);
+	transform: translate(-15%, -40%);
 	width: clamp(300px, 55vw, 1000px);
 	height: clamp(300px, 50vw, 1000px);
 	z-index: 1;
@@ -358,7 +358,6 @@ header {
 	font-size: 3rem;
 	font-weight: 600;
 	color: var(--font-color);
-	margin-top: 100px;
 }
 .sug-images {
 	max-height: 200px;
