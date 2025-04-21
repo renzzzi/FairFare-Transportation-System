@@ -141,13 +141,40 @@ h1 {
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
+.chart-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 10px;
+}
+
 .chart h3 {
 	margin-bottom: 1rem;
 }
 
-#activityChart {
-	width: 100%;
-	height: 300px;
+.chart-header select {
+	margin-left: auto;
+	padding: 5px;
+	border: 2px solid black;
+	margin-bottom: 10px;
+}
+
+#seatsbooked-chart {
+	width: 92% !important;
+	height: 600px !important;
+	justify-self: center;
+}
+
+#websitevisitors-chart {
+	width: 92% !important;
+	height: 600px !important;
+	justify-self: center;
+}
+
+#ratings-chart {
+	width: 40% !important;
+	height: 40% !important;
+	justify-self: center;
 }
 
 .user-table {
@@ -181,4 +208,21 @@ th {
 
 tr:nth-child(even) {
 	background-color: #ececec;
+}
+
+th a {
+	text-decoration: none;
+	color: inherit;
+	display: block;
+}
+
+th a:hover {
+	text-decoration: underline;
+}
+
+.sort-button {
+	border: 0;
+	background-color: transparent;
+	cursor: pointer;
+	font-size: 18px;
 }
