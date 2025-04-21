@@ -155,8 +155,8 @@
                 <h4>Share something about us!</h4>
                 <p>You can send a direct message to us here.</p>
                 <form class="form-inputs">
-                    <div><input class="inputs mess-in" type="text" placeholder="Message"></div>
-                    <div><input class="inputs email-in" type="email" placeholder="Email"></div>
+                    <div><input class="inputs mess-in" type="text" placeholder="Message" /></div>
+                    <div><input class="inputs email-in" type="email" placeholder="Email" /></div>
                     <div><button class="submit-btn" type="submit">Send</button></div>
                 </form>
             </div>
@@ -228,7 +228,7 @@
         </div>
     </footer>
 
-    <script>
+    <script></script>
         const menuBtn = document.querySelector('.menu-btn');
         const mobNav = document.querySelector('.mob');
 
@@ -338,7 +338,7 @@
   <footer class="footer">
     <div class="footer-inside">
       <div class="footer-left">
-        <img src="images/logos/logo-white.png" alt="FairFare logo" class="footer-logo" height="100" width="100">
+        <img src="images/logos/logo-white.png" alt="FairFare logo" class="footer-logo" height="100" width="100" />
         <h4>FAIR FARE</h4>
         <p>Follow us on:</p>
         <div class="social-icons">
@@ -403,8 +403,9 @@
     const menuBtn = document.querySelector('.menu-btn');
     const mobNav = document.querySelector('.mob');
 
-    menuBtn.addEventListener('click', () => {
-      mobNav.classList.toggle('active');
+    menuBtn.addEventListener('click', function() {
+        mobNav.classList.toggle('active');
+      });
       menuBtn.classList.toggle('active');
     });
   </script>
