@@ -14,6 +14,7 @@
   <header class="admin-header">
     <div class="navbar">
       <div class="nav-container">
+        <h2 class="burger-icon" id="burger-icon">&#9776;</h2> <!--Burger Icon po ito-->
         <div class="nav-logo-container">
           <img src="images/logos/logo-color.png" alt="FairFare Logo" class="nav-logo">
           <h1>FAIR FARE Admin</h1>
@@ -25,12 +26,12 @@
   <section class="admin-dashboard">
     <div class="admin-container">
       <aside class="side-panel">
-        <h2>Menu</h2>
-        <ul>
+        <ul id="menu-list">
           <li>Dashboard</li>
-          <li>User Requests</li>
-          <li>Complaints</li>
           <li>Reports</li>
+          <li>Manage Travel Supervisor Accounts</li>
+          <li>Manage Passenger Accounts</li>
+          <li>Passenger Requests/Complaints</li>
           <li>Settings</li>
           <li>Log Out</li>
         </ul>
@@ -39,9 +40,19 @@
       <main class="dashboard-content">
         <h2>Dashboard Overview</h2>
 
-        <section class="timeline-graph">
-          <h3>User Activity (Last 6 Months)</h3>
-          <canvas id="activityChart"></canvas>
+        <section class="chart">
+          <h3>Seats Booked</h3>
+          <canvas id="seatsbooked-chart"></canvas>
+        </section>
+
+        <section class="chart">
+          <h3>Website Visitors</h3>
+          <canvas id="websitevisitors-chart"></canvas>
+        </section>
+
+        <section class="chart">
+          <h3>Ratings</h3>
+          <canvas id="ratings-chart"></canvas>
         </section>
 
         <section class="user-table">
@@ -106,36 +117,8 @@
     </div>
   </section>
 
-  <script>
-    const ctx = document.getElementById('activityChart').getContext('2d');
-    const activityChart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: ['Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr'],
-        datasets: [{
-          label: 'User Activity',
-          data: [320, 450, 390, 520, 610, 740],
-          borderColor: 'var(--primary-color)',
-          backgroundColor: 'rgba(0, 205, 225, 0.2)',
-          tension: 0.3,
-          fill: true,
-          pointBackgroundColor: 'var(--secondary-color)',
-          pointBorderColor: '#fff'
-        }]
-      },
-      options: {
-        responsive: true,
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        },
-        plugins: {
-          legend: { display: false }
-        }
-      }
-    });
-  </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="js/admin-script.js"></script>
 </body>
 
 </html>
