@@ -105,14 +105,20 @@ header {
 /* HERO SECTION */
 
 .hero-section {
-	position: relative;
 	overflow: hidden;
-	background-image: url("/images/landing-page.png");
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
 	height: 90vh;
 	width: 100%;
+}
+
+.hero-bg-img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+	object-position: center;
+	z-index: -1;
 }
 
 .hero-section .blue-circle,
@@ -345,7 +351,6 @@ header {
 	margin-left: 10px;
 	width: 1rem;
 }
-
 
 /* SUGGESTED BUS */
 
