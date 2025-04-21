@@ -295,18 +295,8 @@ h3 {
 	max-height: 200px;
 }
 
-.button-book {
+.card-body .btn {
 	background-color: var(--primary-color);
-	color: var(--light-primary-color);
-	cursor: pointer;
-	transition: all 0.2s ease;
-	text-decoration: none;
-}
-
-.button-book:hover {
-	background-color: var(--secondary-color);
-	color: white;
-	text-decoration: none;
 }
 
 /*footer*/
