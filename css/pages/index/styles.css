@@ -107,7 +107,7 @@ header {
 .hero-section {
 	position: relative;
 	overflow: hidden;
-	background-image: url("/images/landing-page.png");
+	background-image: url("images/landing-page.png");
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
