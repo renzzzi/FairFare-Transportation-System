@@ -1,16 +1,61 @@
-//Seats Booked Chart
 const ctx1 = document.getElementById('seatsbooked-chart').getContext('2d');
 const ctx2 = document.getElementById('websitevisitors-chart').getContext('2d');
 const ctx3 = document.getElementById('ratings-chart').getContext('2d');
 
+const fullLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+var seatsBookedFullData = [810, 540, 210, 350, 723, 298, 441, 410, 225, 105, 305, 979];
+var websiteVisitorsFullData = [1935, 908, 720, 640, 1001, 1034, 988, 840, 305, 299, 541, 2210];
 
+const seatsBookedChartId = 1;
+const websiteVisitorsChartId = 2;
+const ratingsChartId = 3;
+
+// Chart update function
+function updateChart(range, chartId) {
+  let months;
+  switch (range) {
+    case '3m': months = 3; break;
+    case '6m': months = 6; break;
+    case '9m': months = 9; break;
+    case '1y': months = 12; break;
+    default: months = 12; break;
+  }
+
+  let labelSlice = fullLabels.slice(-months);
+  let dataSlice;
+
+  switch (chartId) {
+    case 1:
+      dataSlice = seatsBookedFullData.slice(-months);
+      seatsBookedChart.data.labels = labelSlice;
+      seatsBookedChart.data.datasets[0].data = dataSlice;
+      seatsBookedChart.update();
+      break;
+    case 2:
+      dataSlice = websiteVisitorsFullData.slice(-months);
+      websiteVisitorsChart.data.labels = labelSlice;
+      websiteVisitorsChart.data.datasets[0].data = dataSlice;
+      websiteVisitorsChart.update();
+      break;
+    case 3:
+      dataSlice = ratingsFullData.slice(-months);
+      ratingsChart.data.labels = labelSlice;
+      ratingsChart.data.datasets[0].data = dataSlice;
+      ratingsChart.update();
+      break;
+    default:
+      dataSlice = [];
+  }  
+}
+
+//Seats Booked Chart
 const seatsBookedChart = new Chart(ctx1, {
   type: 'line',
   data: {
-    labels: ['Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr'],
+    labels: fullLabels,
     datasets: [{
       label: 'Seats Booked',
-      data: [320, 450, 390, 520, 610, 740],
+      data: seatsBookedFullData,
       borderColor: 'var(--primary-color)',
       backgroundColor: 'rgba(0, 206, 225, 0.27)',
       tension: 0.3,
@@ -21,6 +66,7 @@ const seatsBookedChart = new Chart(ctx1, {
   },
   options: {
     responsive: true,
+    maintainAspectRatio: false,
     scales: {
       y: {
         beginAtZero: true
@@ -32,14 +78,22 @@ const seatsBookedChart = new Chart(ctx1, {
   }
 });
 
+// Time Range for Seats Booked
+$(document).ready(function () {
+  $('#seatsbooked-timerange').on('change', function () {
+    const range = $(this).val();
+    updateChart(range, seatsBookedChartId);
+  });
+});
+
 //Website Visitors Chart
 const websiteVisitorsChart = new Chart(ctx2, {
   type: 'line',
   data: {
-    labels: ['Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr'],
+    labels: fullLabels,
     datasets: [{
       label: 'Website Visitors',
-      data: [1040, 1804, 2090, 830, 233, 1250],
+      data: websiteVisitorsFullData,
       borderColor: 'var(--primary-color)',
       backgroundColor: 'rgba(0, 206, 225, 0.27)',
       tension: 0.3,
@@ -50,6 +104,7 @@ const websiteVisitorsChart = new Chart(ctx2, {
   },
   options: {
     responsive: true,
+    maintainAspectRatio: false,
     scales: {
       y: {
         beginAtZero: true
@@ -59,6 +114,14 @@ const websiteVisitorsChart = new Chart(ctx2, {
       legend: { display: false }
     }
   }
+});
+
+// Time Range for Website Visitors
+$(document).ready(function () {
+  $('#websitevisitors-timerange').on('change', function () {
+    const range = $(this).val();
+    updateChart(range, websiteVisitorsChartId);
+  });
 });
 
 //Ratings Chart
@@ -86,7 +149,7 @@ const ratingsChart = new Chart(ctx3, {
       responsive: true,
       plugins: {
           legend: {
-              position: 'bottom'
+              position: 'top'
           }
       }
   }
@@ -100,3 +163,37 @@ $(document).ready(function() {
   });
 });
 
+
+
+let sortAscending = true; //Track the sorting direction
+
+function sortTable(columnIndex) {
+    const table = document.querySelector("table");
+    const tbody = table.querySelector("tbody");
+    const rows = Array.from(tbody.querySelectorAll("tr"));
+
+    rows.sort((rowA, rowB) => {
+        const cellA = rowA.querySelectorAll("td")[columnIndex].textContent.trim();
+        const cellB = rowB.querySelectorAll("td")[columnIndex].textContent.trim();
+
+        const numA = parseInt(cellA.replace("#", ""));
+        const numB = parseInt(cellB.replace("#", ""));
+
+        if (sortAscending) {
+            return numA - numB;
+        } else {
+            return numB - numA;
+        }
+    });
+
+    // Remove existing rows
+    while (tbody.firstChild) {
+        tbody.removeChild(tbody.firstChild);
+    }
+
+    // Append sorted rows
+    rows.forEach(row => tbody.appendChild(row));
+
+    // Toggle sorting direction
+    sortAscending = !sortAscending;
+}

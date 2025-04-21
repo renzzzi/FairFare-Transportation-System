@@ -31,7 +31,7 @@
           <li>Reports</li>
           <li>Manage Travel Supervisor Accounts</li>
           <li>Manage Passenger Accounts</li>
-          <li>Passenger Requests/Complaints</li>
+          <li>Passenger Requests / Complaints</li>
           <li>Settings</li>
           <li>Log Out</li>
         </ul>
@@ -41,17 +41,35 @@
         <h2>Dashboard Overview</h2>
 
         <section class="chart">
-          <h3>Seats Booked</h3>
+          <span class="chart-header">
+            <h3>Seats Booked</h3>
+            <select id="seatsbooked-timerange">
+              <option value="1y">1 year</option>
+              <option value="9m">9 months</option>
+              <option value="6m">6 months</option>
+              <option value="3m">3 months</option>
+            </select>
+          </span>
+          
           <canvas id="seatsbooked-chart"></canvas>
         </section>
 
         <section class="chart">
-          <h3>Website Visitors</h3>
+          <span class="chart-header">
+            <h3>Website Visitors</h3>
+            <select id="websitevisitors-timerange">
+              <option value="1y">1 year</option>
+              <option value="9m">9 months</option>
+              <option value="6m">6 months</option>
+              <option value="3m">3 months</option>
+            </select>
+          </span>
           <canvas id="websitevisitors-chart"></canvas>
         </section>
 
         <section class="chart">
           <h3>Ratings</h3>
+          </select>
           <canvas id="ratings-chart"></canvas>
         </section>
 
@@ -60,7 +78,10 @@
           <table>
             <thead>
               <tr>
-                <th>User ID</th>
+                <th>
+                    User ID
+                    <button class="sort-button" onclick="sortTable(0)">&#x21D5;</button>
+                </th>
                 <th>Type</th>
                 <th>Message</th>
                 <th>Status</th>
@@ -113,6 +134,8 @@
             </tbody>
           </table>
         </section>
+
+        
       </main>
     </div>
   </section>
