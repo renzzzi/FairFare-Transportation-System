@@ -47,7 +47,7 @@
       <nav class="navbar navbar-expand-lg navbar-light fixed-top py-5 d-block" data-navbar-on-scroll="data-navbar-on-scroll">
         <div class="container">
           <a class="navbar-brand" href="index.html"><img src="assets/img/logo.png" height="50" alt="logo" /></a><h1 class="mb-0">FAIR FARE</h1>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"> </span></button>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"><span class="navbar-toggler-icon"> </span></button>
           <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-lg-center align-items-start">
               <li class="nav-item px-3 px-xl-4"><a class="nav-link fw-medium" aria-current="page" href="#service">Service</a></li>
@@ -445,6 +445,20 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
     <script src="assets/js/theme.js"></script>
+<<<<<<< HEAD
+=======
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- BURGER ICON -->
+    <script>
+      $(document).ready(function () {
+        $('.navbar-toggler').on('click', function () {
+            var target = $(this).data('target');
+            $(target).toggleClass('collapse');
+        });
+    });
+    </script>
+>>>>>>> ff4ac32730fa31a2b0973055268f88ed2f64fc26
 <script>
   $(document).ready(function () {
     $('#navbarSupportedContent').on('show.bs.collapse', function () {

@@ -15,7 +15,7 @@
 
 /* Blur background when menu is open */
 .navbar.navbar-blur {
-	backdrop-filter: blur(10px);
+	backdrop-filter: blur(15px);
 	background-color: rgba(255, 255, 255, 0.85); /* semi-transparent white */
 	transition: background-color 0.3s ease;
   }
