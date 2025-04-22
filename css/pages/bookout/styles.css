@@ -1,0 +1,122 @@
+:root {
+	--bs-primary: #00cde1;
+	--bs-primary-rgb: 0, 205, 225;
+}
+
+.btn-primary {
+	background-color: var(--bs-primary) !important;
+	border-color: var(--bs-primary) !important;
+}
+
+.btn-outline-primary {
+	color: var(--bs-primary) !important;
+	border-color: var(--bs-primary) !important;
+}
+
+.btn-outline-primary:hover {
+	background-color: var(--bs-primary) !important;
+	color: #fff !important;
+}
+
+.nav-tabs .nav-link.active {
+	border-color: var(--bs-primary) var(--bs-primary) #fff;
+	color: var(--bs-primary) !important;
+}
+
+.nav-pad {
+	padding: 0.5rem 1rem;
+}
+
+.bold-h {
+	font-weight: bolder;
+}
+
+.navbar-toggler {
+	padding: 0.25rem 0.75rem;
+	font-size: 1.25rem;
+	/* Adjust this as needed */
+}
+
+.navbar-toggler-icon {
+	width: 30px;
+	/* Set a fixed width for the burger icon */
+	height: 30px;
+	/* Set a fixed height for the burger icon */
+	background-size: contain;
+	/* Ensure the icon fits the container */
+}
+
+.payment-section {
+	max-width: 600px;
+	padding: 20px;
+	background-color: #f8f9fa;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group label {
+	display: block;
+	margin-bottom: 0.5rem;
+}
+
+.form-control {
+	width: 100%;
+	padding: 0.75rem;
+	margin-bottom: 1rem;
+	border: 1px solid #ced4da;
+	border-radius: 0.25rem;
+	box-sizing: border-box;
+}
+
+.payment-method {
+	margin-bottom: 1.5rem;
+	border: 1px solid #dee2e6;
+	padding: 15px;
+	border-radius: 0.25rem;
+}
+
+.payment-method h6 {
+	margin-top: 0;
+	margin-bottom: 1rem;
+	color: var(--bs-primary);
+}
+
+.payment-method-radio {
+	margin-right: 0.5rem;
+}
+
+/* New Styles for Trip Summary */
+.trip-summary {
+	width: 300px;
+	padding: 20px;
+	background-color: #f8f9fa;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.trip-details {
+	margin-bottom: 1rem;
+}
+
+.trip-details h6 {
+	font-weight: bold;
+	margin-bottom: 0.5rem;
+}
+
+.trip-details p {
+	margin-bottom: 0.25rem;
+}
+
+.main-content {
+	display: flex;
+	justify-content: center;
+	/* Center the items horizontally */
+	align-items: flex-start;
+	padding: 20px;
+}
+
+.payment-section,
+.trip-summary {
+	margin: 0 10px;
+	/* Add margin for spacing between sections */
+}
