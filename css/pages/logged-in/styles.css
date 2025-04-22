@@ -295,15 +295,17 @@ h3 {
 	max-height: 200px;
 }
 
-.button-book {
+.book-btn {
 	background-color: var(--primary-color);
 	color: var(--light-primary-color);
 	cursor: pointer;
 	transition: all 0.2s ease;
 	text-decoration: none;
+	padding: 5px;
+	border-radius: 10px;
 }
 
-.button-book:hover {
+.book-btn:hover {
 	background-color: var(--secondary-color);
 	color: white;
 	text-decoration: none;
