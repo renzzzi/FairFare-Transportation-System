@@ -73,17 +73,17 @@ document.addEventListener('DOMContentLoaded', function () {
         {
             id: 4,
             from: 'Zamboanga',
-            to: 'Manila',
+            to: 'Davao',
             date: '2024-07-23',
             time: '05:00 PM',
-            bus: 'MNL-001',
+            bus: 'MDW-001',
             driver: ' Driver 4',
             status: 'Completed',
             bookings: []
         },
         {
             id: 5,
-            from: 'Manila',
+            from: 'Cagayan de Oro',
             to: 'Zamboanga',
             date: '2024-07-24',
             time: '09:00 AM',

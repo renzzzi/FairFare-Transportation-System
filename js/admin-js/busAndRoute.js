@@ -1,11 +1,17 @@
 let buses = [
-    { id: 1, name: "Super Cruiser", type: "AC", capacity: 40 },
-    { id: 2, name: "City Hopper", type: "Non-AC", capacity: 50 },
+    { id: 1, name: "RTW-123", type: "AC", capacity: 40 },
+    { id: 2, name: "ABC-456", type: "AC", capacity: 50 },
+    { id: 3, name: "XYZ-789", type: "AC", capacity: 50 },
+    { id: 4, name: "MDW-001", type: "Non-AC", capacity: 50 },
+    { id: 5, name: "MNL-002", type: "Non-AC", capacity: 50 },
 ];
 
 let routes = [
-    { id: 1, from: "New York", to: "Los Angeles", distance: 3949 },
-    { id: 2, from: "Chicago", to: "Miami", distance: 2106 },
+    { id: 1, from: "Zamboanga", to: "Ipil", distance: 3949 },
+    { id: 2, from: "Pagadian", to: "Zamboanga", distance: 1242 },
+    { id: 2, from: "Ipil", to: "Pagadian", distance: 3212 },
+    { id: 2, from: "Zamboanga", to: "Davao", distance: 2106 },
+    { id: 2, from: "Cagayan de Oro ", to: "Zamboanga", distance: 4312 },
 ];
 
 function populateBusListTable(buses) {

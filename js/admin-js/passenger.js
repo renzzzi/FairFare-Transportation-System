@@ -5,9 +5,10 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 let passengers = [
-    { id: 1, name: "Alice Smith", email: "alice.smith@example.com", registrationDate: "2025-01-15", accountStatus: "Active" },
-    { id: 2, name: "Bob Johnson", email: "bob.johnson@example.com", registrationDate: "2025-02-20", accountStatus: "Inactive" },
-    { id: 3, name: "Charlie Brown", email: "charlie.brown@example.com", registrationDate: "2025-03-10", accountStatus: "Active" },
+    { id: 1, name: "Juan Dela Cruz", email: "juan@example.com", registrationDate: "2025-01-15", accountStatus: "Active" },
+    { id: 2, name: "Maria Santos", email: "maria@example.com", registrationDate: "2025-02-20", accountStatus: "" },
+    { id: 3, name: "John Smith", email: "john@example.com", registrationDate: "2025-03-10", accountStatus: "Active" },
+    { id: 3, name: "Carl Mark", email: "carl@example.com", registrationDate: "2023-01-10", accountStatus: "Inactive" },
 ];
 
 // Function to populate passenger table
