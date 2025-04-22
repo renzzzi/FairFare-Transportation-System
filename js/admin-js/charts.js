@@ -1,6 +1,8 @@
 const ctx1 = document.getElementById('seatsbooked-chart').getContext('2d');
 const ctx2 = document.getElementById('websitevisitors-chart').getContext('2d');
 const ctx3 = document.getElementById('ratings-chart').getContext('2d');
+const ctx4 = document.getElementById('customerServiceChart').getContext('2d');
+
 
 const fullLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 var seatsBookedFullData = [810, 540, 210, 350, 723, 298, 441, 410, 225, 105, 305, 979];
@@ -42,6 +44,12 @@ export function updateChart(range, chartId) {
             ratingsChart.data.labels = labelSlice;
             ratingsChart.data.datasets[0].data = dataSlice;
             ratingsChart.update();
+            break;
+        case 4:
+            dataSlice = ratingsFullData.slice(-months);
+            customerServiceChart.data.labels = labelSlice;
+            customerServiceChart.data.datasets[0].data = dataSlice;
+            customerServiceChart.update();
             break;
         default:
             dataSlice = [];
@@ -139,6 +147,47 @@ const ratingsChart = new Chart(ctx3, {
     }
 });
 
+const customerServiceChart = new Chart(ctx4, { 
+    type: 'pie',
+    data: {
+        labels: ['Payment Issues', 'Route Inquiries', 'Technical Problems', 'Feedback', 'Other'], // Customize these labels based on your actual categories
+        datasets: [{
+            label: 'Customer Service Requests',
+            data: [150, 220, 180, 100, 50], // Replace these with the actual number of requests for each category
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.7)',   // Red
+                'rgba(54, 162, 235, 0.7)',   // Blue
+                'rgba(255, 206, 86, 0.7)',   // Yellow
+                'rgba(75, 192, 192, 0.7)',   // Green
+                'rgba(153, 102, 255, 0.7)'    // Purple
+                // Add more colors if you have more categories
+            ],
+            borderColor: [
+                'rgba(0, 0, 0, 0.51)',
+            ],
+            borderWidth: 0.5
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        let label = context.label || '';
+                        if (context.parsed !== null) {
+                            label += ': ' + context.parsed + ' requests';
+                        }
+                        return label;
+                    }
+                }
+            }
+        }
+    }
+});
 export function initializeCharts() {
     // Time Range for Seats Booked
     $('#seatsbooked-timerange').on('change', function () {

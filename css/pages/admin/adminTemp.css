@@ -166,10 +166,77 @@ body {
     justify-self: center;
 }
 
-#ratings-chart {
-    width: 40% !important;
-    height: 40% !important;
+#ratings-chart, #customerServiceChart {
+    width: 60% !important;
+    height: 300px !important;
     justify-self: center;
+}
+
+/* MODAL */
+/* Basic modal styling (you can customize this) */
+#modalChartCanvas {
+    background-color: rgb(255, 255, 255);
+}
+
+#modalChartTitle {
+    color: white;
+    font-weight: 600;
+}
+
+#modalChartContent {
+    left: 0;
+    top: 0;
+    transform: translate(60%, -20%);
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100% !important; /* Full width */
+    height: 100% !important; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+}
+
+.modal-content {
+    margin: 15% auto; /* 15% from the top and centered */
+    border: 3px solid white;
+    position: relative;
+    border-radius: 50px;
+}
+
+.modal-content.small-modal {
+    width: 60% !important; /* Adjust as needed */
+}
+
+/* Specific modal width for Breakdown of Customer Service Requests and Ratings */
+.modal-content.large-modal {
+    width: 90% !important; /* Adjust as needed */
+    height: 80% !important;
+    overflow: hidden;
+    padding-bottom: 90px;
+
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Style for the chart containers to make them clickable */
+.chart {
+    cursor: pointer;
 }
 
 .user-table {
