@@ -488,63 +488,111 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- JQUERY FOR SIDE BAR -->
     <script>
+        $(document).ready(function () {
+            var $toggleSidebarButton = $("#toggleSidebar");
+            var $sidebar = $("#sidebar");
+            var $sidebarMenuContainer = $("#sidebarMenuContainer");
+            var $mainContent = $("#mainContent");
+            var $menuLinks = $(".sidebar a");
+        
+            var sections = {
+                dashboardButton: "dashboardSection",
+                manageTripsButton: "manageTripsSection",
+                manageBookingsButton: "manageBookingsSection",
+                salesReportButton: "salesReportSection",
+                availableResourcesButton: "availableResourcesSection"
+            };
+        
+            // Initial setup
+            $sidebar.addClass("active");
+            $mainContent.addClass("active");
+            if ($(window).width() <= 768) {
+                $sidebarMenuContainer.hide();
+            }
+        
+            // Toggle sidebar
+            $toggleSidebarButton.click(function () {
+                $sidebar.toggleClass("active");
+                $mainContent.toggleClass("active");
+                if ($(window).width() <= 768) {
+                    $sidebarMenuContainer.fadeToggle();
+                }
+            });
+        
+            // Section navigation
+            $menuLinks.click(function (e) {
+                e.preventDefault();
+        
+                $.each(sections, function (_, sectionId) {
+                    $("#" + sectionId).hide();
+                });
+        
+                $("#" + sections[this.id]).show();
+        
+                $sidebar.removeClass("active");
+                $mainContent.removeClass("active");
+                if ($(window).width() <= 768) {
+                    $sidebarMenuContainer.fadeOut();
+                }
+            });
+        
+            // Show default section
+            $("#dashboardSection").show();
+        });
+    </script>
+
+    <!-- JQUERY FOR CHANGING PAGES -->
+        <script>
+        $(document).ready(function () {
+            // Initial visibility setup
+            $('#dashboardSection').show();
+            $('#manageTripsSection, #manageBookingsSection, #salesReportSection, #availableResourcesSection').hide();
+
+            // Dashboard button click
+            $('#dashboardButton').click(function () {
+                $('#dashboardSection').show();
+                $('#manageTripsSection, #manageBookingsSection, #salesReportSection, #availableResourcesSection').hide();
+                updateDashboardStats();
+            });
+
+            // Manage Trips button click
+            $('#manageTripsButton').click(function () {
+                $('#manageTripsSection').show();
+                $('#dashboardSection, #manageBookingsSection, #salesReportSection, #availableResourcesSection').hide();
+                renderManageTripsTable();
+            });
+
+            // Manage Bookings button click
+            $('#manageBookingsButton').click(function () {
+                $('#manageBookingsSection').show();
+                $('#dashboardSection, #manageTripsSection, #salesReportSection, #availableResourcesSection').hide();
+                renderBookingsTable();
+            });
+
+            // Sales Report button click
+            $('#salesReportButton').click(function () {
+                $('#salesReportSection').show();
+                $('#dashboardSection, #manageTripsSection, #manageBookingsSection, #availableResourcesSection').hide();
+                renderSalesReport();
+            });
+
+            // Available Resources button click
+            $('#availableResourcesButton').click(function () {
+                $('#availableResourcesSection').show();
+                $('#dashboardSection, #manageTripsSection, #manageBookingsSection, #salesReportSection').hide();
+            });
+        });
+        </script>
+
+        <!-- LOG OUT -->
+        <script>
         $(".dropdown-item").click(function(event) {
             event.preventDefault(); 
             window.location.href = "../login.html";  
         });
-        
-        $(document).ready(function() {
-    const $toggleSidebarButton = $("#toggleSidebar");
-    const $sidebar = $("#sidebar");
-    const $sidebarMenuContainer = $("#sidebarMenuContainer");
-    const $mainContent = $("#mainContent");
-    const $menuLinks = $(".sidebar a");
-    const sections = {
-        dashboardButton: "dashboardSection",
-        manageTripsButton: "manageTripsSection",
-        manageBookingsButton: "manageBookingsSection",
-        salesReportButton: "salesReportSection",
-        availableResourcesButton: "availableResourcesSection"
-    };
-
-    // Initially close the sidebar (for all screen sizes)
-    $sidebar.addClass("active");
-    $mainContent.addClass("active"); 
-    if ($(window).width() <= 768) {
-        $sidebarMenuContainer.hide(); // Hide the container on small screens
-    }
-
-    // Toggle Sidebar
-    $toggleSidebarButton.on("click", function() {
-        $sidebar.toggleClass("active");
-        $mainContent.toggleClass("active");
-        if ($(window).width() <= 768) {
-            $sidebarMenuContainer.fadeToggle(); // Toggle container visibility on small screens
-        }
-    });
-
-    // Handle Section Display
-    $menuLinks.on("click", function(event) {
-        event.preventDefault();
-
-        $.each(sections, function(key, sectionId) {
-            $("#" + sectionId).hide();
-        });
-
-        const targetSectionId = sections[this.id];
-        $("#" + targetSectionId).show();
-
-        $sidebar.removeClass("active");
-        $mainContent.removeClass("active");
-        if ($(window).width() <= 768) {
-            $sidebarMenuContainer.fadeOut(); // Hide container on small screens
-        }
-    });
-
-    $("#dashboardSection").show();
-});
-    </script>
+        </script>
 </body>
 
 </html>
