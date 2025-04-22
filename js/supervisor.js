@@ -1,13 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const dashboardSection = document.getElementById('dashboardSection');
-    const tripHistorySection = document.getElementById('tripHistorySection'); 
-    const manageTripsSection = document.getElementById('manageTripsSection');
-    const manageBookingsSection = document.getElementById('manageBookingsSection');
-    const salesReportSection = document.getElementById('salesReportSection');
-    const dashboardButton = document.getElementById('dashboardButton');
-    const manageTripsButton = document.getElementById('manageTripsButton');
-    const manageBookingsButton = document.getElementById('manageBookingsButton');
-    const salesReportButton = document.getElementById('salesReportButton');
     const createTripForm = document.getElementById('createTripForm');
     const searchTripInput = document.getElementById('searchTrip');
     const toggleSidebarButton = document.getElementById('toggleSidebar');
@@ -16,10 +7,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const statusModal = document.getElementById('statusModal');
     const newStatusSelect = document.getElementById('newStatus');
     const updateStatusForm = document.getElementById('updateStatusForm');
-    const availableResourcesButton = document.getElementById('availableResourcesButton');
-    const availableResourcesSection = document.getElementById('availableResourcesSection');
-    const assignBusSelect = document.getElementById('assignBus');
-    const assignDriverSelect = document.getElementById('assignDriver');
     const trips = [
         {
             id: 1,
@@ -113,69 +100,6 @@ document.addEventListener('DOMContentLoaded', function () {
     let bookingIdCounter = 104;
     let expandedTripId = null; // Track the expanded trip
     let chartInstance = null;
-    //Initial display
-    if (dashboardSection) {
-        dashboardSection.style.display = 'block';
-    }
-    if (manageTripsSection) {
-        manageTripsSection.style.display = 'none';
-    }
-    if (manageBookingsSection) {
-        manageBookingsSection.style.display = 'none';
-    }
-    if (salesReportSection) {
-        salesReportSection.style.display = 'none';
-    }
-    // Event Listeners for switching sections
-    if (dashboardButton) {
-        dashboardButton.addEventListener('click', () => {
-            if (dashboardSection) dashboardSection.style.display = 'block';
-            if (manageTripsSection) manageTripsSection.style.display = 'none';
-            if (manageBookingsSection) manageBookingsSection.style.display = 'none';
-            if (salesReportSection) salesReportSection.style.display = 'none';
-            updateDashboardStats();
-        });
-    }
-    if (manageTripsButton) {
-        manageTripsButton.addEventListener('click', () => {
-            if (dashboardSection) dashboardSection.style.display = 'none';
-            if (manageTripsSection) manageTripsSection.style.display = 'block';
-            if (manageBookingsSection) manageBookingsSection.style.display = 'none';
-            if (salesReportSection) salesReportSection.style.display = 'none';
-            renderManageTripsTable();
-        });
-    }
-    if (manageBookingsButton) {
-        manageBookingsButton.addEventListener('click', () => {
-            if (dashboardSection) dashboardSection.style.display = 'none';
-            if (manageTripsSection) manageTripsSection.style.display = 'none';
-            if (manageBookingsSection) manageBookingsSection.style.display = 'block';
-            if (salesReportSection) salesReportSection.style.display = 'none';
-            renderBookingsTable();
-        });
-    }
-    if (salesReportButton) {
-        salesReportButton.addEventListener('click', () => {
-            if (dashboardSection) dashboardSection.style.display = 'none';
-            if (manageTripsSection) manageTripsSection.style.display = 'none';
-            if (manageBookingsSection) manageBookingsSection.style.display = 'none';
-            if (salesReportSection) salesReportSection.style.display = 'block';
-            renderSalesReport();
-        });
-    }
-    if (availableResourcesButton) {
-        availableResourcesButton.addEventListener('click', () => {
-            // Hide other sections
-            if (dashboardSection) dashboardSection.style.display = 'none';
-            if (manageTripsSection) manageTripsSection.style.display = 'none';
-            if (manageBookingsSection) manageBookingsSection.style.display = 'none';
-            if (salesReportSection) salesReportSection.style.display = 'none';
-            
-            // Show the Available Resources section
-            availableResourcesSection.style.display = 'block';
-        });
-    }
-
     
     // Event listener for form submission
     if (createTripForm) {
