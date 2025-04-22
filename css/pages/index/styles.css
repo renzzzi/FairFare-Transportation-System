@@ -245,12 +245,32 @@ header {
 }
 
 .image-box {
-	background-color: #ccc;
 	border-radius: 5px;
 }
 
 .large-box {
 	height: 300px;
+	overflow: hidden;
+	background-image: url("/images/PICC1.jpg");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.small-box-1 {
+	overflow: hidden;
+	background-image: url("/images/PICC2.jpeg");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.small-box-2{
+	overflow: hidden;
+	background-image: url("/images/PICC3.jpg");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
 }
 
 .small-box-1,
