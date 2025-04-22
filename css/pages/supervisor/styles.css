@@ -1,0 +1,235 @@
+:root {
+    --primary-color: #00cde1;
+    --secondary-color: #e18702;
+    --light-primary-color: #ddfcff;
+    --font-color: #424242;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: white;
+    color: var(--font-color);
+}
+
+/* Navigation Bar */
+.navbar {
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-brand img {
+    margin-right: 0.5rem;
+}
+
+.navbar-nav .nav-link {
+    color: #495057;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #343a40;
+}
+
+.nav-logo {
+    width: 40px; /* Adjusted to match HTML */
+    height: 40px; /* Adjusted to match HTML */
+    margin-right: 0.5rem;
+}
+
+.sidebar {
+    width: 250px;
+    height: 100%;
+    background-color: var(--primary-color);
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.3s;
+}
+
+.sidebar.active {
+    left: -250px; /* Hide the sidebar */
+}
+
+.sidebar a {
+    padding: 15px 25px;
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    display: block;
+}
+
+.sidebar a:hover {
+    background-color: #e9ecef;
+}
+
+.sidebar .label {
+    margin-left: 10px;
+}
+
+.main-content {
+    margin-left: 250px; /* Width of the sidebar */
+    padding: 20px;
+    transition: 0.3s;
+}
+
+.main-content.active {
+    margin-left: 0; /* Make main content take full width */
+}
+
+
+/* Cards */
+.card {
+    margin-bottom: 1rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.card-title {
+    color: white;
+}
+
+/* Tables */
+.table {
+    background-color: white;
+    margin-bottom: 1rem;
+}
+
+.table th {
+    background-color: #e9ecef;
+    color: #495057;
+    font-weight: bold;
+}
+
+.table td,
+.table th {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+
+/* Forms */
+.form-control {
+    border-radius: 0.2rem;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: #009ab4;
+    border-color: #009ab4;
+}
+
+/* Sections */
+.section {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 0.25rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    margin-bottom: 1rem;
+}
+
+/* Modal Styles */
+.modal-content {
+    border: none;
+    border-radius: 0.3rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.modal-title {
+    color: #495057;
+}
+
+.close {
+    color: #6c757d;
+    opacity: 0.7;
+}
+
+.close:hover {
+    opacity: 1;
+}
+
+.modal-footer {
+    border-top: 1px solid #dee2e6;
+    background-color: #f8f9fa;
+}
+
+/* Trip History Table (Tailwind CSS Styles - as in HTML) */
+#tripHistoryTable {
+    min-width: 100%;
+    background-color: white;
+    border-radius: 0.25rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+#tripHistoryTable thead.bg-gray-100 {
+    background-color: #f1f5f9; /* Tailwind's gray-100 */
+}
+
+#tripHistoryTable th.px-4.py-2 {
+    padding-left: 1rem; /* Tailwind's px-4 */
+    padding-right: 1rem;
+    padding-top: 0.5rem; /* Tailwind's py-2 */
+    padding-bottom: 0.5rem;
+    text-align: left;
+}
+
+#tripHistoryTable tbody.text-gray-700 {
+    color: #4b5563; /* Tailwind's gray-700 */
+}
+
+#tripHistoryTable tbody.text-gray-700 td.px-4.py-2 {
+    padding-left: 1rem; /* Tailwind's px-4 */
+    padding-right: 1rem;
+    padding-top: 0.5rem; /* Tailwind's py-2 */
+    padding-bottom: 0.5rem;
+}
+
+#tripHistoryTable tbody.text-gray-700 td.text-center.text-gray-500 {
+    color: #6b7280; /* Tailwind's gray-500 */
+}
+
+/* Media Queries */
+/* Adjust for smaller screens */
+/* Media Queries */
+/* Adjust for smaller screens */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 250px;
+        left: -250px; /* Initially hidden */
+        z-index: 1000; /* Ensure it's on top */
+        position: fixed; /* Fixed position */
+        height: 100%; /* Full height */
+        overflow-y: auto; /* Allow scrolling */
+    }
+    .sidebar.active {
+        left: 0; /* Show the sidebar */
+    }
+    .main-content {
+        margin-left: 0;
+        transition: margin-left 0.3s; /* Smooth transition */
+    }
+    .main-content.active {
+        margin-left: 250px; /* Push content when sidebar is active */
+    }
+}
