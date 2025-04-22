@@ -74,7 +74,7 @@
             </div>
             <h1 class="fw-bold mb-3 text-white">Philippines' #1 Bus<br>Transport Booking Site</h1>
             <h2 class="fw-normal mb-3">Going somewhere?</h2>
-            <button type="button" class="buy-tickets mt-2">Buy Tickets now</button>
+            <button type="button" class="buy-tickets mt-2" id="buy-tickets">Buy Tickets now</button>
           </div>
         </div>
       </div>
@@ -310,6 +310,12 @@
       });
     });
   </script>
+
+<script>
+  document.getElementById("buy-tickets").onclick = function () {
+    window.location.href = "login.html";
+  };
+</script>
 </body>
 
 </html>
