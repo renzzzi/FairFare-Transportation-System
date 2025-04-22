@@ -490,16 +490,10 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         $(".dropdown-item").click(function(event) {
-                if ($(this).find("i.fas.fa-sign-out-alt").length > 0) { // Check if it's the logout link
-                    event.preventDefault(); // Prevent default link behavior (e.g., going to "#")
-
-                    console.log("Logout clicked!"); 
-                    localStorage.removeItem("authToken"); 
-
-                    window.location.href = "../login.html/";  
-                }
-            });
-
+            event.preventDefault(); 
+            window.location.href = "../login.html";  
+        });
+        
         $(document).ready(function() {
     const $toggleSidebarButton = $("#toggleSidebar");
     const $sidebar = $("#sidebar");

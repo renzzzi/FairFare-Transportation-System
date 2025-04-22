@@ -31,7 +31,7 @@
                     <li data-section="manage-passengers">Manage Passenger Accounts</li>
                     <li data-section="passenger-requests">Passenger Requests / Complaints</li>
                     <li data-section="settings">Settings</li>
-                    <li>Log Out</li>
+                    <li id="logout" class="text-decoration-none fas fa-sign-out-alt">Log Out</li>
                 </ul>
             </aside>
 
@@ -260,6 +260,13 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="module" src="js/admin-script.js"></script>
+
+    <script>
+        $("#logout").click(function(event) {
+            event.preventDefault(); 
+            window.location.href = "../login.html";  
+        });
+    </script>
 </body>
 
 </html>
