@@ -79,6 +79,7 @@ body {
 	transition: background-color 0.2s, border-bottom-color 0.2s;
     display: block;
     color: white;
+    text-decoration: none;
 }
 
 .sidebar a:hover {
