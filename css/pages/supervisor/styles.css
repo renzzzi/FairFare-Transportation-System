@@ -68,12 +68,16 @@ body {
     padding: 15px 25px;
     text-decoration: none;
     color: white;
-    font-weight: 600;
+    cursor: pointer;
+	font-weight: 550;
+	border-bottom: 4px solid transparent;
+	transition: background-color 0.2s, border-bottom-color 0.2s;
     display: block;
 }
 
 .sidebar a:hover {
-    background-color: #e9ecef;
+    background-color: #23daeb;
+	border-bottom-color: white;
 }
 
 .sidebar .label {
