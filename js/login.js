@@ -14,7 +14,7 @@ $(document).ready(function () {
         const tspassword = "1234";
 
         if (username === adminusername && password === adminpassword) {
-            window.location.href = "admin.html";
+            window.location.href = "adminTemp.html";
         }
         else if (username === clientusername && password === clientpassword) {
             window.location.href = "logged-in2.html";
