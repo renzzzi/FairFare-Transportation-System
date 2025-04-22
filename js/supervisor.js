@@ -411,7 +411,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!tableBody) return;
         tableBody.innerHTML = '';
         let count = 1;
-    
+        
         trips.filter(trip =>
             trip.from.toLowerCase().includes(searchTerm) ||
             trip.to.toLowerCase().includes(searchTerm) ||
@@ -420,6 +420,11 @@ document.addEventListener('DOMContentLoaded', function () {
             trip.bus.toLowerCase().includes(searchTerm) ||
             trip.status.toLowerCase().includes(searchTerm)
         ).forEach((trip) => {
+            // Skip trips with "Completed" or "Canceled" status
+            if (trip.status === "Completed" || trip.status === "Canceled") {
+                return;
+            }
+    
             const row = tableBody.insertRow();
             row.dataset.index = count - 1;
             row.insertCell().textContent = count++;
@@ -451,7 +456,7 @@ document.addEventListener('DOMContentLoaded', function () {
             statusDropdown.className = 'form-control form-control-sm updateStatusDropdownDashboard status-dropdown mb-1';
             statusDropdown.dataset.id = trip.id;
     
-            const statuses = ["Pending", "Scheduled", "Delayed", "Departed",  "Completed", "Canceled"];
+            const statuses = ["Pending", "Scheduled", "Delayed", "Departed", "Completed", "Canceled"];
             statuses.forEach(status => {
                 const option = document.createElement('option');
                 option.value = status;
@@ -478,6 +483,7 @@ document.addEventListener('DOMContentLoaded', function () {
             actionsCell.appendChild(deleteButton);
         });
     }
+    
 // Populates the Completed Trips History table.
 function populateCompletedTripsHistory() {
     const tableBody = document.querySelector("#completedHistoryTable tbody");
