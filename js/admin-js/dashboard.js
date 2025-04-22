@@ -1,5 +1,3 @@
-import { initializeCharts, updateChart } from './charts.js';
-
 const modal = document.getElementById("chartModal");
 const modalContent = document.getElementById("modalChartContent");
 const modalCanvas = document.getElementById("modalChartCanvas");

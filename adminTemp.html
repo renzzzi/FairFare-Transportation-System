@@ -333,102 +333,90 @@
         <!-- REPORTS -->
         <section id="report" class="dashboard" style="display: none;">
             <h2>Reports</h2>
-            <table id="reports-table">
-                <thead>
-                    <tr>
-                        <th>Supervisor ID</th>
-                        <th>Report Title</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>#TS001</td>
-                        <td>Incident Report - Bus 123</td>
-                        <td>Unseen</td>
-                    </tr>
-                    <tr>
-                        <td>#TS002</td>
-                        <td>Maintenance Request - Bus 456</td>
-                        <td>Seen</td>
-                    </tr>
-                    <tr>
-                        <td>#TS003</td>
-                        <td>Passenger Complaint - Trip 789</td>
-                        <td>Seen</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">salesRevenue-chart</h5>
+                            <div class="form-group">
+                                <label for="seatsbooked-timerange">Time Range:</label>
+                                <select id="seatsbooked-timerange" class="form-control">
+                                    <option value="1y">1 year</option>
+                                    <option value="9m">9 months</option>
+                                    <option value="6m">6 months</option>
+                                    <option value="3m">3 months</option>
+                                </select>
+                            </div>
+                            <canvas id="salesRevenue-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <section class="chart" data-chart="customerService">
+                            <h3>customerDemographicsChart</h3>
+                            <canvas id="customerDemographics-chart"></canvas>
+                        </section>
+                    </div>
+                </div>
+                    <div class="row card-body">
+                        <h5 class="card-title">Supervisor Reports</h5>
+                        <table class="table table-striped" id="reports-table">
+                            <thead>
+                                <tr>
+                                    <th>Supervisor ID</th>
+                                    <th>Report Title</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        
-
+        <!-- CUSTOMER SERVICE -->
         <section id="customerservice" class="dashboard" style="display: none;">
             <h2>Passenger Requests / Complaints</h2>
-            <table id="requests-table">
-                <thead>
-                    <tr>
-                        <th>User ID
-                            <button class="sort-button" onclick="sortTable(0)">&#x21D5;</button>
-                        </th>
-                        <th>Type</th>
-                        <th>Message</th>
-                        <th>Status</th>
-                        <th>Submitted On</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr data-id="#1024" data-type="Request" data-message="Need refund for overcharged ticket"
-                        data-status="Pending" data-submitted="April 12, 2025">
-                        <td>#1024</td>
-                        <td>Request</td>
-                        <td>Need refund for overcharged ticket</td>
-                        <td class="status pending">Pending</td>
-                        <td>April 12, 2025</td>
-                    </tr>
-                    <tr data-id="#1025" data-type="Complaint" data-message="Driver arrived late at terminal"
-                        data-status="Reviewed" data-submitted="April 13, 2025">
-                        <td>#1025</td>
-                        <td>Complaint</td>
-                        <td>Driver arrived late at terminal</td>
-                        <td class="status reviewed">Reviewed</td>
-                        <td>April 13, 2025</td>
-                    </tr>
-                    <tr data-id="#1026" data-type="Request" data-message="Change destination of booked trip"
-                        data-status="Resolved" data-submitted="April 14, 2025">
-                        <td>#1026</td>
-                        <td>Request</td>
-                        <td>Change destination of booked trip</td>
-                        <td class="status resolved">Resolved</td>
-                        <td>April 14, 2025</td>
-                    </tr>
-                    <tr data-id="#1027" data-type="Complaint" data-message="AC not working in bus"
-                        data-status="Pending" data-submitted="April 14, 2025">
-                        <td>#1027</td>
-                        <td>Complaint</td>
-                        <td>AC not working in bus</td>
-                        <td class="status pending">Pending</td>
-                        <td>April 14, 2025</td>
-                    </tr>
-                    <tr data-id="#1028" data-type="Request" data-message="Payment failure during booking"
-                        data-status="Resolved" data-submitted="April 15, 2025">
-                        <td>#1028</td>
-                        <td>Request</td>
-                        <td>Payment failure during booking</td>
-                        <td class="status resolved">Resolved</td>
-                        <td>April 15, 2025</td>
-                    </tr>
-                    <tr data-id="#1029" data-type="Complaint" data-message="Conductor was rude"
-                        data-status="Reviewed" data-submitted="April 15, 2025">
-                        <td>#1029</td>
-                        <td>Complaint</td>
-                        <td>Conductor was rude</td>
-                        <td class="status reviewed">Reviewed</td>
-                        <td>April 15, 2025</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title text-dark">Requests/Complaints List</h5>
+                            <div class="table-responsive">
+                                <table class="table table-striped" id="requests-table">
+                                    <thead>
+                                        <tr>
+                                            <th>User ID
+                                                <button class="sort-button" onclick="sortTable(0)">&#x21D5;</button>
+                                            </th>
+                                            <th>Type
+                                                <button class="sort-button" onclick="sortTable(1)">&#x21D5;</button>
+                                            </th>
+                                            <th>Message</th>
+                                            <th>Status
+                                                <button class="sort-button" onclick="sortTable(3)">&#x21D5;</button>
+                                            </th>
+                                            <th>Submitted On</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                         <tr>
+                                             <td colspan="6" class="text-center">No requests or complaints found.</td>
+                                         </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
+
+        <!-- SETTINGS -->
 
         <section id="settings" class="dashboard" style="display: none;">
             <h2>Settings</h2>
@@ -446,6 +434,8 @@
     <script type="module" src="js/admin-js/travelsupervisor.js"></script>
     <script type="module" src="js/admin-js/passenger.js"></script>
     <script type="module" src="js/admin-js/busAndRoute.js"></script>
+    <script type="module" src="js/admin-js/customerService.js"></script>
+    <script type="module" src="js/admin-js/report.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

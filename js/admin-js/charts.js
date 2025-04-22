@@ -2,11 +2,20 @@ const ctx1 = document.getElementById('seatsbooked-chart').getContext('2d');
 const ctx2 = document.getElementById('websitevisitors-chart').getContext('2d');
 const ctx3 = document.getElementById('ratings-chart').getContext('2d');
 const ctx4 = document.getElementById('customerServiceChart').getContext('2d');
+const ctx5 = document.getElementById('salesRevenue-chart').getContext('2d');
+const ctx6 = document.getElementById('customerDemographics-chart').getContext('2d');
+
 
 
 const fullLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 var seatsBookedFullData = [810, 540, 210, 350, 723, 298, 441, 410, 225, 105, 305, 979];
 var websiteVisitorsFullData = [1935, 908, 720, 640, 1001, 1034, 988, 840, 305, 299, 541, 2210];
+
+const monthlyRevenueData = [1000, 1990, 2000, 1860,];
+const reportMonths = fullLabels;
+
+const ratingsFullData = [42, 140, 200, 405, 700];
+const demographicCountsFullData = [[250, 300, 200, 150, 100]]; 
 
 const seatsBookedChartId = 1;
 const websiteVisitorsChartId = 2;
@@ -51,7 +60,20 @@ export function updateChart(range, chartId) {
             customerServiceChart.data.datasets[0].data = dataSlice;
             customerServiceChart.update();
             break;
-        default:
+        case 5:
+            dataSlice = monthlyRevenueFullData.slice(-months);
+            salesRevenueChart.data.labels = labelSlice;
+            salesRevenueChart.data.datasets[0].data = dataSlice;
+            salesRevenueChart.update();
+            break;
+        case 6:
+            // Assuming you want to update the demographic counts
+            const demographicDataSlice = demographicCountsFullData.map(dataset => dataset.slice(-months));
+            customerDemographicsChart.data.labels = labelSlice; // Assuming labels might also change over time
+            customerDemographicsChart.data.datasets[0].data = demographicDataSlice[0]; // Assuming only one dataset for counts
+            customerDemographicsChart.update();
+            break;
+                default:
             dataSlice = [];
     }
 }
@@ -188,6 +210,88 @@ const customerServiceChart = new Chart(ctx4, {
         }
     }
 });
+
+
+const salesRevenueChart = new Chart(ctx5, {
+    type: 'bar',
+    data: {
+        labels: reportMonths,
+        datasets: [{
+            label: 'Monthly Sales Revenue',
+            data: monthlyRevenueData,
+            backgroundColor: 'rgba(75, 192, 192, 0.7)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            y: {
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: 'Revenue (PHP)'
+                }
+            },
+            x: {
+                title: {
+                    display: true,
+                    text: 'Month'
+                }
+            }
+        },
+        plugins: {
+            legend: { display: true }
+        }
+    }
+});
+
+const customerDemographicsChart = new Chart(ctx6, {
+    type: 'pie',
+    data: {
+        labels: ['18-24', '25-34', '35-44', '45-54', '55+'], // Customize these labels based on your demographic segments
+        datasets: [{
+            label: 'Customer Age Distribution',
+            data: [300, 450, 350, 200, 150], // Replace these with the actual counts for each age group
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.7)',   // Red
+                'rgba(54, 162, 235, 0.7)',   // Blue
+                'rgba(255, 206, 86, 0.7)',   // Yellow
+                'rgba(75, 192, 192, 0.7)',   // Green
+                'rgba(153, 102, 255, 0.7)'    // Purple
+                // Add more colors if you have more segments
+            ],
+            borderColor: [
+                'rgba(0, 0, 0, 0.51)',
+            ],
+            borderWidth: 0.5
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        let label = context.label || '';
+                        if (context.parsed !== null) {
+                            label += ': ' + context.parsed + ' customers';
+                        }
+                        return label;
+                    }
+                }
+            }
+        }
+    }
+});
+
+
+
 export function initializeCharts() {
     // Time Range for Seats Booked
     $('#seatsbooked-timerange').on('change', function () {
@@ -200,4 +304,5 @@ export function initializeCharts() {
         const range = $(this).val();
         updateChart(range, websiteVisitorsChartId);
     });
+    
 }

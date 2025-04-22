@@ -160,20 +160,18 @@ body {
     margin-bottom: 10px;
 }
 
-#seatsbooked-chart, #websitevisitors-chart {
+#seatsbooked-chart, #websitevisitors-chart, #salesRevenue-chart {
     width: 100% !important;
     height: 300px !important;
     justify-self: center;
 }
 
-#ratings-chart, #customerServiceChart {
+#ratings-chart, #customerServiceChart, #customerDemographics-chart {
     width: 60% !important;
     height: 300px !important;
     justify-self: center;
 }
 
-/* MODAL */
-/* Basic modal styling (you can customize this) */
 #modalChartCanvas {
     background-color: rgb(255, 255, 255);
 }
