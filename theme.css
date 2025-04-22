@@ -7060,7 +7060,7 @@ fieldset:disabled .btn {
   list-style: none;
 }
 
-.carousel-indicators [data-bs-target] {
+.carousel-indicators [data-target] {
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
   -webkit-box-flex: 0;
@@ -7085,7 +7085,7 @@ fieldset:disabled .btn {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .carousel-indicators [data-bs-target] {
+  .carousel-indicators [data-target] {
     -webkit-transition: none;
     -o-transition: none;
     transition: none;
@@ -7113,7 +7113,7 @@ fieldset:disabled .btn {
   filter: invert(1) grayscale(100);
 }
 
-.carousel-dark .carousel-indicators [data-bs-target] {
+.carousel-dark .carousel-indicators [data-target] {
   background-color: #000;
 }
 
@@ -19445,22 +19445,22 @@ iframe {
 /* -------------------------------------------------------------------------- */
 /*                                    Badge                                   */
 /* -------------------------------------------------------------------------- */
-.carousel-indicators {
+/* .carousel-indicators {
   right: unset;
   margin-left: 1.2rem;
-}
+} */
 
 @media (max-width: 991.98px) {
   .carousel-indicators {
     -webkit-transform: translateY(6rem);
     -ms-transform: translateY(6rem);
-    transform: translateY(6rem);
+    transform: translateY(6srem);
     right: 0;
     margin-left: 15%;
   }
 }
 
-.carousel-indicators [data-bs-target] {
+.carousel-indicators [data-target] {
   background-color: #212832;
   width: 0.6875rem;
   height: 0.6875rem;
@@ -19468,11 +19468,11 @@ iframe {
   border-radius: 50%;
 }
 
-.carousel-indicators [data-bs-target]:not(:last-child) {
+.carousel-indicators [data-target]:not(:last-child) {
   margin-right: 1.5625rem;
 }
 
-.carousel-indicators [data-bs-target].active {
+.carousel-indicators [data-target].active {
   opacity: 1;
 }
 
