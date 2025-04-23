@@ -106,10 +106,10 @@
                 <section id="manage-supervisors" class="dashboard-section" style="display: none;">
                     <h2>Manage Travel Supervisor Accounts</h2>
                     <div class="table-container">
-                        <button id="expand-supervisors-button">Expand Table</button>
+                        <button type="button" id="expand-supervisors-button">Expand Table</button>
                         <div id="supervisor-search" style="display: none;">
                             <input type="text" id="supervisor-search-input" placeholder="Search by ID or Name">
-                            <button id="search-supervisors-button">Search</button>
+                            <button type="button" id="search-supervisors-button">Search</button>
                         </div>
                         <table id="supervisors-table">
                             <thead>
@@ -123,12 +123,12 @@
                                 <tr>
                                     <td>#TS001</td>
                                     <td>John Doe</td>
-                                    <td><button class="chat-button">Chat</button></td>
+                                    <td><button type="button" class="chat-button">Chat</button></td>
                                 </tr>
                                 <tr>
                                     <td>#TS002</td>
                                     <td>Jane Smith</td>
-                                    <td><button class="chat-button">Chat</button></td>
+                                    <td><button type="button" class="chat-button">Chat</button></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -136,19 +136,19 @@
                             <h3>Add Supervisor</h3>
                             <input type="text" id="new-supervisor-name" placeholder="Name">
                             <input type="password" id="new-supervisor-password" placeholder="Password">
-                            <button id="add-supervisor-button">Add</button>
+                            <button type="button" id="add-supervisor-button">Add</button>
                         </div>
-                        <button id="remove-supervisor-button">Remove Supervisor</button>
+                        <button type="button" id="remove-supervisor-button">Remove Supervisor</button>
                     </div>
                 </section>
 
                 <section id="manage-passengers" class="dashboard-section" style="display: none;">
                     <h2>Manage Passenger Accounts</h2>
                     <div class="table-container">
-                        <button id="expand-passengers-button">Expand Table</button>
+                        <button type="button" id="expand-passengers-button">Expand Table</button>
                         <div id="passenger-search" style="display: none;">
                             <input type="text" id="passenger-search-input" placeholder="Search by ID or Name">
-                            <button id="search-passengers-button">Search</button>
+                            <button type="button" id="search-passengers-button">Search</button>
                         </div>
                         <table id="passengers-table">
                             <thead>
@@ -162,12 +162,12 @@
                                 <tr>
                                     <td>#P001</td>
                                     <td>Alice Johnson</td>
-                                    <td><button class="ban-button">Ban</button></td>
+                                    <td><button type="button" class="ban-button">Ban</button></td>
                                 </tr>
                                 <tr class="banned">
                                     <td>#P002</td>
                                     <td>Bob Williams</td>
-                                    <td><button class="ban-button">Unban</button></td>
+                                    <td><button type="button" class="ban-button">Unban</button></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -180,7 +180,7 @@
                         <thead>
                             <tr>
                                 <th>User ID
-                                    <button class="sort-button" onclick="sortTable(0)">&#x21D5;</button>
+                                    <button type="button" class="sort-button" onclick="sortTable(0)">&#x21D5;</button>
                                 </th>
                                 <th>Type</th>
                                 <th>Message</th>
@@ -243,7 +243,7 @@
 
                 <section id="settings" class="dashboard-section" style="display: none;">
                     <h2>Settings</h2>
-                    <button id="theme-toggle">Toggle Theme</button>
+                    <button type="button" id="theme-toggle">Toggle Theme</button>
                 </section>
             </main>
         </div>
@@ -259,7 +259,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="module" src="js/admin-script.js"></script>
+    <script type="module" src="js/admin-js/admin-script.js"></script>
 
     <script>
         $("#logout").click(function(event) {
