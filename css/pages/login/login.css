@@ -90,11 +90,14 @@ h1 {
     margin: 3rem auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2rem;
     max-width: 1000px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     overflow: hidden;
+}
+
+form{
+    width: 100%;
 }
 
 .loginfo {
@@ -165,6 +168,7 @@ label {
     border-radius: 5px;
     font-size: 1rem;
     transition: border-color 0.3s ease;
+    width: 100%;
 }
 
 .input-field:focus {
