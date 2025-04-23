@@ -1,0 +1,58 @@
+/* Media query for small screens */
+@media (max-width: 768px) {
+	.form-input {
+		display: none;
+	}
+
+	.form-select {
+		display: block;
+	}
+}
+
+:root {
+	--bs-primary: #00cde1;
+	--bs-primary-rgb: 0, 205, 225;
+}
+
+.btn-primary {
+	background-color: var(--bs-primary) !important;
+	border-color: var(--bs-primary) !important;
+}
+
+.btn-outline-primary {
+	color: var(--bs-primary) !important;
+	border-color: var(--bs-primary) !important;
+}
+
+.btn-outline-primary:hover {
+	background-color: var(--bs-primary) !important;
+	color: #fff !important;
+}
+
+.nav-tabs .nav-link.active {
+	border-color: var(--bs-primary) var(--bs-primary) #fff;
+	color: var(--bs-primary) !important;
+}
+
+.nav-pad {
+	padding: 0.5rem 1rem;
+}
+
+.bold-h {
+	font-weight: bolder;
+}
+
+.navbar-toggler {
+	padding: 0.25rem 0.75rem;
+	font-size: 1.25rem;
+	/* Adjust this as needed */
+}
+
+.navbar-toggler-icon {
+	width: 30px;
+	/* Set a fixed width for the burger icon */
+	height: 30px;
+	/* Set a fixed height for the burger icon */
+	background-size: contain;
+	/* Ensure the icon fits the container */
+}
