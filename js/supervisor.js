@@ -1,12 +1,11 @@
 document.addEventListener('DOMContentLoaded', function () {
     const createTripForm = document.getElementById('createTripForm');
     const searchTripInput = document.getElementById('searchTrip');
-    const toggleSidebarButton = document.getElementById('toggleSidebar');
-    const sidebar = document.getElementById('sidebar');
-    const mainContent = document.getElementById('mainContent');
     const statusModal = document.getElementById('statusModal');
     const newStatusSelect = document.getElementById('newStatus');
     const updateStatusForm = document.getElementById('updateStatusForm');
+
+    //INITIAL DATA
     const trips = [
         {
             id: 1,
@@ -96,148 +95,13 @@ document.addEventListener('DOMContentLoaded', function () {
     
 
     
-    let tripIdCounter = trips.length + 1;
-    let bookingIdCounter = 104;
-    let expandedTripId = null; // Track the expanded trip
-    let chartInstance = null;
+    let tripIdCounter = trips.length + 1; // Track the number of bus ID
+    let expandedTripId = null; // Track which trip is currently expanded in the UI
+    let chartInstance = null; //reference to a chart object to prevents multiple charts from stacking or conflicting
     
-    // Event listener for form submission
-    if (createTripForm) {
-        createTripForm.addEventListener('submit', (event) => {
-            event.preventDefault();
-            const from = document.getElementById('from').value;
-            const to = document.getElementById('to').value;
-            const date = document.getElementById('date').value;
-            const time = document.getElementById('time').value;
-            const bus = document.getElementById('assignBus').value;
-            const driver = document.getElementById('assignDriver').value;
-            const addResourceForm = document.getElementById('addResourceForm');
-            const resourceTableBody = document.querySelector('#resourceTable tbody');
-            if (!from || !to || !date || !time || !bus || !driver) {
-                alert('Please fill in all the fields.');
-                return;
-            }
-            const newTrip = {
-                id: tripIdCounter++,
-                from,
-                to,
-                date,
-                time,
-                bus,
-                driver,
-                status: 'Pending',
-                bookings: []
-            };
-            trips.push(newTrip);
-            renderManageTripsTable();
-            updateDashboardStats();
-            populateCanceledTripsHistory()
-            populateCompletedTripsHistory()
-            populateUpcomingTripsTableDashboard();
-            populateDepartedBusesTableDashboard();
-            populateCompletedTripsDashboard();
-            populateCanceledTripsDashboard();
-            if (statusModal) $(statusModal).modal('hide');
-            createTripForm.reset();
-        });
-    }
-    // Event listener for the search input
-    if (searchTripInput) {
-        searchTripInput.addEventListener('input', () => {
-            const searchTerm = searchTripInput.value.toLowerCase();
-            renderManageTripsTable(searchTerm);
-        });
-    }
-    if (toggleSidebarButton) {
-        toggleSidebarButton.addEventListener('click', () => {
-            sidebar.classList.toggle('collapsed');
-            mainContent.classList.toggle('collapsed');
-        });
-    }
-    if (updateStatusForm) {
-        updateStatusForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-            const newStatus = newStatusSelect.value;
-            if (currentTripIdForStatusUpdate !== null) {
-                const tripIndex = trips.findIndex(trip => trip.id === currentTripIdForStatusUpdate);
-                if (tripIndex !== -1) {
-                    trips[tripIndex].status = newStatus;
-                    renderManageTripsTable();
-                    updateDashboardStats();
-                    populateCanceledTripsHistory()
-                    populateCompletedTripsHistory()
-                    populateUpcomingTripsTableDashboard();
-                    populateDepartedBusesTableDashboard();
-                    populateCompletedTripsDashboard();
-                    populateCanceledTripsDashboard();
-                }
-                currentTripIdForStatusUpdate = null;
-            }
-            if (statusModal) $(statusModal).modal('hide');
-        });
-    }
+//DASHBOARD SECTION
 
-    function updateDashboardStats() {
-        const totalTrips = trips.length;
-        const activeDrivers = new Set(trips.filter(trip => trip.status === "Departed" && trip.driver).map(trip => trip.driver)).size;
-        const pendingApprovals = trips.filter(trip => trip.status === "Pending").length;
-        const deployedBusesCount = trips.filter(trip => trip.status === "Departed").length;
-        document.getElementById("totalTripsDashboard").textContent = totalTrips;
-        document.getElementById("activeDriversDashboard").textContent = activeDrivers;
-        document.getElementById("pendingApprovalsDashboard").textContent = pendingApprovals;
-        document.getElementById("deployedBusesDashboard").textContent = deployedBusesCount;
-    }
-
-
-// Populates the Departed Trips table in the Dashboard.
-    function populateDepartedBusesTableDashboard() {
-        const tableBody = document.querySelector("#deployedBusesTableDashboard tbody");
-        if (!tableBody) return;
-        tableBody.innerHTML = '';
-        const deployedTrips = trips.filter(trip => trip.status === "Departed");
-        deployedTrips.forEach((trip) => {
-            const row = tableBody.insertRow();
-            row.insertCell().textContent = trip.bus;
-            row.insertCell().textContent = trip.from;
-            row.insertCell().textContent = trip.to;
-            row.insertCell().textContent = trip.driver;
-            row.insertCell().textContent = trip.time;
-            const statusWordCell = row.insertCell();
-            statusWordCell.textContent = trip.status;
-            statusWordCell.className = 'status';
-            // Monitor button
-            const bookingsCell = row.insertCell();
-            const monitorButton = document.createElement('button');
-            monitorButton.className = 'btn btn-info btn-sm monitorBookingBtn';
-            monitorButton.textContent = 'Monitor';
-            monitorButton.dataset.id = trip.id;
-            monitorButton.addEventListener('click', (event) => {
-                toggleBookingDisplay(event, trip.id);
-            });
-            bookingsCell.appendChild(monitorButton);
-            // Status Dropdown
-            const statusCell = row.insertCell();
-            const statusDropdown = document.createElement('select');
-            statusDropdown.className = 'form-control form-control-sm updateStatusDropdownDashboard status-dropdown';
-            statusDropdown.dataset.id = trip.id;
-            const statuses = ["Pending", "Scheduled", "Delayed", "Departed", "Completed", "Canceled"];
-            statuses.forEach(status => {
-                const option = document.createElement('option');
-                option.value = status;
-                option.textContent = status;
-                if (trip.status === status) {
-                    option.selected = true;
-                }
-                statusDropdown.appendChild(option);
-            });
-            statusDropdown.addEventListener('change', () => {
-                updateTripStatus(trip.id, statusDropdown.value);
-            });
-            statusCell.appendChild(statusDropdown);
-        });
-    }
-    // Populates the Upcoming Trips table in the Dashboard.
-
+    //UPCOMING TRIPS DASHBOARD
     function populateUpcomingTripsTableDashboard() {
         const tableBody = document.querySelector("#dashboardTripTable tbody");
         if (!tableBody) return;
@@ -291,6 +155,218 @@ document.addEventListener('DOMContentLoaded', function () {
             statusCell.appendChild(statusDropdown);
         });
     }
+
+    // DEPARTED TRIPS DASHBOARD
+    function populateDepartedBusesTableDashboard() {
+        const tableBody = document.querySelector("#deployedBusesTableDashboard tbody");
+        if (!tableBody) return;
+        tableBody.innerHTML = '';
+        const deployedTrips = trips.filter(trip => trip.status === "Departed");
+        deployedTrips.forEach((trip) => {
+            const row = tableBody.insertRow();
+            row.insertCell().textContent = trip.bus;
+            row.insertCell().textContent = trip.from;
+            row.insertCell().textContent = trip.to;
+            row.insertCell().textContent = trip.driver;
+            row.insertCell().textContent = trip.time;
+            const statusWordCell = row.insertCell();
+            statusWordCell.textContent = trip.status;
+            statusWordCell.className = 'status';
+            // Monitor button
+            const bookingsCell = row.insertCell();
+            const monitorButton = document.createElement('button');
+            monitorButton.className = 'btn btn-info btn-sm monitorBookingBtn';
+            monitorButton.textContent = 'Monitor';
+            monitorButton.dataset.id = trip.id;
+            monitorButton.addEventListener('click', (event) => {
+                toggleBookingDisplay(event, trip.id);
+            });
+            bookingsCell.appendChild(monitorButton);
+            // Status Dropdown
+            const statusCell = row.insertCell();
+            const statusDropdown = document.createElement('select');
+            statusDropdown.className = 'form-control form-control-sm updateStatusDropdownDashboard status-dropdown';
+            statusDropdown.dataset.id = trip.id;
+            const statuses = ["Pending", "Scheduled", "Delayed", "Departed", "Completed", "Canceled"];
+            statuses.forEach(status => {
+                const option = document.createElement('option');
+                option.value = status;
+                option.textContent = status;
+                if (trip.status === status) {
+                    option.selected = true;
+                }
+                statusDropdown.appendChild(option);
+            });
+            statusDropdown.addEventListener('change', () => {
+                updateTripStatus(trip.id, statusDropdown.value);
+            });
+            statusCell.appendChild(statusDropdown);
+        });
+    }
+
+        
+
+    //COMPLETED TRIPS DASHBOARD
+    function populateCompletedTripsDashboard() {
+        const tableBody = document.querySelector("#dashboardCompletedTripsTable tbody");
+        if (!tableBody) return;
+        tableBody.innerHTML = '';
+        let count = 1;
+        const completedTrips = trips.filter(trip => trip.status === "Completed");
+        completedTrips.forEach(trip => {
+            const row = tableBody.insertRow();
+            row.insertCell().textContent = count++;
+            row.insertCell().textContent = trip.from;
+            row.insertCell().textContent = trip.to;
+            row.insertCell().textContent = trip.date;
+            row.insertCell().textContent = trip.time;
+            row.insertCell().textContent = trip.bus;
+            row.insertCell().textContent = trip.driver;
+            const statusCell = row.insertCell();
+            const statusDropdown = document.createElement('select');
+            statusDropdown.className = 'form-control form-control-sm updateStatusDropdownDashboard status-dropdown';
+            statusDropdown.dataset.id = trip.id;
+            const statuses = ["Pending", "Scheduled","Delayed",  "Departed", "Completed", "Canceled"];
+            statuses.forEach(status => {
+                const option = document.createElement('option');
+                option.value = status;
+                option.textContent = status;
+                if (trip.status === status) {
+                    option.selected = true;
+                }
+                statusDropdown.appendChild(option);
+            });
+            statusDropdown.addEventListener('change', () => {
+                updateTripStatus(trip.id, statusDropdown.value);
+            });
+            statusCell.appendChild(statusDropdown);
+        });
+    }
+
+
+    //CANCELLED TRIPS DASHBOARD
+    function populateCanceledTripsDashboard() {
+        const tableBody = document.querySelector("#dashboardCanceledTripsTable tbody");
+        if (!tableBody) return;
+        tableBody.innerHTML = '';
+        let count = 1;
+        const canceledTrips = trips.filter(trip => trip.status === "Canceled");
+        canceledTrips.forEach(trip => {
+            const row = tableBody.insertRow();
+            row.insertCell().textContent = count++;
+            row.insertCell().textContent = trip.from;
+            row.insertCell().textContent = trip.to;
+            row.insertCell().textContent = trip.date;
+            row.insertCell().textContent = trip.time;
+            row.insertCell().textContent = trip.bus;
+            row.insertCell().textContent = trip.driver;
+            const statusCell = row.insertCell();
+            const statusDropdown = document.createElement('select');
+            statusDropdown.className = 'form-control form-control-sm updateStatusDropdownDashboard status-dropdown';
+            statusDropdown.dataset.id = trip.id;
+            const statuses = ["Pending", "Scheduled","Delayed",  "Departed", "Completed", "Canceled"];
+            statuses.forEach(status => {
+                const option = document.createElement('option');
+                option.value = status;
+                option.textContent = status;
+                if (trip.status === status) {
+                    option.selected = true;
+                }
+                statusDropdown.appendChild(option);
+            });
+            statusDropdown.addEventListener('change', () => {
+                updateTripStatus(trip.id, statusDropdown.value);
+            });
+            statusCell.appendChild(statusDropdown);
+        });
+    }
+
+    function updateDashboardStats() {
+        const totalTrips = trips.length;
+        const activeDrivers = new Set(trips.filter(trip => trip.status === "Departed" && trip.driver).map(trip => trip.driver)).size;
+        const pendingApprovals = trips.filter(trip => trip.status === "Pending").length;
+        const deployedBusesCount = trips.filter(trip => trip.status === "Departed").length;
+        document.getElementById("totalTripsDashboard").textContent = totalTrips;
+        document.getElementById("activeDriversDashboard").textContent = activeDrivers;
+        document.getElementById("pendingApprovalsDashboard").textContent = pendingApprovals;
+        document.getElementById("deployedBusesDashboard").textContent = deployedBusesCount;
+    }
+
+// MANAGE TRIPS SECTION
+
+    //CREATE TRIP FORM
+    if (createTripForm) {
+        createTripForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const from = document.getElementById('from').value;
+            const to = document.getElementById('to').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const bus = document.getElementById('assignBus').value;
+            const driver = document.getElementById('assignDriver').value;
+            const addResourceForm = document.getElementById('addResourceForm');
+            const resourceTableBody = document.querySelector('#resourceTable tbody');
+            if (!from || !to || !date || !time || !bus || !driver) {
+                alert('Please fill in all the fields.');
+                return;
+            }
+            const newTrip = {
+                id: tripIdCounter++,
+                from,
+                to,
+                date,
+                time,
+                bus,
+                driver,
+                status: 'Pending',
+                bookings: []
+            };
+            trips.push(newTrip);
+            renderManageTripsTable();
+            updateDashboardStats();
+            populateCanceledTripsHistory()
+            populateCompletedTripsHistory()
+            populateUpcomingTripsTableDashboard();
+            populateDepartedBusesTableDashboard();
+            populateCompletedTripsDashboard();
+            populateCanceledTripsDashboard();
+            if (statusModal) $(statusModal).modal('hide');
+            createTripForm.reset();
+        });
+    }
+    
+    //SEARCH TRIP
+    if (searchTripInput) {
+        searchTripInput.addEventListener('input', () => {
+            const searchTerm = searchTripInput.value.toLowerCase();
+            renderManageTripsTable(searchTerm);
+        });
+    }
+
+    //UPDATE STATUS OF TRIP
+    if (updateStatusForm) {
+        updateStatusForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const newStatus = newStatusSelect.value;
+            if (currentTripIdForStatusUpdate !== null) {
+                const tripIndex = trips.findIndex(trip => trip.id === currentTripIdForStatusUpdate);
+                if (tripIndex !== -1) {
+                    trips[tripIndex].status = newStatus;
+                    renderManageTripsTable();
+                    updateDashboardStats();
+                    populateCanceledTripsHistory()
+                    populateCompletedTripsHistory()
+                    populateUpcomingTripsTableDashboard();
+                    populateDepartedBusesTableDashboard();
+                    populateCompletedTripsDashboard();
+                    populateCanceledTripsDashboard();
+                }
+                currentTripIdForStatusUpdate = null;
+            }
+            if (statusModal) $(statusModal).modal('hide');
+        });
+    }
+
     // Renders the Scheduled Trips table.
     function renderManageTripsTable(searchTerm = '') {
         const tableBody = document.querySelector("#tripList tbody");
@@ -370,163 +446,90 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
     
-// Populates the Completed Trips History table.
-function populateCompletedTripsHistory() {
-    const tableBody = document.querySelector("#completedHistoryTable tbody");
-    if (!tableBody) return;
-    tableBody.innerHTML = '';
-    let count = 1;
-    const completedTrips = trips.filter(trip => trip.status === "Completed");
-    if (completedTrips.length === 0) {
-        tableBody.innerHTML = '<tr><td colspan="7" class="text-center">No completed trips.</td></tr>';
-    } else {
-        completedTrips.forEach(trip => {
-            const row = tableBody.insertRow();
-            row.insertCell().textContent = count++;
-            row.insertCell().textContent = trip.from;
-            row.insertCell().textContent = trip.to;
-            row.insertCell().textContent = trip.date;
-            row.insertCell().textContent = trip.time;
-            row.insertCell().textContent = trip.bus;
-            row.insertCell().textContent = trip.driver;
-            const statusCell = row.insertCell();
-            const statusDropdown = document.createElement('select');
-            statusDropdown.className = 'form-control form-control-sm updateStatusDropdownDashboard status-dropdown';
-            statusDropdown.dataset.id = trip.id;
-            const statuses = ["Pending", "Scheduled","Delayed",  "Departed", "Completed", "Canceled"];
-            statuses.forEach(status => {
-                const option = document.createElement('option');
-                option.value = status;
-                option.textContent = status;
-                if (trip.status === status) {
-                    option.selected = true;
-                }
-                statusDropdown.appendChild(option);
-            });
-            statusDropdown.addEventListener('change', () => {
-                updateTripStatus(trip.id, statusDropdown.value);
-            });
-            statusCell.appendChild(statusDropdown);
-        });
-    }
-}
-
-//Populates the Canceled Trips History table.
-function populateCanceledTripsHistory() {
-    const tableBody = document.querySelector("#canceledHistoryTable tbody");
-    if (!tableBody) return;
-    tableBody.innerHTML = '';
-    let count = 1;
-    const canceledTrips = trips.filter(trip => trip.status === "Canceled");
-    if (canceledTrips.length === 0) {
-        tableBody.innerHTML = '<tr><td colspan="7" class="text-center">No canceled trips.</td></tr>';
-    } else {
-        canceledTrips.forEach(trip => {
-            const row = tableBody.insertRow();
-            row.insertCell().textContent = count++;
-            row.insertCell().textContent = trip.from;
-            row.insertCell().textContent = trip.to;
-            row.insertCell().textContent = trip.date;
-            row.insertCell().textContent = trip.time;
-            row.insertCell().textContent = trip.bus;
-            row.insertCell().textContent = trip.driver;
-            const statusCell = row.insertCell();
-            const statusDropdown = document.createElement('select');
-            statusDropdown.className = 'form-control form-control-sm updateStatusDropdownDashboard status-dropdown';
-            statusDropdown.dataset.id = trip.id;
-            const statuses = ["Pending", "Scheduled","Delayed",  "Departed", "Completed", "Canceled"];
-            statuses.forEach(status => {
-                const option = document.createElement('option');
-                option.value = status;
-                option.textContent = status;
-                if (trip.status === status) {
-                    option.selected = true;
-                }
-                statusDropdown.appendChild(option);
-            });
-            statusDropdown.addEventListener('change', () => {
-                updateTripStatus(trip.id, statusDropdown.value);
-            });
-            statusCell.appendChild(statusDropdown);
-        });
-    }
-}
-
-    
-
-    //Populates the Completed Trips table in the Dashboard.
-    function populateCompletedTripsDashboard() {
-        const tableBody = document.querySelector("#dashboardCompletedTripsTable tbody");
+    //COMPLETE TRIPS HISTORY TABLE
+    function populateCompletedTripsHistory() {
+        const tableBody = document.querySelector("#completedHistoryTable tbody");
         if (!tableBody) return;
         tableBody.innerHTML = '';
         let count = 1;
         const completedTrips = trips.filter(trip => trip.status === "Completed");
-        completedTrips.forEach(trip => {
-            const row = tableBody.insertRow();
-            row.insertCell().textContent = count++;
-            row.insertCell().textContent = trip.from;
-            row.insertCell().textContent = trip.to;
-            row.insertCell().textContent = trip.date;
-            row.insertCell().textContent = trip.time;
-            row.insertCell().textContent = trip.bus;
-            row.insertCell().textContent = trip.driver;
-            const statusCell = row.insertCell();
-            const statusDropdown = document.createElement('select');
-            statusDropdown.className = 'form-control form-control-sm updateStatusDropdownDashboard status-dropdown';
-            statusDropdown.dataset.id = trip.id;
-            const statuses = ["Pending", "Scheduled","Delayed",  "Departed", "Completed", "Canceled"];
-            statuses.forEach(status => {
-                const option = document.createElement('option');
-                option.value = status;
-                option.textContent = status;
-                if (trip.status === status) {
-                    option.selected = true;
-                }
-                statusDropdown.appendChild(option);
+        if (completedTrips.length === 0) {
+            tableBody.innerHTML = '<tr><td colspan="7" class="text-center">No completed trips.</td></tr>';
+        } else {
+            completedTrips.forEach(trip => {
+                const row = tableBody.insertRow();
+                row.insertCell().textContent = count++;
+                row.insertCell().textContent = trip.from;
+                row.insertCell().textContent = trip.to;
+                row.insertCell().textContent = trip.date;
+                row.insertCell().textContent = trip.time;
+                row.insertCell().textContent = trip.bus;
+                row.insertCell().textContent = trip.driver;
+                const statusCell = row.insertCell();
+                const statusDropdown = document.createElement('select');
+                statusDropdown.className = 'form-control form-control-sm updateStatusDropdownDashboard status-dropdown';
+                statusDropdown.dataset.id = trip.id;
+                const statuses = ["Pending", "Scheduled","Delayed",  "Departed", "Completed", "Canceled"];
+                statuses.forEach(status => {
+                    const option = document.createElement('option');
+                    option.value = status;
+                    option.textContent = status;
+                    if (trip.status === status) {
+                        option.selected = true;
+                    }
+                    statusDropdown.appendChild(option);
+                });
+                statusDropdown.addEventListener('change', () => {
+                    updateTripStatus(trip.id, statusDropdown.value);
+                });
+                statusCell.appendChild(statusDropdown);
             });
-            statusDropdown.addEventListener('change', () => {
-                updateTripStatus(trip.id, statusDropdown.value);
-            });
-            statusCell.appendChild(statusDropdown);
-        });
+        }
     }
-    //Populates the Canceled Trips table in the Dashboard.
-    function populateCanceledTripsDashboard() {
-        const tableBody = document.querySelector("#dashboardCanceledTripsTable tbody");
+
+    //CANCELLED TRIP HISTORY TABLE
+    function populateCanceledTripsHistory() {
+        const tableBody = document.querySelector("#canceledHistoryTable tbody");
         if (!tableBody) return;
         tableBody.innerHTML = '';
         let count = 1;
         const canceledTrips = trips.filter(trip => trip.status === "Canceled");
-        canceledTrips.forEach(trip => {
-            const row = tableBody.insertRow();
-            row.insertCell().textContent = count++;
-            row.insertCell().textContent = trip.from;
-            row.insertCell().textContent = trip.to;
-            row.insertCell().textContent = trip.date;
-            row.insertCell().textContent = trip.time;
-            row.insertCell().textContent = trip.bus;
-            row.insertCell().textContent = trip.driver;
-            const statusCell = row.insertCell();
-            const statusDropdown = document.createElement('select');
-            statusDropdown.className = 'form-control form-control-sm updateStatusDropdownDashboard status-dropdown';
-            statusDropdown.dataset.id = trip.id;
-            const statuses = ["Pending", "Scheduled","Delayed",  "Departed", "Completed", "Canceled"];
-            statuses.forEach(status => {
-                const option = document.createElement('option');
-                option.value = status;
-                option.textContent = status;
-                if (trip.status === status) {
-                    option.selected = true;
-                }
-                statusDropdown.appendChild(option);
+        if (canceledTrips.length === 0) {
+            tableBody.innerHTML = '<tr><td colspan="7" class="text-center">No canceled trips.</td></tr>';
+        } else {
+            canceledTrips.forEach(trip => {
+                const row = tableBody.insertRow();
+                row.insertCell().textContent = count++;
+                row.insertCell().textContent = trip.from;
+                row.insertCell().textContent = trip.to;
+                row.insertCell().textContent = trip.date;
+                row.insertCell().textContent = trip.time;
+                row.insertCell().textContent = trip.bus;
+                row.insertCell().textContent = trip.driver;
+                const statusCell = row.insertCell();
+                const statusDropdown = document.createElement('select');
+                statusDropdown.className = 'form-control form-control-sm updateStatusDropdownDashboard status-dropdown';
+                statusDropdown.dataset.id = trip.id;
+                const statuses = ["Pending", "Scheduled","Delayed",  "Departed", "Completed", "Canceled"];
+                statuses.forEach(status => {
+                    const option = document.createElement('option');
+                    option.value = status;
+                    option.textContent = status;
+                    if (trip.status === status) {
+                        option.selected = true;
+                    }
+                    statusDropdown.appendChild(option);
+                });
+                statusDropdown.addEventListener('change', () => {
+                    updateTripStatus(trip.id, statusDropdown.value);
+                });
+                statusCell.appendChild(statusDropdown);
             });
-            statusDropdown.addEventListener('change', () => {
-                updateTripStatus(trip.id, statusDropdown.value);
-            });
-            statusCell.appendChild(statusDropdown);
-        });
+        }
     }
     
+
+    //UPDATE TRIP STATUS
     function updateTripStatus(tripId, newStatus) {
         const targetTrip = trips.find(t => t.id === tripId);
         if (targetTrip) {
@@ -542,6 +545,7 @@ function populateCanceledTripsHistory() {
         }
     }
 
+    //DELETE TRIP
     function deleteTrip(tripId) {
         const indexToDelete = trips.findIndex((trip) => trip.id === tripId);
         if (indexToDelete !== -1) {
@@ -556,6 +560,8 @@ function populateCanceledTripsHistory() {
             populateCanceledTripsDashboard();
         }
     }
+
+    //MONITOR BOOKINGS
     function toggleBookingDisplay(event, tripId) {
         const clickedButton = event.target;
         const row = clickedButton.closest('tr');
@@ -650,6 +656,11 @@ function populateCanceledTripsHistory() {
             });
         }
     }
+
+
+//MANAGE BOOKINGS SECTION
+
+    //ACCEPT BOOKINGS
     function acceptBooking(tripId, bookingId) {
         const trip = trips.find(t => t.id === tripId);
         if (trip) {
@@ -662,6 +673,8 @@ function populateCanceledTripsHistory() {
             }
         }
     }
+
+    //REJECT BOOKINGS
     function rejectBooking(tripId, bookingId) {
         const trip = trips.find(t => t.id === tripId);
         if (trip) {
@@ -674,6 +687,8 @@ function populateCanceledTripsHistory() {
             }
         }
     }
+    
+    //MANAGE BOOKINGS TABLE
     function renderBookingsTable() {
         const bookingsTableBody = document.querySelector('#manageBookingsTable tbody');
         if (!bookingsTableBody) return;
@@ -735,8 +750,9 @@ function populateCanceledTripsHistory() {
     }
     
     
+//SALES REPORT SECTION
 
-    
+    //SALES REPORT TABLE
     function renderSalesReport() {
         const salesReportTableBody = document.querySelector('#salesReportTable tbody');
         if (!salesReportTableBody) return;
@@ -758,7 +774,9 @@ function populateCanceledTripsHistory() {
         //render chart
         renderChart(trips);
     }
-    // Renders a chart of accepted bookings per trip.
+    
+    
+    //SALES REPORT CHART
     function renderChart(trips) {
         const ctx = document.getElementById('salesChart');
         if (!ctx) return;
@@ -817,187 +835,121 @@ function populateCanceledTripsHistory() {
         });
     }
 
-    
-
+// AVAILABLE RESOURCES SECTION
     const resources = [];
 
+    //ADD DRIVER AND BUS FORM
     document.getElementById('addResourceForm').addEventListener('submit', function (e) {
         e.preventDefault();
-    
+
         const busName = document.getElementById('busName').value.trim();
         const driverName = document.getElementById('driverName').value.trim();
-    
-        // Check if the bus and driver pair already exists
-        if (busName && driverName && !resourceExists(busName, driverName)) {
-            resources.push({ busName, driverName });
-            renderResourceTable(); // Update the table without resetting
-            updateResourceDropdowns(busName, driverName); // Update the dropdowns with the new bus and driver
-            this.reset(); // Clear the form
-        } else {
-            alert("This bus and driver pair already exists.");
-        }
+        resources.push({ busName, driverName });
+        renderResourceTable();
+        updateResourceDropdowns(busName, driverName);
+        this.reset();
     });
+
     
-    function resourceExists(busName, driverName) {
-        // Check if the pair exists in the resources array
-        return resources.some(resource => resource.busName === busName && resource.driverName === driverName);
+    function createButton(text, className, onClick) {
+        const button = document.createElement('button');
+        button.textContent = text;
+        button.className = className;
+        button.addEventListener('click', onClick);
+        return button;
     }
-    
+
+    //RESOURCE TABLE
+
     function renderResourceTable() {
-        const resourceTableBody = document.querySelector('#resourceTable tbody');
-        resourceTableBody.innerHTML = ''; // Clear existing table rows
-    
+        const tbody = document.querySelector('#resourceTable tbody');
+        tbody.innerHTML = '';
+
         resources.forEach((resource, index) => {
-            const row = resourceTableBody.insertRow();
-            row.insertCell().textContent = index + 1; // Row number
-            row.insertCell().textContent = resource.busName; // Bus name
-            row.insertCell().textContent = resource.driverName; // Driver name
-    
-            // Add Edit button
+            const row = tbody.insertRow();
+            row.insertCell().textContent = index + 1;
+            row.insertCell().textContent = resource.busName;
+            row.insertCell().textContent = resource.driverName;
+
             const editCell = row.insertCell();
-            const editButton = document.createElement('button');
-            editButton.textContent = 'Edit';
-            editButton.className = 'btn btn-sm btn-warning';
-            editButton.addEventListener('click', () => editResource(resource.busName, resource.driverName, row));
-            editCell.appendChild(editButton);
-    
-            // Add Remove button
+            editCell.appendChild(createButton('Edit', 'btn btn-sm btn-warning', () =>
+                editResource(resource.busName, resource.driverName, row)
+            ));
+
             const removeCell = row.insertCell();
-            const removeButton = document.createElement('button');
-            removeButton.textContent = 'Remove';
-            removeButton.className = 'btn btn-sm btn-danger ml-1';
-            removeButton.addEventListener('click', () => removeResource(resource.busName, row));
-            removeCell.appendChild(removeButton);
+            removeCell.appendChild(createButton('Remove', 'btn btn-sm btn-danger ml-1', () =>
+                removeResource(resource.busName, row)
+            ));
         });
     }
-    
-    function addResourceToTable(busName, driverName) {
-        const resourceTableBody = document.querySelector('#resourceTable tbody');
-    
-        // Get the current row count
-        const rowCount = resourceTableBody.rows.length;
-    
-        // Create a new row for the newly added resource
-        const row = resourceTableBody.insertRow(rowCount); // Insert at the end
-        row.insertCell().textContent = rowCount + 1;
-        row.insertCell().textContent = busName;
-        row.insertCell().textContent = driverName;
-    
-        // Add Edit button
-        const editCell = row.insertCell();
-        const editButton = document.createElement('button');
-        editButton.textContent = 'Edit';
-        editButton.className = 'btn btn-sm btn-warning';
-        editButton.addEventListener('click', () => editResource(busName, driverName, row));
-        editCell.appendChild(editButton);
-    
-        // Add Remove button
-        const removeCell = row.insertCell();
-        const removeButton = document.createElement('button');
-        removeButton.textContent = 'Remove';
-        removeButton.className = 'btn btn-sm btn-danger ml-1';
-        removeButton.addEventListener('click', () => removeResource(busName, row));
-        removeCell.appendChild(removeButton);
-    }
-    
+
+    //UPDATE DROPDOWNS IN MANAGE TRIP
     function updateResourceDropdowns(busName, driverName) {
         const busSelect = document.getElementById('assignBus');
         const driverSelect = document.getElementById('assignDriver');
-    
-        // Add the new bus and driver to the dropdowns without resetting
-        const busOption = document.createElement('option');
-        busOption.value = busName;
-        busOption.textContent = busName;
-        busSelect.appendChild(busOption);
-    
-        const driverOption = document.createElement('option');
-        driverOption.value = driverName;
-        driverOption.textContent = driverName;
-        driverSelect.appendChild(driverOption);
+
+        busSelect.appendChild(new Option(busName, busName));
+        driverSelect.appendChild(new Option(driverName, driverName));
     }
-    
-    // Initialize resources from trips (only run once)
-    function initializeResourcesFromTrips() {
-        const busSet = new Set();
-        const driverSet = new Set();
-    
-        trips.forEach(trip => {
-            if (trip.bus) busSet.add(trip.bus);
-            if (trip.driver) driverSet.add(trip.driver);
-        });
-    
-        // Initialize a unique list of bus-driver pairs
-        busSet.forEach(bus => {
-            driverSet.forEach(driver => {
-                // If the pair does not already exist, add it to the resources array
-                if (!resourceExists(bus, driver)) {
-                    resources.push({ busName: bus, driverName: driver });
-                }
-            });
-        });
-    
-        // Render the resources table and update dropdowns
-        renderResourceTable();
-        renderResourceDropdowns();
-    }
-    
-    // Function to render options in the Manage Trips dropdowns
+
     function renderResourceDropdowns() {
         const busSelect = document.getElementById('assignBus');
         const driverSelect = document.getElementById('assignDriver');
-    
-        // Clear existing options
+
         busSelect.innerHTML = '<option value="" disabled selected>Select Bus</option>';
         driverSelect.innerHTML = '<option value="" disabled selected>Select Driver</option>';
-    
-        // Populate dropdowns with current resources
-        resources.forEach(resource => {
-            if (resource.busName) {
-                const busOption = document.createElement('option');
-                busOption.value = resource.busName;
-                busOption.textContent = resource.busName;
-                busSelect.appendChild(busOption);
+
+        resources.forEach(({ busName, driverName }) => {
+            if (!Array.from(busSelect.options).some(opt => opt.value === busName)) {
+                busSelect.appendChild(new Option(busName, busName));
             }
-            if (resource.driverName) {
-                const driverOption = document.createElement('option');
-                driverOption.value = resource.driverName;
-                driverOption.textContent = resource.driverName;
-                driverSelect.appendChild(driverOption);
+            if (!Array.from(driverSelect.options).some(opt => opt.value === driverName)) {
+                driverSelect.appendChild(new Option(driverName, driverName));
             }
         });
     }
-    
-    function removeResource(busName, row) {
-        const resourceIndex = resources.findIndex(r => r.busName === busName);
-        if (resourceIndex !== -1) {
-            resources.splice(resourceIndex, 1);
-        }
-    
-        // Remove the row from the table
-        row.remove();
-    
-        // Update the dropdowns and table after removal
+
+    function initializeResourcesFromTrips() {
+        const addedPairs = new Set();
+
+        trips.forEach(({ bus, driver }) => {
+            if (bus && driver) {
+                const key = `${bus}-${driver}`;
+                if (!addedPairs.has(key)) {
+                resources.push({ busName: bus, driverName: driver });
+                addedPairs.add(key);
+                }
+            }
+        });
+
+        renderResourceTable();
         renderResourceDropdowns();
     }
-    
-    function editResource(busName, driverName, row) {
-        const newBus = prompt("Enter new bus name:", busName);
-        const newDriver = prompt("Enter new driver name:", driverName);
-    
-        if (newBus && newDriver && !resourceExists(newBus, newDriver)) {
-            const resourceIndex = resources.findIndex(r => r.busName === busName && r.driverName === driverName);
-            if (resourceIndex !== -1) {
-                resources[resourceIndex] = { busName: newBus, driverName: newDriver };
-                row.cells[1].textContent = newBus;
-                row.cells[2].textContent = newDriver;
-                renderResourceDropdowns(); // Update the dropdowns after editing
-            }
-        } else {
-            alert("This bus and driver pair already exists.");
+
+    //REMOVE
+    function removeResource(busName, row) {
+        const index = resources.findIndex(r => r.busName === busName);
+        if (index !== -1) resources.splice(index, 1);
+        row.remove();
+        renderResourceDropdowns();
+    }
+
+
+    //EDIT
+    function editResource(oldBus, oldDriver, row) {
+        const newBus = prompt("Enter new bus name:", oldBus);
+        const newDriver = prompt("Enter new driver name:", oldDriver);
+        const index = resources.findIndex(r => r.busName === oldBus && r.driverName === oldDriver);
+        if (index !== -1) {
+            resources[index] = { busName: newBus, driverName: newDriver };
+            row.cells[1].textContent = newBus;
+            row.cells[2].textContent = newDriver;
+            renderResourceDropdowns();
         }
     }
 
     initializeResourcesFromTrips();
+
     
 
     // Initial call
