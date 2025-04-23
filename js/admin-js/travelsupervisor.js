@@ -1,3 +1,10 @@
+let supervisors = [
+    { id: 1, name: "Renz Espiritu", email: "espiritu@example.com", applicationDate: "2025-04-20", approvalStatus: "Accepted", accountStatus: "Active" },
+    { id: 2, name: "James Rojas", email: "rojas@example.com", applicationDate: "2025-04-18", approvalStatus: "Accepted", accountStatus: "Inactive" },
+    { id: 3, name: "Theodore Adanza", email: "adanza@example.com", applicationDate: "2025-04-22", approvalStatus: "Pending", accountStatus: "Inactive" },
+    { id: 4, name: "Graziella Saavedra", email: "saavedra@example.com", applicationDate: "2025-04-15", approvalStatus: "Rejected", accountStatus: "Inactive" }
+];
+
 function populateSupervisorAccountsTable(supervisors) {
     const tableBody = document.querySelector("#supervisorAccountsTable tbody");
     if (!tableBody) return;
@@ -96,10 +103,6 @@ function populateSupervisorAccountsTable(supervisors) {
 
 
 function updateSupervisorAccountStatus(supervisorId, newAccountStatus) {
-    // In a real application, send an AJAX request to update the account status.
-    console.log(`Updating supervisor ${supervisorId} account status to: ${newAccountStatus}`);
-
-    // For this front-end example:
     supervisors = supervisors.map(supervisor => {
         if (supervisor.id === supervisorId) {
             return { ...supervisor, accountStatus: newAccountStatus };
@@ -130,7 +133,7 @@ function updateSupervisorApprovalStatus(id, newStatus) {
 
     populateSupervisorAccountsTable(supervisors);
     updateSupervisorDashboardCounts(supervisors);
-    updateDashboardStats(); // Optional: ensures all other stats are also refreshed
+    updateDashboardStats(); // ensures all other stats are also refreshed
 }
 
 
@@ -147,30 +150,3 @@ function updateSupervisorDashboardCounts(supervisors) {
     document.getElementById("activeSupervisorsDashboard").textContent = activeCount;
     document.getElementById("pendingSupervisorApprovalsDashboard").textContent = pendingCount;
 }
-
-
-// Example data (replace with your actual data fetching)
-let supervisors = [
-    { id: 1, name: "Renz Espiritu", email: "espiritu@example.com", applicationDate: "2025-04-20", approvalStatus: "Accepted", accountStatus: "Active" },
-    { id: 2, name: "James Rojas", email: "rojas@example.com", applicationDate: "2025-04-18", approvalStatus: "Accepted", accountStatus: "Inactive" },
-    { id: 3, name: "Theodore Adanza", email: "adanza@example.com", applicationDate: "2025-04-22", approvalStatus: "Pending", accountStatus: "Inactive" },
-    { id: 4, name: "Graziella Saavedra", email: "saavedra@example.com", applicationDate: "2025-04-15", approvalStatus: "Rejected", accountStatus: "Inactive" }
-];
-
-
-
-$(document).ready(function () {
-    // ... your existing $(document).ready() code ...
-
-    // Manage Bookings button click (assuming this was a typo and should be Manage Supervisors)
-    $('#manageBookingsButton').click(function () {
-        $('#manage-supervisors').show();
-        $('#dashboardSection, #manageTripsSection, #salesReportSection, #availableResourcesSection, #manage-passengers, #passenger-requests').hide();
-        populateSupervisorAccountsTable(supervisors);
-        updateSupervisorDashboardCounts(supervisors); // Update dashboard if active/pending supervisor count changes
-        updateDashboardStats(); 
-    });
-
-    // ... rest of your existing $(document).ready() code ...
-});
-

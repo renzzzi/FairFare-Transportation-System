@@ -7,6 +7,8 @@ let requests = [
     { id: "#1029", type: "Complaint", message: "Conductor was rude", status: "Reviewed", submitted: "April 15, 2025" },
 ];
 
+
+// TABLE
 function populateTable() {
     const tableBody = document.querySelector("#requests-table tbody");
     tableBody.innerHTML = ''; // Clear the table body
@@ -52,7 +54,7 @@ function populateTable() {
     });
     updatePendingCount(); //update count
 }
-
+//SORTING
 function sortTable(n) {
     var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
     table = document.getElementById("requests-table");
@@ -89,7 +91,7 @@ function sortTable(n) {
         }
     }   
 }
-
+// UPDATE
 function updateStatus(selectElement, id) {
     const status = selectElement.value;
     const row = selectElement.parentNode.parentNode;
@@ -108,6 +110,7 @@ function updateStatus(selectElement, id) {
     updatePendingCount();
 }
 
+//UPDATE IN DASHBOARD
 function updatePendingCount() {
     const table = document.getElementById("requests-table");
     const rows = table.rows;

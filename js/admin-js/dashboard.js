@@ -1,73 +1,8 @@
-const modal = document.getElementById("chartModal");
-const modalContent = document.getElementById("modalChartContent");
-const modalCanvas = document.getElementById("modalChartCanvas");
-const modalCtx = modalCanvas.getContext('2d');
-const modalTitle = document.getElementById("modalChartTitle");
-const closeButton = document.querySelector(".close-button");
-const chartContainers = document.querySelectorAll(".chart");
-
 let activeChart = null;
 
-function createModalChart(chartId, title) {
-    const originalChart = Chart.getChart(chartId);
-    if (originalChart) {
-        modalTitle.textContent = title;
+// CHARTS
 
-        // Determine modal size based on chart ID
-        if (chartId === 'websitevisitors-chart' || chartId === 'seatsbooked-chart') {
-            modalContent.className = 'modal-content small-modal';
-        } else if (chartId === 'customerServiceChart' || chartId === 'ratings-chart') {
-            modalContent.className = 'modal-content large-modal';
-        } else {
-            modalContent.className = 'modal-content'; // Default size
-        }
-
-        if (activeChart) {
-            activeChart.destroy();
-        }
-        activeChart = new Chart(modalCtx, {
-            type: originalChart.config.type,
-            data: {
-                labels: [...originalChart.data.labels],
-                datasets: originalChart.data.datasets.map(dataset => ({ ...dataset, data: [...dataset.data] }))
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-            }
-        });
-        modal.style.display = "block";
-    } else {
-        console.error(`Chart with ID ${chartId} not found.`);
-    }
-}
-
-chartContainers.forEach(container => {
-    container.addEventListener('click', () => {
-        const chartId = container.querySelector('canvas').id;
-        const chartTitle = container.querySelector('h3') ? container.querySelector('h3').textContent : container.querySelector('.chart-header h3').textContent;
-        createModalChart(chartId, chartTitle);
-    });
-});
-
-closeButton.addEventListener('click', () => {
-    modal.style.display = "none";
-    if (activeChart) {
-        activeChart.destroy();
-        activeChart = null;
-    }
-});
-
-window.addEventListener('click', (event) => {
-    if (event.target == modal) {
-        modal.style.display = "none";
-        if (activeChart) {
-            activeChart.destroy();
-            activeChart = null;
-        }
-    }
-});
-
+// CUSTOMER SERVICE CHART
 const customerServiceChart = new Chart(document.getElementById('customerServiceChart').getContext('2d'), {
     type: 'pie',
     data: {
@@ -113,6 +48,7 @@ const customerServiceChart = new Chart(document.getElementById('customerServiceC
     }
 });
 
+// RATINGS CHART
 const ratingsChart = new Chart(document.getElementById('ratings-chart').getContext('2d'), {
     type: 'bar',
     data: {
@@ -143,7 +79,7 @@ const ratingsChart = new Chart(document.getElementById('ratings-chart').getConte
     }
 });
 
-// Initialize Seats Booked chart
+// SEATS BOOKED CHART
 const seatsBookedChart = new Chart(document.getElementById('seatsbooked-chart').getContext('2d'), {
     type: 'line', // Example type, adjust as needed
     data: {
@@ -166,7 +102,7 @@ const seatsBookedChart = new Chart(document.getElementById('seatsbooked-chart').
     }
 });
 
-// Initialize Website Visitors chart
+//WEBSITE VISITORS CHART
 const websiteVisitorsChart = new Chart(document.getElementById('websitevisitors-chart').getContext('2d'), {
     type: 'bar', // Example type, adjust as needed
     data: {

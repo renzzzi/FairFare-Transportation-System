@@ -9,9 +9,9 @@ let buses = [
 let routes = [
     { id: 1, from: "Zamboanga", to: "Ipil", distance: 3949 },
     { id: 2, from: "Pagadian", to: "Zamboanga", distance: 1242 },
-    { id: 2, from: "Ipil", to: "Pagadian", distance: 3212 },
-    { id: 2, from: "Zamboanga", to: "Davao", distance: 2106 },
-    { id: 2, from: "Cagayan de Oro ", to: "Zamboanga", distance: 4312 },
+    { id: 3, from: "Ipil", to: "Pagadian", distance: 3212 },
+    { id: 4, from: "Zamboanga", to: "Davao", distance: 2106 },
+    { id: 5, from: "Cagayan de Oro ", to: "Zamboanga", distance: 4312 },
 ];
 
 function populateBusListTable(buses) {

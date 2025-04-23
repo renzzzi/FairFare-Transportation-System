@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     
     let tripIdCounter = trips.length + 1; // Track the number of bus ID
-    let expandedTripId = null; // Track which trip is currently expanded in the UI
+    let expandedTripId = null; // Track which book is currently expanded in the UI, for monitor button 
     let chartInstance = null; //reference to a chart object to prevents multiple charts from stacking or conflicting
     
 //DASHBOARD SECTION
@@ -367,7 +367,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Renders the Scheduled Trips table.
+    // SCHEDULED TRIPS TABLE.
     function renderManageTripsTable(searchTerm = '') {
         const tableBody = document.querySelector("#tripList tbody");
         if (!tableBody) return;
@@ -410,6 +410,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 toggleBookingDisplay(event, trip.id);
             });
             bookingsCell.appendChild(monitorButton);
+
     
             const actionsCell = row.insertCell();
     
@@ -529,22 +530,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     
 
-    //UPDATE TRIP STATUS
-    function updateTripStatus(tripId, newStatus) {
-        const targetTrip = trips.find(t => t.id === tripId);
-        if (targetTrip) {
-            targetTrip.status = newStatus;
-            renderManageTripsTable();
-            populateUpcomingTripsTableDashboard();
-            populateDepartedBusesTableDashboard();
-            updateDashboardStats();
-            populateCanceledTripsHistory()
-            populateCompletedTripsHistory()
-            populateCompletedTripsDashboard();
-            populateCanceledTripsDashboard();
-        }
-    }
-
     //DELETE TRIP
     function deleteTrip(tripId) {
         const indexToDelete = trips.findIndex((trip) => trip.id === tripId);
@@ -561,101 +546,138 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    //MONITOR BOOKINGS
+    //MONITOR BOOKING
+
     function toggleBookingDisplay(event, tripId) {
         const clickedButton = event.target;
         const row = clickedButton.closest('tr');
-        let bookingRow = row.nextElementSibling; // Check if booking row exists
+        let bookingRow = row.nextElementSibling;
+    
         if (expandedTripId === tripId) {
             if (bookingRow && bookingRow.classList.contains('booking-info-row')) {
                 bookingRow.remove();
             }
             expandedTripId = null;
             clickedButton.textContent = 'Monitor';
+            return;
+        }
+    
+        if (expandedTripId !== null) {
+            const prevBtn = document.querySelector(`[data-id="${expandedTripId}"]`);
+            if (prevBtn) {
+                const prevRow = prevBtn.closest('tr').nextElementSibling;
+                if (prevRow && prevRow.classList.contains('booking-info-row')) {
+                    prevRow.remove();
+                }
+                prevBtn.textContent = 'Monitor';
+            }
+        }
+    
+        expandedTripId = tripId;
+        clickedButton.textContent = 'Hide';
+    
+        bookingRow = document.createElement('tr');
+        bookingRow.className = 'booking-info-row';
+        const bookingCell = document.createElement('td');
+        bookingCell.colSpan = row.cells.length;
+        bookingCell.style.padding = '20px';
+    
+        const trip = trips.find(t => t.id === tripId);
+    
+        if (trip) {
+            let html = `
+                <div style="border: 1px solid #ddd; padding: 15px; border-radius: 5px;">
+                    <h4>Booking Information for Trip ${trip.id}</h4>
+                    <p>Bus: ${trip.bus}</p>
+                    <p>Total Bookings: ${trip.bookings.length}</p>`;
+    
+            if (trip.bookings.length > 0) {
+                html += `
+                    <table class="table table-sm table-striped mt-3">
+                        <thead>
+                            <tr>
+                                <th>Booking #</th>
+                                <th>Passenger Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Seat #</th>
+                                <th>Booking Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>`;
+    
+                trip.bookings.forEach(booking => {
+                    html += `
+                        <tr data-booking-row-id="${booking.bookingId}">
+                            <td>${booking.bookingId}</td>
+                            <td>${booking.passengerName}</td>
+                            <td>${booking.email}</td>
+                            <td>${booking.phone}</td>
+                            <td>${booking.seatNumber}</td>
+                            <td>${booking.bookingDate}</td>
+                            <td><span class="badge ${
+                                booking.status === 'Accepted' ? 'badge-success' :
+                                booking.status === 'Pending' ? 'badge-warning' : 'badge-danger'
+                            }" data-status="${booking.bookingId}">${booking.status}</span></td>
+                            <td>
+                                <button class="btn btn-success btn-sm accept-booking-btn" data-booking-id="${booking.bookingId}">Accept</button>
+                                <button class="btn btn-danger btn-sm reject-booking-btn" data-booking-id="${booking.bookingId}">Reject</button>
+                            </td>
+                        </tr>`;
+                });
+    
+                html += `</tbody></table>`;
+            } else {
+                html += `<p>No bookings for this trip yet.</p>`;
+            }
+    
+            html += `</div>`;
+            bookingCell.innerHTML = html;
         } else {
-            if (expandedTripId !== null) {
-                const previousExpandedButton = document.querySelector(`[data-id="${expandedTripId}"]`);
-                if (previousExpandedButton) {
-                    const previousExpandedRow = previousExpandedButton.closest('tr').nextElementSibling;
-                    if (previousExpandedRow && previousExpandedRow.classList.contains('booking-info-row')) {
-                        previousExpandedRow.remove();
-                        previousExpandedButton.textContent = 'Monitor';
+            bookingCell.innerHTML = `<div class="alert alert-danger">Trip information not found.</div>`;
+        }
+    
+        bookingRow.appendChild(bookingCell);
+        row.parentNode.insertBefore(bookingRow, row.nextSibling);
+    
+        // Accept button
+        bookingRow.querySelectorAll('.accept-booking-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                const bookingId = parseInt(this.dataset.bookingId);
+                const booking = trip.bookings.find(b => b.bookingId === bookingId);
+                if (booking) {
+                    booking.status = 'Accepted';
+                    const statusSpan = bookingRow.querySelector(`span[data-status="${bookingId}"]`);
+                    if (statusSpan) {
+                        statusSpan.textContent = 'Accepted';
+                        statusSpan.className = 'badge badge-success';
                     }
                 }
-            }
-            expandedTripId = tripId; 
-            clickedButton.textContent = 'Hide'; 
-            bookingRow = document.createElement('tr');
-            bookingRow.classList.add('booking-info-row');
-            const bookingCell = document.createElement('td');
-            bookingCell.colSpan = row.cells.length;
-            bookingCell.style.padding = '20px';
-            const trip = trips.find(t => t.id === tripId);
-            if (trip) {
-                let bookingInfoHTML = `<div style="border: 1px solid #ddd; padding: 15px; border-radius: 5px; margin-top: 10px;">
-                            <h4>Booking Information for Trip ${trip.id}</h4>
-                            <p>Bus: ${trip.bus}</p>
-                            <p>Total Bookings: ${trip.bookings.length}</p>`;
-                if (trip.bookings.length > 0) {
-                    bookingInfoHTML += `<table class="table table-sm table-striped mt-3">
-                                    <thead>
-                                        <tr>
-                                            <th>Booking #</th>
-                                            <th>Passenger Name</th>
-                                            <th>Email</th>
-                                            <th>Phone</th>
-                                            <th>Seat #</th>
-                                            <th>Booking Date</th>
-                                            <th>Status</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>`;
-                    trip.bookings.forEach(booking => {
-                        bookingInfoHTML += `
-                                        <tr>
-                                            <td>${booking.bookingId}</td>
-                                            <td>${booking.passengerName}</td>
-                                            <td>${booking.email}</td>
-                                            <td>${booking.phone}</td>
-                                            <td>${booking.seatNumber}</td>
-                                            <td>${booking.bookingDate}</td>
-                                            <td><span class="badge ${booking.status === 'Accepted' ? 'badge-success' : booking.status === 'Pending' ? 'badge-warning' : 'badge-danger'}">${booking.status}</span></td>
-                                            <td>
-                                                <button class="btn btn-success btn-sm accept-booking-btn" data-booking-id="${booking.bookingId}">Accept</button>
-                                                <button class="btn btn-danger btn-sm reject-booking-btn" data-booking-id="${booking.bookingId}">Reject</button>
-                                            </td>
-                                        </tr>
-                                        `;
-                    });
-                    bookingInfoHTML += `</tbody></table>`;
-                } else {
-                    bookingInfoHTML += `<p>No bookings for this trip yet.</p>`;
+                acceptBooking(tripId, bookingId); // Optional backend call
+            });
+        });
+    
+        // Reject button
+        bookingRow.querySelectorAll('.reject-booking-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                const bookingId = parseInt(this.dataset.bookingId);
+                const booking = trip.bookings.find(b => b.bookingId === bookingId);
+                if (booking) {
+                    booking.status = 'Rejected';
+                    const statusSpan = bookingRow.querySelector(`span[data-status="${bookingId}"]`);
+                    if (statusSpan) {
+                        statusSpan.textContent = 'Rejected';
+                        statusSpan.className = 'badge badge-danger';
+                    }
                 }
-                bookingInfoHTML += `</div>`;
-                bookingCell.innerHTML = bookingInfoHTML;
-            } else {
-                bookingCell.innerHTML = `<div class="alert alert-danger">Trip information not found.</div>`;
-            }
-            bookingRow.appendChild(bookingCell);
-            row.parentNode.insertBefore(bookingRow, row.nextSibling);
-            // Add event listeners to the dynamically created buttons
-            const acceptButtons = bookingRow.querySelectorAll('.accept-booking-btn');
-            const rejectButtons = bookingRow.querySelectorAll('.reject-booking-btn');
-            acceptButtons.forEach(button => {
-                button.addEventListener('click', (event) => {
-                    const bookingId = parseInt(event.target.dataset.bookingId);
-                    acceptBooking(tripId, bookingId);
-                });
+                rejectBooking(tripId, bookingId); // Optional backend call
             });
-            rejectButtons.forEach(button => {
-                button.addEventListener('click', (event) => {
-                    const bookingId = parseInt(event.target.dataset.bookingId);
-                    rejectBooking(tripId, bookingId);
-                });
-            });
-        }
+        });
     }
+    
+
 
 
 //MANAGE BOOKINGS SECTION

@@ -502,58 +502,51 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- JQUERY FOR SIDE BAR -->
     <script>
-        $(document).ready(function () {
-            var $toggleSidebarButton = $("#toggleSidebar");
+        $(function () {
             var $sidebar = $("#sidebar");
-            var $sidebarMenuContainer = $("#sidebarMenuContainer");
             var $mainContent = $("#mainContent");
-            var $menuLinks = $(".sidebar a");
-
-            var sections = {
-                dashboardButton: "dashboardSection",
-                manageTripsButton: "manageTripsSection",
-                manageBookingsButton: "manageBookingsSection",
-                salesReportButton: "salesReportSection",
-                availableResourcesButton: "availableResourcesSection"
-            };
-
-            // Initial setup
-            $sidebar.addClass("active");
-            $mainContent.addClass("active");
+            var $menuContainer = $("#sidebarMenuContainer");
+            
+            // Hide menu if screen is small
             if ($(window).width() <= 768) {
-                $sidebarMenuContainer.hide();
+                $menuContainer.hide();
             }
-
-            // Toggle sidebar
-            $toggleSidebarButton.click(function () {
+    
+            // Toggle sidebar on button click
+            $("#toggleSidebar").click(function () {
                 $sidebar.toggleClass("active");
                 $mainContent.toggleClass("active");
+    
                 if ($(window).width() <= 768) {
-                    $sidebarMenuContainer.fadeToggle();
+                    $menuContainer.fadeToggle();
                 }
             });
-
-            // Section navigation
-            $menuLinks.click(function (e) {
+    
+            // Handle button clicks by ID
+            $("#dashboardButton, #manageTripsButton, #manageBookingsButton, #salesReportButton, #availableResourcesButton").click(function (e) {
                 e.preventDefault();
-
-                $.each(sections, function (_, sectionId) {
-                    $("#" + sectionId).hide();
-                });
-
-                $("#" + sections[this.id]).show();
-
+    
+                // Hide all sections
+                $("#dashboardSection, #manageTripsSection, #manageBookingsSection, #salesReportSection, #availableResourcesSection").hide();
+    
+                // Show the section that matches the clicked button
+                var sectionId = this.id.replace("Button", "Section");
+                $("#" + sectionId).show();
+    
+                // Close sidebar for small screens
+                if ($(window).width() <= 768) {
+                    $menuContainer.fadeOut();
+                }
+    
                 $sidebar.removeClass("active");
                 $mainContent.removeClass("active");
-                if ($(window).width() <= 768) {
-                    $sidebarMenuContainer.fadeOut();
-                }
             });
-
-            // Show default section
+    
+            // Show dashboard by default
             $("#dashboardSection").show();
         });
     </script>
+    
 
     <!-- JQUERY FOR CHANGING PAGES -->
     <script>

@@ -6,9 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 let passengers = [
     { id: 1, name: "Juan Dela Cruz", email: "juan@example.com", registrationDate: "2025-01-15", accountStatus: "Active" },
-    { id: 2, name: "Maria Santos", email: "maria@example.com", registrationDate: "2025-02-20", accountStatus: "" },
+    { id: 2, name: "Maria Santos", email: "maria@example.com", registrationDate: "2025-02-20", accountStatus: "Active" },
     { id: 3, name: "John Smith", email: "john@example.com", registrationDate: "2025-03-10", accountStatus: "Active" },
-    { id: 3, name: "Carl Mark", email: "carl@example.com", registrationDate: "2023-01-10", accountStatus: "Inactive" },
+    { id: 4, name: "Carl Mark", email: "carl@example.com", registrationDate: "2023-01-10", accountStatus: "Inactive" },
 ];
 
 // Function to populate passenger table
@@ -70,8 +70,15 @@ function populatePassengerAccountsTable(passengerList) {
 // Updates the dashboard stats
 function updateDashboardStats() {
     const totalPassengers = passengers.length;
-    document.getElementById("totalPassengersDashboard").textContent = totalPassengers;
+    const activePassengers = passengers.filter(p => p.accountStatus === "Active").length;
+
+    const totalElement = document.getElementById("totalPassengersDashboard");
+    if (totalElement) totalElement.textContent = totalPassengers;
+
+    const activeElement = document.getElementById("totalPassengerActiveDashboard");
+    if (activeElement) activeElement.textContent = activePassengers;
 }
+
 
 // Update account status
 function updatePassengerAccountStatus(passengerId, newStatus) {
@@ -88,16 +95,3 @@ function deletePassenger(passengerId) {
     populatePassengerAccountsTable(passengers);
     updateDashboardStats();
 }
-
-// jQuery to show the correct section
-$(document).ready(function () {
-    $('#manage-passengers').hide(); // Hidden initially
-
-    $('#managePassengersButton').click(function () {
-        $('#manage-passengers').show();
-        $('#dashboardSection, #manageTripsSection, #salesReportSection, #availableResourcesSection, #manage-passengers, #passenger-requests').hide();
-        populatePassengerAccountsTable(passengers);
-        updateDashboardStats(); // Call here too, when showing the section
-    });
-
-});
