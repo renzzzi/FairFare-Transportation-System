@@ -188,120 +188,6 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById("deployedBusesDashboard").textContent = deployedBusesCount;
     }
 
-    const buses = [];
-    const drivers = [];
-
-    const resourceTableBody = document.querySelector('#resourceTable tbody');
-    const busSelect = document.getElementById('assignBus');
-    const driverSelect = document.getElementById('assignDriver');
-
-    function initializeResourcesFromTrips() {
-        const busSet = new Set();
-        const driverSet = new Set();
-
-        trips.forEach(trip => {
-            if (trip.bus) busSet.add(trip.bus);
-            if (trip.driver) driverSet.add(trip.driver);
-        });
-
-        let count = 1;
-
-        // Populate both arrays and table
-        busSet.forEach(bus => {
-            buses.push(bus);
-        });
-
-        driverSet.forEach(driver => {
-            drivers.push(driver);
-        });
-
-        // Render initial rows in the resource table
-        buses.forEach((bus, index) => {
-            const driver = drivers[index] || '';
-            const row = resourceTableBody.insertRow();
-            row.insertCell().textContent = count++;
-            row.insertCell().textContent = bus;
-            row.insertCell().textContent = driver;
-
-            // Add Edit button
-            const editCell = row.insertCell();
-            const editButton = document.createElement('button');
-            editButton.textContent = 'Edit';
-            editButton.className = 'btn btn-sm btn-warning';
-            editButton.addEventListener('click', () => editResource(bus, driver, row));
-            editCell.appendChild(editButton);
-
-            // Add Remove button
-            const removeCell = row.insertCell();
-            const removeButton = document.createElement('button');
-            removeButton.textContent = 'Remove';
-            removeButton.className = 'btn btn-sm btn-danger ml-1';
-            removeButton.addEventListener('click', () => removeResource(bus, row));
-            removeCell.appendChild(removeButton);
-        });
-
-        // Then render dropdowns
-        renderResourceDropdowns();
-    }
-
-    // Function to render options in the Manage Trips dropdowns
-    function renderResourceDropdowns() {
-        // Clear existing options
-        busSelect.innerHTML = '';
-        driverSelect.innerHTML = '';
-
-        busSelect.innerHTML = '<option value="" disabled selected>Select Bus</option>';
-        driverSelect.innerHTML = '<option value="" disabled selected>Select Driver</option>';
-
-        buses.forEach(bus => {
-            const busOption = document.createElement('option');
-            busOption.value = bus;
-            busOption.textContent = bus;
-            busSelect.appendChild(busOption);
-        });
-
-        // Add each driver as an option in the driver dropdown
-        drivers.forEach(driver => {
-            const driverOption = document.createElement('option');
-            driverOption.value = driver;
-            driverOption.textContent = driver;
-            driverSelect.appendChild(driverOption);
-        });
-    }
-
-    function removeResource(bus, row) {
-        const busIndex = buses.indexOf(bus);
-        if (busIndex !== -1) {
-            buses.splice(busIndex, 1);
-            drivers.splice(busIndex, 1);
-        }
-    
-        // Remove the row from the table
-        row.remove();
-    
-        // Update the dropdowns and table after removal
-        renderResourceDropdowns();  
-    }
-    
-
-    function editResource(bus, driver, row) {
-        const newBus = prompt("Enter new bus name:", bus);
-        const newDriver = prompt("Enter new driver name:", driver);
-
-        if (newBus && newDriver) {
-            const busIndex = buses.indexOf(bus);
-            buses[busIndex] = newBus;
-
-            const driverIndex = drivers.indexOf(driver);
-            drivers[driverIndex] = newDriver;
-
-            row.cells[1].textContent = newBus;
-            row.cells[2].textContent = newDriver;
-
-            renderResourceDropdowns();
-        }
-    }
-    initializeResourcesFromTrips();
 
 // Populates the Departed Trips table in the Dashboard.
     function populateDepartedBusesTableDashboard() {
@@ -931,34 +817,188 @@ function populateCanceledTripsHistory() {
         });
     }
 
-    // Renders the section for Available Buses and Drivers.
+    
+
     const resources = [];
 
     document.getElementById('addResourceForm').addEventListener('submit', function (e) {
         e.preventDefault();
-
+    
         const busName = document.getElementById('busName').value.trim();
         const driverName = document.getElementById('driverName').value.trim();
-
-        if (busName && driverName) {
+    
+        // Check if the bus and driver pair already exists
+        if (busName && driverName && !resourceExists(busName, driverName)) {
             resources.push({ busName, driverName });
-            renderResourceTable();
+            renderResourceTable(); // Update the table without resetting
+            updateResourceDropdowns(busName, driverName); // Update the dropdowns with the new bus and driver
             this.reset(); // Clear the form
+        } else {
+            alert("This bus and driver pair already exists.");
         }
     });
-
+    
+    function resourceExists(busName, driverName) {
+        // Check if the pair exists in the resources array
+        return resources.some(resource => resource.busName === busName && resource.driverName === driverName);
+    }
+    
     function renderResourceTable() {
         const resourceTableBody = document.querySelector('#resourceTable tbody');
-        resourceTableBody.innerHTML = '';
-
+        resourceTableBody.innerHTML = ''; // Clear existing table rows
+    
         resources.forEach((resource, index) => {
             const row = resourceTableBody.insertRow();
-            row.insertCell().textContent = index + 1;
-            row.insertCell().textContent = resource.busName;
-            row.insertCell().textContent = resource.driverName;
+            row.insertCell().textContent = index + 1; // Row number
+            row.insertCell().textContent = resource.busName; // Bus name
+            row.insertCell().textContent = resource.driverName; // Driver name
+    
+            // Add Edit button
+            const editCell = row.insertCell();
+            const editButton = document.createElement('button');
+            editButton.textContent = 'Edit';
+            editButton.className = 'btn btn-sm btn-warning';
+            editButton.addEventListener('click', () => editResource(resource.busName, resource.driverName, row));
+            editCell.appendChild(editButton);
+    
+            // Add Remove button
+            const removeCell = row.insertCell();
+            const removeButton = document.createElement('button');
+            removeButton.textContent = 'Remove';
+            removeButton.className = 'btn btn-sm btn-danger ml-1';
+            removeButton.addEventListener('click', () => removeResource(resource.busName, row));
+            removeCell.appendChild(removeButton);
         });
     }
-// Initial rendering of available buses and drivers
+    
+    function addResourceToTable(busName, driverName) {
+        const resourceTableBody = document.querySelector('#resourceTable tbody');
+    
+        // Get the current row count
+        const rowCount = resourceTableBody.rows.length;
+    
+        // Create a new row for the newly added resource
+        const row = resourceTableBody.insertRow(rowCount); // Insert at the end
+        row.insertCell().textContent = rowCount + 1;
+        row.insertCell().textContent = busName;
+        row.insertCell().textContent = driverName;
+    
+        // Add Edit button
+        const editCell = row.insertCell();
+        const editButton = document.createElement('button');
+        editButton.textContent = 'Edit';
+        editButton.className = 'btn btn-sm btn-warning';
+        editButton.addEventListener('click', () => editResource(busName, driverName, row));
+        editCell.appendChild(editButton);
+    
+        // Add Remove button
+        const removeCell = row.insertCell();
+        const removeButton = document.createElement('button');
+        removeButton.textContent = 'Remove';
+        removeButton.className = 'btn btn-sm btn-danger ml-1';
+        removeButton.addEventListener('click', () => removeResource(busName, row));
+        removeCell.appendChild(removeButton);
+    }
+    
+    function updateResourceDropdowns(busName, driverName) {
+        const busSelect = document.getElementById('assignBus');
+        const driverSelect = document.getElementById('assignDriver');
+    
+        // Add the new bus and driver to the dropdowns without resetting
+        const busOption = document.createElement('option');
+        busOption.value = busName;
+        busOption.textContent = busName;
+        busSelect.appendChild(busOption);
+    
+        const driverOption = document.createElement('option');
+        driverOption.value = driverName;
+        driverOption.textContent = driverName;
+        driverSelect.appendChild(driverOption);
+    }
+    
+    // Initialize resources from trips (only run once)
+    function initializeResourcesFromTrips() {
+        const busSet = new Set();
+        const driverSet = new Set();
+    
+        trips.forEach(trip => {
+            if (trip.bus) busSet.add(trip.bus);
+            if (trip.driver) driverSet.add(trip.driver);
+        });
+    
+        // Initialize a unique list of bus-driver pairs
+        busSet.forEach(bus => {
+            driverSet.forEach(driver => {
+                // If the pair does not already exist, add it to the resources array
+                if (!resourceExists(bus, driver)) {
+                    resources.push({ busName: bus, driverName: driver });
+                }
+            });
+        });
+    
+        // Render the resources table and update dropdowns
+        renderResourceTable();
+        renderResourceDropdowns();
+    }
+    
+    // Function to render options in the Manage Trips dropdowns
+    function renderResourceDropdowns() {
+        const busSelect = document.getElementById('assignBus');
+        const driverSelect = document.getElementById('assignDriver');
+    
+        // Clear existing options
+        busSelect.innerHTML = '<option value="" disabled selected>Select Bus</option>';
+        driverSelect.innerHTML = '<option value="" disabled selected>Select Driver</option>';
+    
+        // Populate dropdowns with current resources
+        resources.forEach(resource => {
+            if (resource.busName) {
+                const busOption = document.createElement('option');
+                busOption.value = resource.busName;
+                busOption.textContent = resource.busName;
+                busSelect.appendChild(busOption);
+            }
+            if (resource.driverName) {
+                const driverOption = document.createElement('option');
+                driverOption.value = resource.driverName;
+                driverOption.textContent = resource.driverName;
+                driverSelect.appendChild(driverOption);
+            }
+        });
+    }
+    
+    function removeResource(busName, row) {
+        const resourceIndex = resources.findIndex(r => r.busName === busName);
+        if (resourceIndex !== -1) {
+            resources.splice(resourceIndex, 1);
+        }
+    
+        // Remove the row from the table
+        row.remove();
+    
+        // Update the dropdowns and table after removal
+        renderResourceDropdowns();
+    }
+    
+    function editResource(busName, driverName, row) {
+        const newBus = prompt("Enter new bus name:", busName);
+        const newDriver = prompt("Enter new driver name:", driverName);
+    
+        if (newBus && newDriver && !resourceExists(newBus, newDriver)) {
+            const resourceIndex = resources.findIndex(r => r.busName === busName && r.driverName === driverName);
+            if (resourceIndex !== -1) {
+                resources[resourceIndex] = { busName: newBus, driverName: newDriver };
+                row.cells[1].textContent = newBus;
+                row.cells[2].textContent = newDriver;
+                renderResourceDropdowns(); // Update the dropdowns after editing
+            }
+        } else {
+            alert("This bus and driver pair already exists.");
+        }
+    }
+
+    initializeResourcesFromTrips();
+    
 
     // Initial call
     updateDashboardStats();
