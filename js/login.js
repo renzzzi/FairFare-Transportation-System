@@ -17,7 +17,6 @@ $(document).ready(function () {
             window.location.href = "admin.html";
         }
         else if (username === clientusername && password === clientpassword) {
-            alert("Client login successful!");
             window.location.href = "client.html";
         }
         else if (username === tsusername && password === tspassword) {
