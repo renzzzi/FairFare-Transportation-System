@@ -14,13 +14,14 @@ $(document).ready(function () {
         const tspassword = "1234";
 
         if (username === adminusername && password === adminpassword) {
-            window.location.href = "pages/admin.html";
+            window.location.href = "admin.html";
         }
         else if (username === clientusername && password === clientpassword) {
-            window.location.href = "logged-in2.html";
+            alert("Client login successful!");
+            window.location.href = "client.html";
         }
         else if (username === tsusername && password === tspassword) {
-            window.location.href = "pages/supervisor.html";
+            window.location.href = "supervisor.html";
         }
         else {
             alert("Incorrect username or password, please try again");
