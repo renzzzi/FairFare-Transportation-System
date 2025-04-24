@@ -1,19 +1,4 @@
-/* -------------------------------------------------------------------------- */
-/*                                 Theme                                      */
-/* -------------------------------------------------------------------------- */
-/* prettier-ignore */
-/* -------------------------------------------------------------------------- */
-/*                                  Utilities                                 */
-/* -------------------------------------------------------------------------- */
-/*-----------------------------------------------
-|   Bootstrap Styles
------------------------------------------------*/
-/*!
- * Bootstrap v5.0.0-alpha1 (https://getbootstrap.com/)
- * Copyright 2011-2020 The Bootstrap Authors
- * Copyright 2011-2020 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- */
+
 :root {
   --bs-blue: #747DEF;
   --bs-indigo: #6237FF;
@@ -52,6 +37,148 @@
   :root {
     scroll-behavior: smooth;
   }
+}
+
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Montserrat", sans-serif;
+	scroll-behavior: smooth;
+}
+
+:root {
+	--primary-color: #00cde1;
+	--secondary-color: #e18702;
+	--light-primary-color: #ddfcff;
+	--font-color: #424242;
+}
+
+/* Blur background when menu is open */
+.navbar.navbar-blur {
+	backdrop-filter: blur(15px);
+	background-color: rgba(255, 255, 255, 0.85); /* semi-transparent white */
+	transition: background-color 0.3s ease;
+  }
+  
+  /* Smooth animation for collapsing */
+  .collapse.navbar-collapse {
+	transition: all 0.4s ease;
+  }
+
+h4{
+	font-size: 1.5rem;
+	font-weight: bolder !important;
+	color: var(--font-color) !important;
+}
+
+.footer {
+	padding: 40px 40px;
+	background-color: #ddfcff;
+	display: flex;
+	justify-content: center;
+}
+
+.footer-inside {
+	display: flex;
+	flex-wrap: wrap;
+	justify-items: space-around;
+	column-gap: 100px;
+	row-gap: 50px;
+	max-width: 1250px;
+}
+
+.footer-left {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.footer-logo {
+	filter: brightness(20%);
+}
+
+.social-icon {
+	fill: #424242;
+	width: 30px;
+	height: 30px;
+}
+
+li {
+	list-style-type: none;
+}
+
+.submit-btn {
+	background-color: var(--secondary-color);
+	border: none;
+	padding: 10px;
+	width: 50%;
+	color: var(--light-primary-color);
+	border-radius: 10px;
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+.submit-btn:hover {
+	background-color: var(--primary-color);
+	color: white;
+}
+
+.inputs {
+	width: 100%;
+	height: 70px;
+	padding: 20px;
+	border-radius: 10px;
+	border: none;
+}
+
+.email-in {
+	height: 10px;
+}
+
+.footer-form {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.form-inputs {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 20px;
+	gap: 10px;
+}
+
+.quick-links {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.accounts {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.link-list {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.bottom-bar {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding: 10px;
+	background-color: var(--font-color);
+}
+
+.bottom-bar > p {
+	color: white;
+	font-size: 14px;
 }
 
 body {
@@ -7060,7 +7187,7 @@ fieldset:disabled .btn {
   list-style: none;
 }
 
-.carousel-indicators [data-bs-target] {
+.carousel-indicators [data-target] {
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
   -webkit-box-flex: 0;
@@ -7085,7 +7212,7 @@ fieldset:disabled .btn {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .carousel-indicators [data-bs-target] {
+  .carousel-indicators [data-target] {
     -webkit-transition: none;
     -o-transition: none;
     transition: none;
@@ -7113,7 +7240,7 @@ fieldset:disabled .btn {
   filter: invert(1) grayscale(100);
 }
 
-.carousel-dark .carousel-indicators [data-bs-target] {
+.carousel-dark .carousel-indicators [data-target] {
   background-color: #000;
 }
 
@@ -19445,22 +19572,22 @@ iframe {
 /* -------------------------------------------------------------------------- */
 /*                                    Badge                                   */
 /* -------------------------------------------------------------------------- */
-.carousel-indicators {
+/* .carousel-indicators {
   right: unset;
   margin-left: 1.2rem;
-}
+} */
 
 @media (max-width: 991.98px) {
   .carousel-indicators {
     -webkit-transform: translateY(6rem);
     -ms-transform: translateY(6rem);
-    transform: translateY(6rem);
+    transform: translateY(6srem);
     right: 0;
     margin-left: 15%;
   }
 }
 
-.carousel-indicators [data-bs-target] {
+.carousel-indicators [data-target] {
   background-color: #212832;
   width: 0.6875rem;
   height: 0.6875rem;
@@ -19468,11 +19595,11 @@ iframe {
   border-radius: 50%;
 }
 
-.carousel-indicators [data-bs-target]:not(:last-child) {
+.carousel-indicators [data-target]:not(:last-child) {
   margin-right: 1.5625rem;
 }
 
-.carousel-indicators [data-bs-target].active {
+.carousel-indicators [data-target].active {
   opacity: 1;
 }
 
