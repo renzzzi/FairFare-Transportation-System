@@ -42,7 +42,6 @@
       border-color: var(--bs-primary) !important;
     }
 
-
     .nav-pad {
       padding: 0.5rem 1rem;
     }
@@ -62,7 +61,32 @@
     .sug-images {
       object-fit: cover !important;
       width: 100% !important;
-      height: auto !important;
+      height: 200px !important;
+    }
+
+    /* New styles for suggested routes */
+    .card {
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: none;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+    }
+
+    .badge {
+      font-weight: 500;
+      padding: 0.5em 0.8em;
+    }
+
+    .route-info {
+      font-size: 0.9rem;
+      color: #6c757d;
+    }
+
+    .star-rating {
+      color: #ffc107;
     }
   </style>
 </head>
@@ -184,18 +208,21 @@
         <div class="row g-4">
           <!-- Bus Card 1 -->
           <div class="col-md-4">
-            <div class="card h-100 shadow-sm hover-shadow transition">
+            <div class="card h-100 shadow-sm">
               <img src="../images/suggested pictures/pic-1.jpg" class="card-img-top sug-images" alt="Zamboanga to Davao route">
               <div class="card-body">
                 <div class="d-flex justify-content-between align-items-start mb-2">
                   <h5 class="card-title mb-0">Zamboanga to Davao</h5>
                   <span class="badge bg-primary">Most Popular</span>
                 </div>
-                <p class="card-text text-muted mb-3">6-8 hours • Daily departures</p>
+                <p class="route-info mb-3">
+                  <i class="bi bi-clock me-2"></i>6-8 hours
+                  <i class="bi bi-calendar-check ms-3 me-2"></i>Daily departures
+                </p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div>
-                    <p class="mb-0"><strong>₱500 - ₱700</strong></p>
-                    <div class="text-warning small">
+                    <p class="mb-1 fw-bold">₱500 - ₱700</p>
+                    <div class="star-rating">
                       <i class="bi bi-star-fill"></i>
                       <i class="bi bi-star-fill"></i>
                       <i class="bi bi-star-fill"></i>
@@ -204,8 +231,8 @@
                       <span class="text-muted ms-1">(4.9)</span>
                     </div>
                   </div>
-                  <button class="btn btn-outline-primary quick-search" data-from="Zamboanga" data-to="Davao">
-                    View Schedule
+                  <button class="btn btn-outline-primary" data-from="Zamboanga" data-to="Davao">
+                    <i class="bi bi-calendar2-week me-2"></i>View Schedule
                   </button>
                 </div>
               </div>
@@ -214,18 +241,21 @@
 
           <!-- Bus Card 2 -->
           <div class="col-md-4">
-            <div class="card h-100 shadow-sm hover-shadow transition">
+            <div class="card h-100 shadow-sm">
               <img src="../images/suggested pictures/pic-2.jpg" class="card-img-top sug-images" alt="Manila to Baguio route">
               <div class="card-body">
                 <div class="d-flex justify-content-between align-items-start mb-2">
                   <h5 class="card-title mb-0">Manila to Baguio</h5>
                   <span class="badge bg-success">Best Value</span>
                 </div>
-                <p class="card-text text-muted mb-3">4-6 hours • Multiple departures</p>
+                <p class="route-info mb-3">
+                  <i class="bi bi-clock me-2"></i>4-6 hours
+                  <i class="bi bi-calendar-check ms-3 me-2"></i>Multiple departures
+                </p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div>
-                    <p class="mb-0"><strong>₱400 - ₱600</strong></p>
-                    <div class="text-warning small">
+                    <p class="mb-1 fw-bold">₱400 - ₱600</p>
+                    <div class="star-rating">
                       <i class="bi bi-star-fill"></i>
                       <i class="bi bi-star-fill"></i>
                       <i class="bi bi-star-fill"></i>
@@ -234,8 +264,8 @@
                       <span class="text-muted ms-1">(4.8)</span>
                     </div>
                   </div>
-                  <button class="btn btn-outline-primary quick-search" data-from="Manila" data-to="Baguio">
-                    View Schedule
+                  <button class="btn btn-outline-primary" data-from="Manila" data-to="Baguio">
+                    <i class="bi bi-calendar2-week me-2"></i>View Schedule
                   </button>
                 </div>
               </div>
@@ -244,18 +274,21 @@
 
           <!-- Bus Card 3 -->
           <div class="col-md-4">
-            <div class="card h-100 shadow-sm hover-shadow transition">
+            <div class="card h-100 shadow-sm">
               <img src="../images/suggested pictures/pic-3.jpg" class="card-img-top sug-images" alt="Davao to Cagayan route">
               <div class="card-body">
                 <div class="d-flex justify-content-between align-items-start mb-2">
                   <h5 class="card-title mb-0">Davao to Cagayan</h5>
                   <span class="badge bg-info">Express Route</span>
                 </div>
-                <p class="card-text text-muted mb-3">5-7 hours • Weekend trips</p>
+                <p class="route-info mb-3">
+                  <i class="bi bi-clock me-2"></i>5-7 hours
+                  <i class="bi bi-calendar-check ms-3 me-2"></i>Weekend trips
+                </p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div>
-                    <p class="mb-0"><strong>₱300 - ₱500</strong></p>
-                    <div class="text-warning small">
+                    <p class="mb-1 fw-bold">₱300 - ₱500</p>
+                    <div class="star-rating">
                       <i class="bi bi-star-fill"></i>
                       <i class="bi bi-star-fill"></i>
                       <i class="bi bi-star-fill"></i>
@@ -264,8 +297,8 @@
                       <span class="text-muted ms-1">(4.5)</span>
                     </div>
                   </div>
-                  <button class="btn btn-outline-primary quick-search" data-from="Davao" data-to="Cagayan">
-                    View Schedule
+                  <button class="btn btn-outline-primary" data-from="Davao" data-to="Cagayan">
+                    <i class="bi bi-calendar2-week me-2"></i>View Schedule
                   </button>
                 </div>
               </div>
