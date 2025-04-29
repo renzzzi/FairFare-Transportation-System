@@ -98,9 +98,152 @@
     display: block;
 }
 
+/* Footer styles */
+.footer {
+    padding: 40px 40px;
+    background-color: var(--primary-color) !important;
+    display: flex;
+    justify-content: center;
+}
+
+.footer-inside {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    column-gap: 100px;
+    row-gap: 50px;
+    max-width: 1250px;
+    margin: 0 auto;
+}
+
+.footer-left {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-logo {
+    filter: brightness(100%);
+}
+
+.social-icons {
+    display: flex;
+    gap: 20px;
+}
+
+.social-icon {
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.social-icon:hover {
+    color: #F1A501;
+}
+
+.footer-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.inputs {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    width: 300px;
+}
+
+.inputs::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.submit-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #F1A501;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #d99401;
+}
+
+.quick-links, .accounts {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.link-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.link-list li {
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.link-list li:hover {
+    color: #F1A501;
+}
+
+.bold-h {
+    font-weight: bold;
+    color: white !important;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .card-body {
         padding: 2rem !important;
+    }
+
+    .footer-inside {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .footer-left {
+        align-items: center;
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+
+    .footer-form {
+        align-items: center;
+    }
+
+    .inputs {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .quick-links, .accounts {
+        align-items: center;
+    }
+
+    .link-list {
+        align-items: center;
     }
 }
