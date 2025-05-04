@@ -1,0 +1,90 @@
+ /* Media query for small screens */
+ @media (max-width: 768px) {
+    .form-input {
+      display: none;
+    }
+
+    .form-select {
+      display: block;
+    }
+  }
+
+  :root {
+    --bs-primary: #00cde1;
+    --bs-secondary: #E18702;
+    --bs-primary-rgb: 0, 205, 225;
+  }
+
+
+  .btn-primary {
+    background-color: var(--bs-primary) !important;
+    border-color: var(--bs-primary) !important;
+  }
+
+  .btn-primary:hover {
+    border-color: var(--bs-secondary) !important;
+    background-color: var(--bs-secondary) !important;
+    color: white;
+  }
+
+  .btn-outline-primary {
+    color: var(--bs-primary) !important;
+    border-color: var(--bs-primary) !important;
+  }
+
+  .btn-outline-primary:hover {
+    background-color: var(--bs-primary) !important;
+    color: #fff !important;
+  }
+
+  .nav-pad {
+    padding: 0.5rem 1rem;
+  }
+
+  .bold-h {
+    font-weight: bolder;
+  }
+
+  .if-two {
+    border-radius: 10px !important;
+  }
+
+  .gap-adjust {
+    gap: 0px;
+  }
+
+  .sug-images {
+    object-fit: cover !important;
+    width: 100% !important;
+    height: 200px !important;
+  }
+
+  /* New styles for suggested routes */
+  .card {
+    border-radius: 20px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: none;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+  }
+
+  .badge {
+    font-weight: 500;
+    padding: 0.5em 0.8em;
+  }
+
+  .route-info {
+    font-size: 0.9rem;
+    color: #6c757d;
+  }
+
+  .star-rating {
+    color: #ffc107;
+  }
+
+  .card-img-top {
+    border-radius: 20px 20px 0 0;
+  }
