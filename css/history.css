@@ -1,0 +1,10 @@
+:root {
+    --bs-primary: #00cde1;
+    --bs-secondary: #E18702;
+    --bs-primary-rgb: 0, 205, 225;
+}
+
+.bg-primary {
+    background-color: var(--bs-primary) !important;
+    color: white;
+}
