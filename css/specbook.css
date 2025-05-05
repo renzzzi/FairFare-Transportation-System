@@ -57,11 +57,6 @@
         vertical-align: middle; /* Helps align SVG with text */
    }
 
-   /* Optional: Style for Cancel Button */
-   .btn-cancel-booking {
-        /* Add specific styles if needed, e.g., width */
-   }
-
    /* Blur effect for header */
    .div-blur {
         backdrop-filter: blur(10px);

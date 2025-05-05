@@ -1,212 +1,436 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Payment Information - Fair Fare</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fair Fare - Passenger Details (Bus)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="../css/pages/logged-in/styles.css">
-  <link rel="stylesheet" href="../css/pages/bookout/styles.css">
+    <link rel="stylesheet" href="../css/headfoot.css">
+    <link rel="stylesheet" href="../css/bookout.css">
+   
 </head>
-
-<body>
-  <header class="sticky-top bg-white bg-opacity-75 backdrop-blur shadow-sm">
-    <nav class="navbar navbar-expand-md nav-pad">
-      <div class="container d-flex align-items-center justify-content-between">
-        <div class="d-flex align-items-center">
-          <img src="../images/logos/logo-color.png" alt="Logo" style="width: 50px; height: 50px;" class="me-2">
-          <h1 class="mb-0 fs-2 text-primary d-none d-md-block">FAIR FARE</h1>
-        </div>
-
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
-          aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link px-3 py-4 rounded" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link px-3 py-4 rounded" href="#">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link px-3 py-4 rounded" href="#">Contact</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </header>
-
-  <main class="main-container">
-    <div class="main-content container">
-      <div class="payment-section">
-        <h2 class="bold-h mb-4 text-center">Passenger Information & Payment</h2>
-        <form>
-          <h5 class="bold-h mb-3">Personal Information</h5>
-          <div class="form-group">
-            <label for="firstName">First Name</label>
-            <input type="text" class="form-control" id="firstName" required>
-          </div>
-          <div class="form-group">
-            <label for="lastName">Last Name</label>
-            <input type="text" class="form-control" id="lastName" required>
-          </div>
-          <div class="form-group">
-            <label for="email">Email Address</label>
-            <input type="email" class="form-control" id="email" required>
-          </div>
-          <div class="form-group">
-            <label for="phoneNumber">Phone Number</label>
-            <input type="tel" class="form-control" id="phoneNumber">
-          </div>
-
-          <hr class="my-4">
-          <h5 class="bold-h mb-3">Payment Method</h5>
-
-          <div class="payment-method">
-            <h6><input type="radio" name="paymentMethod" value="creditCard" class="payment-method-radio" required>
-              Credit Card</h6>
-            <div class="form-group">
-              <label for="cardNumber">Card Number</label>
-              <input type="text" class="form-control" id="cardNumber" placeholder="XXXX-XXXX-XXXX-XXXX">
+<body style="font-family: Montserrat, sans-serif;">
+    <header class="sticky-top bg-white bg-opacity-75 div-blur shadow-sm">
+        <nav class="navbar navbar-expand-md nav-pad">
+          <div class="container d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+              <img src="../images/logos/logo-color.png" alt="Logo" style="width: 50px; height: 50px;" class="me-2">
+              <h1 class="mb-0 fs-2 d-none fw-bold f-primary d-md-block">FAIR FARE</h1>
             </div>
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="expiryDate">Expiry Date</label>
-                <input type="text" class="form-control" id="expiryDate" placeholder="MM/YY">
-              </div>
-              <div class="form-group col-md-6">
-                <label for="cvv">CVV</label>
-                <input type="text" class="form-control" id="cvv" placeholder="XXX">
-              </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+              aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link px-3 py-4 rounded" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link px-3 py-4 rounded" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link px-3 py-4 rounded" href="#">Contact</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link px-3 py-4 rounded text-danger logout" href="login.html">Log Out</a>
+                </li>
+              </ul>
             </div>
           </div>
+        </nav>
+      </header>
 
-          <div class="payment-method">
-            <h6><input type="radio" name="paymentMethod" value="paypal" class="payment-method-radio" required>
-              PayPal</h6>
-            <p>You will be redirected to PayPal to complete your payment.</p>
-          </div>
+      <main class="main-content">
+        <div class="container">
+            <a href="#" class="back-button" aria-label="Go back">
+                <i class="fas fa-chevron-left"></i>
+            </a>
 
-          <div class="payment-method">
-            <h6><input type="radio" name="paymentMethod" value="gcash" class="payment-method-radio" required>
-              GCash</h6>
-            <div class="form-group">
-              <label for="gcashNumber">GCash Mobile Number</label>
-              <input type="tel" class="form-control" id="gcashNumber" placeholder="09XXXXXXXXX">
+             <div class="progress-container">
+                 <h2 class="text-center mb-4 fs-1 f-color fw-bold">Passenger details</h2>
+                <ul class="progress-steps" data-active-steps="1">
+                    <div class="progress-line-active"></div>
+                    <li class="progress-step active">
+                        <span class="step-number">1</span>
+                        <span class="step-label">Passenger Details</span>
+                    </li>
+                    <li class="progress-step">
+                        <span class="step-number">2</span>
+                        <span class="step-label">Payment</span>
+                    </li>
+                    <li class="progress-step">
+                        <span class="step-number">3</span>
+                        <span class="step-label">Successful</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="row">
+                <!-- Left Column: Forms -->
+                <div class="col-lg-8">
+                    <div class="welcome-box">
+                        <i class="fas fa-user-circle welcome-icon"></i>
+                        <div> Welcome, Juan Dela Cruz! (<a href="#">Not Juan Dela Cruz? Sign out</a>) </div>
+                    </div>
+
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title mb-1 fw-bold">Contact details</h5>
+                            <p class="text-muted mb-3" style="font-size: 0.9rem;">This is where your confirmation will be sent</p>
+                            <p class="required-field">*Required field</p>
+                            <form>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="firstName" class="form-label">First name *</label>
+                                        <input type="text" class="form-control" id="firstName" value="Juan " required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="lastName" class="form-label">Last name *</label>
+                                        <input type="text" class="form-control" id="lastName" value="Dela Cruz" required>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                     <div class="col-md-6">
+                                         <label for="email" class="form-label">Email *</label>
+                                         <input type="email" class="form-control" id="email" value="juandelacruz@gmail.com" required>
+                                     </div>
+                                     <div class="col-md-6">
+                                         <label for="idType" class="form-label">Primary ID Type Presented *</label>
+                                         <select class="form-select" id="idType" required>
+                                             <option value="" disabled selected>Select ID Type</option>
+                                             <option value="govt">Government ID (e.g., UMID, PhilSys)</option>
+                                             <option value="drivers">Driver's License</option>
+                                             <option value="passport">Passport</option>
+                                             <option value="senior">Senior Citizen ID</option>
+                                             <option value="student">Student ID</option>
+                                             <option value="other">Other Valid ID</option>
+                                         </select>
+                                     </div>
+                                </div>
+                                <!-- START: Added ID Number and Photo Upload Row -->
+                                <div class="row mb-3">
+                                     <div class="col-md-6">
+                                         <label for="idNumber" class="form-label">ID Number *</label>
+                                         <input type="text" class="form-control" id="idNumber" placeholder="Enter ID Number" required>
+                                     </div>
+                                     <div class="col-md-6">
+                                         <label for="idPhotoUpload" class="form-label">Upload Photo of ID *</label>
+                                         <input type="file" class="form-control" id="idPhotoUpload" accept="image/*" required>
+                                         <small class="form-text text-muted">Upload a clear photo of the selected ID.</small>
+                                     </div>
+                                </div>
+                                <!-- END: Added ID Number and Photo Upload Row -->
+                                 <div class="row mb-3">
+                                     <label class="form-label mb-1">Phone number *</label>
+                                     <div class="col-4 col-md-3 pe-0">
+                                          <label for="countryCode" class="form-label visually-hidden">Country code *</label>
+                                          <select class="form-select" id="countryCode" required>
+                                              <option selected>+63</option>
+                                              {/* Add other codes */}
+                                          </select>
+                                     </div>
+                                     <div class="col-8 col-md-9">
+                                        <label for="phoneNumber" class="form-label visually-hidden">Phone number *</label>
+                                        <input type="tel" class="form-control" id="phoneNumber" placeholder="Phone number" required>
+                                    </div>
+                                 </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Passenger Details Section -->
+                     <div class="card">
+                         <div class="card-body">
+                            <div class="d-flex align-items-center justify-content-between mb-3">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-users me-2 text-primary"></i> <!-- Changed icon -->
+                                    <h5 class="card-title mb-0  fw-bold">Passenger Details</h5> <!-- Changed title -->
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <button id="subtract-passenger-btn" class="btn btn-outline-secondary passenger-control-btn me-2" disabled aria-label="Remove Passenger">-</button>
+                                    <span id="passenger-count" class="passenger-count-display mx-1">1</span>
+                                    <button id="add-passenger-btn" class="btn btn-outline-secondary passenger-control-btn ms-2" aria-label="Add Passenger">+</button>
+                                </div>
+                             </div>
+                             <p class="passenger-section-subtitle">Passenger details must match a valid ID. Age required for potential discounts.</p>
+                             <p class="required-field">*Required field</p>
+
+                            <div id="passenger-forms-container">
+                                <!-- Passenger 1 Form (Default - Pre-filled) -->
+                                <div class="passenger-form-group" data-passenger-index="1">
+                                     <h6 class="passenger-section-title mb-3">Passenger 1</h6>
+                                     <form>
+                                         <div class="row mb-3">
+                                             <div class="col-md-6">
+                                                 <label for="passengerFirstName-1" class="form-label">First and middle name *</label>
+                                                 <!-- Pre-filled name -->
+                                                 <input type="text" class="form-control passenger-first-name" id="passengerFirstName-1" value="Juan" required>
+                                             </div>
+                                             <div class="col-md-6">
+                                                 <label for="passengerLastName-1" class="form-label">Last name *</label>
+                                                 <!-- Pre-filled name -->
+                                                 <input type="text" class="form-control passenger-last-name" id="passengerLastName-1" value="Dela Cruz" required>
+                                             </div>
+                                         </div>
+                                          <div class="row mb-3">
+                                             <div class="col-md-6">
+                                                <label class="form-label d-block">Gender *</label>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input passenger-gender" type="radio" name="gender-1" id="male-1" value="male" required>
+                                                    <label class="form-check-label" for="male-1">Male</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input passenger-gender" type="radio" name="gender-1" id="female-1" value="female" required>
+                                                    <label class="form-check-label" for="female-1">Female</label>
+                                                </div>
+                                             </div>
+                                             <div class="col-md-6">
+                                                  <label for="passengerAge-1" class="form-label">Age *</label>
+                                                  <input type="number" class="form-control passenger-age" id="passengerAge-1" min="0" max="120" required>
+                                             </div>
+                                         </div>
+                                     </form>
+                                </div>
+                                <!-- Dynamic passenger forms will be added here -->
+                            </div>
+
+                            <div class="mt-4 text-end">
+                                 <button type="button" id="continue-payment-btn" class="btn btn-primary">Continue to Payment</button>
+                            </div>
+                         </div>
+                     </div>
+                </div>
+
+                <!-- Right Column: Summary -->
+                <div class="col-lg-4">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            Zamboanga City <i class="fas fa-arrow-right mx-1"></i> Davao City <br>
+                            <small id="passenger-summary-count">1 Passenger</small> <!-- Dynamic Count -->
+                        </div>
+                         <div class="card-body p-3">
+                             <div class="trip-details-box">
+                                 <div class="d-flex justify-content-between align-items-center mb-1"> <span class="fw-bold">Zamboanga City <i class="fas fa-arrow-right mx-1"></i> Davao City</span> </div>
+                                 <div class="company mb-2"> <i class="fas fa-bus me-1"></i> Rural Transit </div>
+                                 <div class="time mb-2"> 08:00 - 20:30 · <i class="far fa-clock me-1"></i> 12h 30m </div>
+                             </div>
+                             <a href="#" class="policies-link d-block mt-2">Trip Policies</a>
+                         </div>
+                    </div>
+
+                    <div class="card mb-3">
+                        <div class="card-body price-breakdown">
+                            <h5 class="card-title mb-3 fw-bold">Price breakdown</h5>
+                            <dl class="mb-1">
+                                <dt id="breakdown-passengers-label">Passenger x 1</dt>
+                                <dd id="breakdown-passengers-price">₱ 3,509.00</dd>
+                                <dt>Base fare</dt>
+                                <dd id="breakdown-base-fare">₱ 3,509.00</dd>
+                                <dt>Taxes and fees</dt>
+                                <dd id="breakdown-taxes">₱ 0.00</dd>
+                                <div class="discount">
+                                    <dt>Discount</dt>
+                                    <dd id="breakdown-discount">-₱ 0.00</dd> <!-- Dynamic Discount -->
+                                </div>
+                                <div class="free">
+                                    <dt>Processing cost</dt>
+                                    <dd>FREE</dd>
+                                </div>
+                            </dl>
+                             <hr>
+                             <dl class="mb-0">
+                                 <dt class="total-strikethrough">Total</dt>
+                                 <dd class="total-strikethrough" id="breakdown-total-strikethrough">₱ 3,509.00</dd>
+                                 <dt class="fw-bold">Total</dt>
+                                 <dd class="final-total" id="breakdown-final-total">₱ 3,509.00</dd> <!-- Dynamic Final Total -->
+                             </dl>
+                        </div>
+                    </div>
+
+                     <div class="card">
+                         <div class="card-body booking-conditions">
+                             <h6 class="fw-bold text-dark mb-2">Booking conditions</h6>
+                             <p class="mb-0">* Please check the bus operator's official website or contact them for the latest trip details, terminal information, and terms and conditions of carriage.</p>
+                         </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+      </main>
+
+      <footer class="footer">
+        <!-- Footer content remains the same -->
+        <div class="footer-inside">
+          <div class="footer-left">
+            <img src="../images/logos/logo-white.png" alt="FairFare logo" class="footer-logo" height="100" width="100">
+            <h4 class="fw-bold">FAIR FARE</h4>
+            <p>Follow us on:</p>
+            <div class="social-icons">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px" class="social-icon" fill="currentColor"><path d="M12,2C6.477,2,2,6.477,2,12c0,5.013,3.693,9.153,8.505,9.876V14.65H8.031v-2.629h2.474v-1.749 c0-2.896,1.411-4.167,3.818-4.167c1.153,0,1.762,0.085,2.051,0.124v2.294h-1.642c-1.022,0-1.379,0.969-1.379,2.061v1.437h2.995 l-0.406,2.629h-2.588v7.247C18.235,21.236,22,17.062,22,12C22,6.477,17.523,2,12,2z" /></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px" class="social-icon" fill="currentColor"><path d="M 8 3 C 5.239 3 3 5.239 3 8 L 3 16 C 3 18.761 5.239 21 8 21 L 16 21 C 18.761 21 21 18.761 21 16 L 21 8 C 21 5.239 18.761 3 16 3 L 8 3 z M 18 5 C 18.552 5 19 5.448 19 6 C 19 6.552 18.552 7 18 7 C 17.448 7 17 6.552 17 6 C 17 5.448 17.448 5 18 5 z M 12 7 C 14.761 7 17 9.239 17 12 C 17 14.761 14.761 17 12 17 C 9.239 17 7 14.761 7 12 C 7 9.239 9.239 7 12 7 z M 12 9 A 3 3 0 0 0 9 12 A 3 3 0 0 0 12 15 A 3 3 0 0 0 15 12 A 3 3 0 0 0 12 9 z" /></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="24px" height="24px" class="social-icon" fill="currentColor"><path d="M 11 4 C 7.134 4 4 7.134 4 11 L 4 39 C 4 42.866 7.134 46 11 46 L 39 46 C 42.866 46 46 42.866 46 39 L 46 11 C 46 7.134 42.866 4 39 4 L 11 4 z M 13.085938 13 L 21.023438 13 L 26.660156 21.009766 L 33.5 13 L 36 13 L 27.789062 22.613281 L 37.914062 37 L 29.978516 37 L 23.4375 27.707031 L 15.5 37 L 13 37 L 22.308594 26.103516 L 13.085938 13 z M 16.914062 15 L 31.021484 35 L 34.085938 35 L 19.978516 15 L 16.914062 15 z" /></svg>
             </div>
           </div>
-
-          <button type="submit" class="btn btn-primary btn-block mt-4" id="confirm">Confirm and Pay</button>
-        </form>
-      </div>
-
-      <div class="trip-summary">
-        <h5 class="bold-h mb-3">Trip Summary</h5>
-        <div class="trip-details">
-          <h6>Route</h6>
-          <p>Zamboanga City → Davao City</p>
+          <div class="footer-form">
+            <h4 class="fw-bold">Share something about us!</h4>
+            <p>You can send a direct message to us here.</p>
+            <form class="form-inputs">
+              <div><input class="inputs mess-in" type="text" placeholder="Message"></div>
+              <div><input class="inputs email-in" type="email" placeholder="Email"></div>
+              <div><button class="submit-btn" type="submit">Send</button></div>
+            </form>
+          </div>
+          <div class="quick-links">
+            <h4 class="fw-bold">Quick Links</h4>
+            <ul class="link-list"> <li>Log In</li> <li>Search Bus Terminals</li> <li>Help Centre</li> <li>Available Trips</li> </ul>
+          </div>
+          <div class="accounts">
+            <h4 class="fw-bold">Accounts</h4>
+            <ul class="link-list"> <li>Passenger</li> <li>Bus Driver / Conductor</li> <li>Bus Company</li> <li>Terminal Control</li> </ul>
+          </div>
         </div>
-        <div class="trip-details">
-          <h6>Date</h6>
-          <p>6 May 2024</p>
+      </footer>
+      <footer class="bg-dark text-white py-2">
+        <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+          <p class="mb-1 mb-md-0 small">Terms and Policies • Privacy Notice</p>
+          <p class="mb-0 small">© Fair Fare 2025–2025</p>
         </div>
-        <div class="trip-details">
-          <h6>Time</h6>
-          <p>08:00 — 20:30 (12h 30m)</p>
-        </div>
-        <div class="trip-details">
-          <h6>Bus Company</h6>
-          <p>Rural Transit</p>
-        </div>
-        <div class="trip-details">
-          <h6>Price</h6>
-          <p>₱ 3,509</p>
-        </div>
-      </div>
-    </div>
-  </main>
+      </footer>
 
-  <footer class="footer">
-    <div class="footer-inside">
-      <div class="footer-left">
-        <img src="../images/logos/logo-white.png" alt="FairFare logo" class="footer-logo" height="100" width="100">
-        <h4 class="bold-h">FAIR FARE</h4>
-        <p>Follow us on:</p>
-        <div class="social-icons">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px" class="social-icon"
-            fill="currentColor">
-            <path
-              d="M12,2C6.477,2,2,6.477,2,12c0,5.013,3.693,9.153,8.505,9.876V14.65H8.031v-2.629h2.474v-1.749 c0-2.896,1.411-4.167,3.818-4.167c1.153,0,1.762,0.085,2.051,0.124v2.294h-1.642c-1.022,0-1.379,0.969-1.379,2.061v1.437h2.995 l-0.406,2.629h-2.588v7.247C18.235,21.236,22,17.062,22,12C22,6.477,17.523,2,12,2z" />
-          </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px" class="social-icon"
-            fill="currentColor">
-            <path
-              d="M 8 3 C 5.239 3 3 5.239 3 8 L 3 16 C 3 18.761 5.239 21 8 21 L 16 21 C 18.761 21 21 18.761 21 16 L 21 8 C 21 5.239 18.761 3 16 3 L 8 3 z M 18 5 C 18.552 5 19 5.448 19 6 C 19 6.552 18.552 7 18 7 C 17.448 7 17 6.552 17 6 C 17 5.448 17.448 5 18 5 z M 12 7 C 14.761 7 17 9.239 17 12 C 17 14.761 14.761 17 12 17 C 9.239 17 7 14.761 7 12 C 7 9.239 9.239 7 12 7 z M 12 9 A 3 3 0 0 0 9 12 A 3 3 0 0 0 12 15 A 3 3 0 0 0 15 12 A 3 3 0 0 0 12 9 z" />
-          </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="24px" height="24px" class="social-icon"
-            fill="currentColor">
-            <path
-              d="M 11 4 C 7.134 4 4 7.134 4 11 L 4 39 C 4 42.866 7.134 46 11 46 L 39 46 C 42.866 46 46 42.866 46 39 L 46 11 C 46 7.134 42.866 4 39 4 L 11 4 z M 13.085938 13 L 21.023438 13 L 26.660156 21.009766 L 33.5 13 L 36 13 L 27.789062 22.613281 L 37.914062 37 L 29.978516 37 L 23.4375 27.707031 L 15.5 37 L 13 37 L 22.308594 26.103516 L 13.085938 13 z M 16.914062 15 L 31.021484 35 L 34.085938 35 L 19.978516 15 L 16.914062 15 z" />
-          </svg>
-        </div>
-      </div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const passengerFormsContainer = document.getElementById('passenger-forms-container');
+        const addBtn = document.getElementById('add-passenger-btn');
+        const subtractBtn = document.getElementById('subtract-passenger-btn');
+        const passengerCountDisplay = document.getElementById('passenger-count');
+        const passengerSummaryCount = document.getElementById('passenger-summary-count');
 
-      <div class="footer-form">
-        <h4 class="bold-h">Share something about us!</h4>
-        <p>You can send a direct message to us here.</p>
-        <form class="form-inputs">
-          <div><input class="inputs mess-in" type="text" placeholder="Message"></div>
-          <div><input class="inputs email-in" type="email" placeholder="Email"></div>
-          <div><button class="submit-btn" type="submit">Send</button></div>
-        </form>
-      </div>
+        // Price Breakdown Elements
+        const breakdownPassengersLabel = document.getElementById('breakdown-passengers-label');
+        const breakdownPassengersPrice = document.getElementById('breakdown-passengers-price');
+        const breakdownBaseFare = document.getElementById('breakdown-base-fare');
+        const breakdownTaxes = document.getElementById('breakdown-taxes'); // Keep reference
+        const breakdownDiscount = document.getElementById('breakdown-discount');
+        const breakdownTotalStrikethrough = document.getElementById('breakdown-total-strikethrough');
+        const breakdownFinalTotal = document.getElementById('breakdown-final-total');
 
-      <div class="quick-links">
-        <h4 class="bold-h">Quick Links</h4>
-        <ul class="link-list">
-          <li>Log In</li>
-          <li>Search Bus Terminals</li>
-          <li>Help Centre</li>
-          <li>Available Trips</li>
-        </ul>
-      </div>
+        const baseFarePerPassenger = 3509; // Base fare from details
+        const discountRate = 0.20; // 20% discount
 
-      <div class="accounts">
-        <h4 class="bold-h">Accounts</h4>
-        <ul class="link-list">
-          <li>Passenger</li>
-          <li>Bus Driver / Conductor</li>
-          <li>Bus Company</li>
-          <li>Terminal Control</li>
-        </ul>
-      </div>
-    </div>
-  </footer>
+        let passengerCount = 1;
 
-  <footer class="bg-dark text-white py-2">
-    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
-      <p class="mb-1 mb-md-0 small">Terms and Policies • Privacy Notice</p>
-      <p class="mb-0 small">© Fair Fare 2025–2025</p>
-    </div>
-  </footer>
-  <script>
-    document.getElementById("confirm").addEventListener("click", function() {
-    window.location.href = "successful.html";
-  });
-  </script>
+        const updatePassengerCountDisplay = () => {
+            passengerCountDisplay.textContent = passengerCount;
+            passengerSummaryCount.textContent = `${passengerCount} Passenger${passengerCount > 1 ? 's' : ''}`;
+            subtractBtn.disabled = passengerCount <= 1;
+            // Add max passenger limit logic here if needed
+            // addBtn.disabled = passengerCount >= MAX_PASSENGERS;
+        };
+
+        const updatePrice = () => {
+            let totalBaseFare = 0;
+            let totalDiscount = 0;
+            const ageInputs = passengerFormsContainer.querySelectorAll('.passenger-age');
+
+            ageInputs.forEach(input => {
+                const currentPassengerBaseFare = baseFarePerPassenger; // Fare for this passenger
+                totalBaseFare += currentPassengerBaseFare;
+
+                const age = parseInt(input.value, 10);
+                if (!isNaN(age) && (age < 18 || age > 60)) { // Example discount logic: Under 18 or Over 60
+                    totalDiscount += currentPassengerBaseFare * discountRate;
+                }
+            });
+
+            const finalTotal = totalBaseFare - totalDiscount;
+
+            // Update Breakdown Display
+            breakdownPassengersLabel.textContent = `Passenger${passengerCount > 1 ? 's' : ''} x ${passengerCount}`;
+            breakdownPassengersPrice.textContent = `₱ ${totalBaseFare.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`; // Added comma formatting
+            breakdownBaseFare.textContent = `₱ ${totalBaseFare.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`; // Added comma formatting
+            breakdownTaxes.textContent = `₱ 0.00`; // Explicitly set taxes to 0
+            breakdownDiscount.textContent = `-₱ ${totalDiscount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`; // Added comma formatting
+            breakdownTotalStrikethrough.textContent = `₱ ${totalBaseFare.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`; // Added comma formatting
+            breakdownFinalTotal.textContent = `₱ ${finalTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`; // Added comma formatting
+        };
+
+
+        const addPassengerForm = () => {
+            passengerCount++;
+            const newIndex = passengerCount;
+            const formGroup = document.createElement('div');
+            formGroup.classList.add('passenger-form-group');
+            formGroup.setAttribute('data-passenger-index', newIndex);
+            formGroup.innerHTML = `
+                <h6 class="passenger-section-title mb-3">Passenger ${newIndex}</h6>
+                <form>
+                     <div class="row mb-3">
+                         <div class="col-md-6">
+                             <label for="passengerFirstName-${newIndex}" class="form-label">First and middle name *</label>
+                             <input type="text" class="form-control passenger-first-name" id="passengerFirstName-${newIndex}" required>
+                         </div>
+                         <div class="col-md-6">
+                             <label for="passengerLastName-${newIndex}" class="form-label">Last name *</label>
+                             <input type="text" class="form-control passenger-last-name" id="passengerLastName-${newIndex}" required>
+                         </div>
+                     </div>
+                      <div class="row mb-3">
+                         <div class="col-md-6">
+                            <label class="form-label d-block">Gender *</label>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input passenger-gender" type="radio" name="gender-${newIndex}" id="male-${newIndex}" value="male" required>
+                                <label class="form-check-label" for="male-${newIndex}">Male</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input passenger-gender" type="radio" name="gender-${newIndex}" id="female-${newIndex}" value="female" required>
+                                <label class="form-check-label" for="female-${newIndex}">Female</label>
+                            </div>
+                         </div>
+                         <div class="col-md-6">
+                              <label for="passengerAge-${newIndex}" class="form-label">Age *</label>
+                              <input type="number" class="form-control passenger-age" id="passengerAge-${newIndex}" min="0" max="120" required>
+                         </div>
+                     </div>
+                 </form>
+            `;
+            passengerFormsContainer.appendChild(formGroup);
+            updatePassengerCountDisplay();
+            updatePrice(); // Update price when form is added
+        };
+
+        const removePassengerForm = () => {
+            if (passengerCount > 1) {
+                const lastForm = passengerFormsContainer.querySelector('.passenger-form-group:last-child');
+                if (lastForm) {
+                    passengerFormsContainer.removeChild(lastForm);
+                    passengerCount--;
+                    updatePassengerCountDisplay();
+                    updatePrice(); // Update price when form is removed
+                }
+            }
+        };
+
+        addBtn.addEventListener('click', addPassengerForm);
+        subtractBtn.addEventListener('click', removePassengerForm);
+
+        // Use event delegation for age inputs as they are added dynamically
+        passengerFormsContainer.addEventListener('input', (event) => {
+            if (event.target.classList.contains('passenger-age')) {
+                updatePrice();
+            }
+        });
+
+        // Initial price calculation
+        updatePrice();
+    });
+</script>
+
 </body>
-
 </html>

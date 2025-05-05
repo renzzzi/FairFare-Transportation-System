@@ -1,459 +1,298 @@
 <!DOCTYPE html>
-<html lang="en-US" dir="ltr">
-
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Fair Fare</title>
-  
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <meta name="theme-color" content="#ffffff">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <link rel="stylesheet" href="../css/pages/search/styles.css">
-  <link href="../assets/css/theme.css" rel="stylesheet" />
-  
-  <style>
-    /* Media query for small screens */
-    @media (max-width: 768px) {
-      .form-input {
-        display: none;
-      }
-
-      .form-select {
-        display: block;
-      }
-    }
-
-    :root {
-      --bs-primary: #00cde1;
-      --bs-primary: #e18702;
-      --bs-primary-rgb: 0, 205, 225;
-    }
-
-    .btn-primary {
-      background-color: var(--bs-primary) !important;
-      border-color: var(--bs-primary) !important;
-    }
-
-    .btn-outline-primary {
-      color: var(--bs-primary) !important;
-      border-color: var(--bs-primary) !important;
-    }
-
-    .nav-pad {
-      padding: 0.5rem 1rem;
-    }
-
-    .bold-h {
-      font-weight: bolder;
-    }
-
-    .if-two {
-      border-radius: 10px !important;
-    }
-
-    .gap-adjust {
-      gap: 0px;
-    }
-
-    .sug-images {
-      object-fit: cover !important;
-      width: 100% !important;
-      height: 200px !important;
-    }
-
-    /* New styles for suggested routes */
-    .card {
-      transition: transform 0.2s, box-shadow 0.2s;
-      border: none;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
-    }
-
-    .badge {
-      font-weight: 500;
-      padding: 0.5em 0.8em;
-    }
-
-    .route-info {
-      font-size: 0.9rem;
-      color: #6c757d;
-    }
-
-    .star-rating {
-      color: #ffc107;
-    }
-  </style>
-</head>
-
-<body style="font-family: 'Montserrat', sans-serif !important;">
-  <header class="sticky-top bg-white bg-opacity-75 backdrop-blur shadow-sm">
-    <nav class="navbar navbar-expand-md nav-pad">
-      <div class="container d-flex align-items-center justify-content-between">
-
-        <div class="d-flex align-items-center">
-          <img src="../images/logos/logo-color.png" alt="Logo" style="width: 50px; height: 50px;" class="me-2">
-          <h1 class="mb-0 fs-2 text-primary d-none d-md-block">FAIR FARE</h1>
-        </div>
-
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
-          aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link px-3 py-4 rounded" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link px-3 py-4 rounded" href="#">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link px-3 py-4 rounded" href="#">Contact</a>
-            </li>
-            <!-- Log Out Button -->
-            <li class="nav-item">
-              <a class="nav-link px-3 py-4 rounded text-danger logout" href="login.html">Log Out</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </header>
-  <main class="main" id="top">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fair Fare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
-
-    <div class="first-section">
-      <div class="bg-wpic">
-        <h2 class="fw-bold">Book Your Dream Bus Trip Now!</h2>
-        <p class="lead">Quick, easy booking with the best fares guaranteed.</p>
-      </div>
-    </div>
-    <div class="second-section">
-      <div class="booking-container">
-        <div class="booking-form">
-          <h3 class="fw-bold">Where would you like to go?</h3>
-          <form class="dest">
-            <div class="travel-input row d-flex align-items-center justify-content-center gap-3">
-              <div class="col-12 col-md-3 mb-3">
-                <label for="pickup" class="form-label">From (Terminal/City)</label>
-                <div class="input-group">
-                  <span class="input-group-text bg-light">
-                    <i class="bi bi-geo-alt"></i>
-                  </span>
-                  <input type="text" id="pickup" name="pickup" required class="form-control" placeholder="Enter departure city (e.g. Manila)">
-                </div>
-              </div>
-              <div class="col-12 col-md-3 mb-3">
-                <label for="dropoff" class="form-label">To (Terminal/City)</label>
-                <div class="input-group">
-                  <span class="input-group-text bg-light">
-                    <i class="bi bi-geo-alt"></i>
-                  </span>
-                  <input type="text" id="dropoff" name="dropoff" required class="form-control" placeholder="Enter destination city (e.g. Cebu)">
-                </div>
-              </div>
-              <div class="col-12 col-md-2 mb-3">
-                <label for="date" class="form-label">Date</label>
-                <div class="input-group">
-                  <span class="input-group-text bg-light">
-                    <i class="bi bi-calendar"></i>
-                  </span>
-                  <input type="date" id="date" name="date" required class="form-control">
-                </div>
-              </div>
-              <div class="col-12 col-md-2 mb-3">
-                <label for="passengers" class="form-label">Passengers</label>
-                <div class="input-group">
-                  <span class="input-group-text bg-light">
-                    <i class="bi bi-person"></i>
-                  </span>
-                  <select id="passengers" name="passengers" required class="form-select">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-12 col-md-2 mb-3 d-flex align-items-end">
-                <button type="submit" class="btn btn-primary w-100 py-2" id="searchBtn">
-                  <i class="bi bi-search me-2"></i>Search Buses
-                </button>
-              </div>
+    <link rel="stylesheet" href="../css/headfoot.css">
+    <link rel="stylesheet" href="../css/client2.css">
+</head>
+<body style="font-family: Montserrat, sans-serif;">
+    <header class="sticky-top bg-white bg-opacity-75 div-blur shadow-sm">
+        <nav class="navbar navbar-expand-md nav-pad">
+          <div class="container d-flex align-items-center justify-content-between">
+    
+            <div class="d-flex align-items-center">
+              <img src="../images/logos/logo-color.png" alt="Logo" style="width: 50px; height: 50px;" class="me-2">
+              <h1 class="mb-0 fs-2 d-none fw-bold f-primary d-md-block">FAIR FARE</h1>
             </div>
-          </form>
-        </div>
-      </div>
-    </div>
-
-    <!-- SUGGESTED BUS SECTION -->
-    <section class="suggested-bus py-5 bg-light">
-      <div class="container">
-        <h2 class="text-center mb-4">Popular Routes</h2>
-        <p class="text-center text-muted mb-5">Quick access to frequently booked destinations</p>
-        <div class="row g-4">
-          <!-- Bus Card 1 -->
-          <div class="col-md-4">
-            <div class="card h-100 shadow-sm">
-              <img src="../images/suggested pictures/pic-1.jpg" class="card-img-top sug-images" alt="Zamboanga to Davao route">
-              <div class="card-body">
-                <div class="d-flex justify-content-between align-items-start mb-2">
-                  <h5 class="card-title mb-0">Zamboanga to Davao</h5>
-                  <span class="badge bg-primary">Most Popular</span>
-                </div>
-                <p class="route-info mb-3">
-                  <i class="bi bi-clock me-2"></i>6-8 hours
-                  <i class="bi bi-calendar-check ms-3 me-2"></i>Daily departures
-                </p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div>
-                    <p class="mb-1 fw-bold">₱500 - ₱700</p>
-                    <div class="star-rating">
-                      <i class="bi bi-star-fill"></i>
-                      <i class="bi bi-star-fill"></i>
-                      <i class="bi bi-star-fill"></i>
-                      <i class="bi bi-star-fill"></i>
-                      <i class="bi bi-star-fill"></i>
-                      <span class="text-muted ms-1">(4.9)</span>
-                    </div>
-                  </div>
-                  <button class="btn btn-outline-primary" data-from="Zamboanga" data-to="Davao">
-                    <i class="bi bi-calendar2-week me-2"></i>View Schedule
-                  </button>
-                </div>
-              </div>
+    
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+              aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link px-3 py-4 rounded" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link px-3 py-4 rounded" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link px-3 py-4 rounded" href="#">Booking History</a>
+                </li>
+                <!-- Log Out Button -->
+                <li class="nav-item">
+                  <a class="nav-link px-3 py-4 rounded text-danger logout" href="login.html">Log Out</a>
+                </li>
+              </ul>
             </div>
           </div>
+        </nav>
+    </header>
 
-          <!-- Bus Card 2 -->
-          <div class="col-md-4">
-            <div class="card h-100 shadow-sm">
-              <img src="../images/suggested pictures/pic-2.jpg" class="card-img-top sug-images" alt="Manila to Baguio route">
-              <div class="card-body">
-                <div class="d-flex justify-content-between align-items-start mb-2">
-                  <h5 class="card-title mb-0">Manila to Baguio</h5>
-                  <span class="badge bg-success">Best Value</span>
-                </div>
-                <p class="route-info mb-3">
-                  <i class="bi bi-clock me-2"></i>4-6 hours
-                  <i class="bi bi-calendar-check ms-3 me-2"></i>Multiple departures
-                </p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div>
-                    <p class="mb-1 fw-bold">₱400 - ₱600</p>
-                    <div class="star-rating">
-                      <i class="bi bi-star-fill"></i>
-                      <i class="bi bi-star-fill"></i>
-                      <i class="bi bi-star-fill"></i>
-                      <i class="bi bi-star-fill"></i>
-                      <i class="bi bi-star-fill"></i>
-                      <span class="text-muted ms-1">(4.8)</span>
+      <main>
+        <div class="first-section p-4 bg-primary">
+            <div class="bg-wpic">
+              <h2 class="fw-bold text-center fs-3 text-white">Book Your Dream Bus Trip Now!</h2>
+              <p class="lead text-center text-white mb-0">Quick, easy booking with the best fares guaranteed.</p>
+            </div>
+        </div>
+        <div class="second-section p-4">
+            <div class="booking-container">
+              <div class="booking-form">
+                <h3 class="fw-bold text-center f-primary mb-4">Where would you like to go?</h3>
+                <form class="dest">
+                  <div class="travel-input row d-flex align-items-center justify-content-center gap-3">
+                    <div class="col-12 col-md-3 mb-3">
+                      <label for="pickup" class="form-label">From (Terminal/City)</label>
+                      <div class="input-group">
+                        <span class="input-group-text bg-light">
+                          <i class="bi bi-geo-alt"></i>
+                        </span>
+                        <input type="text" id="pickup" name="pickup" required class="form-control" placeholder="Enter departure city (e.g. Manila)">
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-3 mb-3">
+                      <label for="dropoff" class="form-label">To (Terminal/City)</label>
+                      <div class="input-group">
+                        <span class="input-group-text bg-light">
+                          <i class="bi bi-geo-alt"></i>
+                        </span>
+                        <input type="text" id="dropoff" name="dropoff" required class="form-control" placeholder="Enter destination city (e.g. Cebu)">
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-2 mb-3">
+                      <label for="date" class="form-label">Date</label>
+                      <div class="input-group">
+                        <span class="input-group-text bg-light">
+                          <i class="bi bi-calendar"></i>
+                        </span>
+                        <input type="date" id="date" name="date" required class="form-control">
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-2 mb-3">
+                      <label for="passengers" class="form-label">Passengers</label>
+                      <div class="input-group">
+                        <span class="input-group-text bg-light">
+                          <i class="bi bi-person"></i>
+                        </span>
+                        <select id="passengers" name="passengers" required class="form-select">
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                          <option value="7">7</option>
+                          <option value="8">8</option>
+                          <option value="9">9</option>
+                          <option value="10">10</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-2 mb-3 d-flex align-items-end">
+                      <button type="submit" class="btn btn-primary w-100 py-2" id="searchBtn" href="search.html">
+                        <i class="bi bi-search me-2"></i>Search Buses
+                      </button>
                     </div>
                   </div>
-                  <button class="btn btn-outline-primary" data-from="Manila" data-to="Baguio">
-                    <i class="bi bi-calendar2-week me-2"></i>View Schedule
-                  </button>
+                </form>
+              </div>
+            </div>
+        </div>
+
+
+          <section class="suggested-bus py-5 bg-light">
+            <div class="container">
+              <h2 class="text-center mb-4 f-primary fw-bold">Popular Routes</h2>
+              <p class="text-center text-muted mb-5">Quick access to frequently booked destinations</p>
+              <div class="row g-4">
+                <!-- Bus Card 1 -->
+                <div class="col-md-4">
+                  <div class="card h-100 shadow-sm">
+                    <img src="../images/suggested pictures/pic-1.jpg" class="card-img-top sug-images" alt="Zamboanga to Davao route">
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h5 class="card-title mb-0">Zamboanga to Davao</h5>
+                        <span class="badge bg-primary">Most Popular</span>
+                      </div>
+                      <p class="route-info mb-3">
+                        <i class="bi bi-clock me-2"></i>6-8 hours
+                        <i class="bi bi-calendar-check ms-3 me-2"></i>Daily departures
+                      </p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                          <p class="mb-1 fw-bold">₱500 - ₱700</p>
+                          <div class="star-rating">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <span class="text-muted ms-1">(4.9)</span>
+                          </div>
+                        </div>
+                        <button class="btn btn-outline-primary" data-from="Zamboanga" data-to="Davao" >
+                          <i class="bi bi-calendar2-week me-2"></i>View Schedule
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+      
+                <!-- Bus Card 2 -->
+                <div class="col-md-4">
+                  <div class="card h-100 shadow-sm">
+                    <img src="../images/suggested pictures/pic-2.jpg" class="card-img-top sug-images" alt="Manila to Baguio route">
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h5 class="card-title mb-0">Manila to Baguio</h5>
+                        <span class="badge bg-success">Best Value</span>
+                      </div>
+                      <p class="route-info mb-3">
+                        <i class="bi bi-clock me-2"></i>4-6 hours
+                        <i class="bi bi-calendar-check ms-3 me-2"></i>Multiple departures
+                      </p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                          <p class="mb-1 fw-bold">₱400 - ₱600</p>
+                          <div class="star-rating">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <span class="text-muted ms-1">(4.8)</span>
+                          </div>
+                        </div>
+                        <button class="btn btn-outline-primary" data-from="Manila" data-to="Baguio">
+                          <i class="bi bi-calendar2-week me-2"></i>View Schedule
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+      
+                <!-- Bus Card 3 -->
+                <div class="col-md-4">
+                  <div class="card h-100 shadow-sm">
+                    <img src="../images/suggested pictures/pic-3.jpg" class="card-img-top sug-images" alt="Davao to Cagayan route">
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h5 class="card-title mb-0">Davao to Cagayan</h5>
+                        <span class="badge bg-info">Express Route</span>
+                      </div>
+                      <p class="route-info mb-3">
+                        <i class="bi bi-clock me-2"></i>5-7 hours
+                        <i class="bi bi-calendar-check ms-3 me-2"></i>Weekend trips
+                      </p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                          <p class="mb-1 fw-bold">₱300 - ₱500</p>
+                          <div class="star-rating">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                            <span class="text-muted ms-1">(4.5)</span>
+                          </div>
+                        </div>
+                        <button class="btn btn-outline-primary" data-from="Davao" data-to="Cagayan">
+                          <i class="bi bi-calendar2-week me-2"></i>View Schedule
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </section>
+      </main>
 
-          <!-- Bus Card 3 -->
-          <div class="col-md-4">
-            <div class="card h-100 shadow-sm">
-              <img src="../images/suggested pictures/pic-3.jpg" class="card-img-top sug-images" alt="Davao to Cagayan route">
-              <div class="card-body">
-                <div class="d-flex justify-content-between align-items-start mb-2">
-                  <h5 class="card-title mb-0">Davao to Cagayan</h5>
-                  <span class="badge bg-info">Express Route</span>
-                </div>
-                <p class="route-info mb-3">
-                  <i class="bi bi-clock me-2"></i>5-7 hours
-                  <i class="bi bi-calendar-check ms-3 me-2"></i>Weekend trips
-                </p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div>
-                    <p class="mb-1 fw-bold">₱300 - ₱500</p>
-                    <div class="star-rating">
-                      <i class="bi bi-star-fill"></i>
-                      <i class="bi bi-star-fill"></i>
-                      <i class="bi bi-star-fill"></i>
-                      <i class="bi bi-star-fill"></i>
-                      <i class="bi bi-star-half"></i>
-                      <span class="text-muted ms-1">(4.5)</span>
-                    </div>
-                  </div>
-                  <button class="btn btn-outline-primary" data-from="Davao" data-to="Cagayan">
-                    <i class="bi bi-calendar2-week me-2"></i>View Schedule
-                  </button>
-                </div>
-              </div>
+      <footer class="footer">
+        <div class="footer-inside">
+          <div class="footer-left">
+            <img src="../images/logos/logo-white.png" alt="FairFare logo" class="footer-logo" height="100" width="100">
+            <h4 class="fw-bold">FAIR FARE</h4>
+            <p>Follow us on:</p>
+            <div class="social-icons">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px" class="social-icon"
+                fill="currentColor">
+                <path
+                  d="M12,2C6.477,2,2,6.477,2,12c0,5.013,3.693,9.153,8.505,9.876V14.65H8.031v-2.629h2.474v-1.749 c0-2.896,1.411-4.167,3.818-4.167c1.153,0,1.762,0.085,2.051,0.124v2.294h-1.642c-1.022,0-1.379,0.969-1.379,2.061v1.437h2.995 l-0.406,2.629h-2.588v7.247C18.235,21.236,22,17.062,22,12C22,6.477,17.523,2,12,2z" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px" class="social-icon"
+                fill="currentColor">
+                <path
+                  d="M 8 3 C 5.239 3 3 5.239 3 8 L 3 16 C 3 18.761 5.239 21 8 21 L 16 21 C 18.761 21 21 18.761 21 16 L 21 8 C 21 5.239 18.761 3 16 3 L 8 3 z M 18 5 C 18.552 5 19 5.448 19 6 C 19 6.552 18.552 7 18 7 C 17.448 7 17 6.552 17 6 C 17 5.448 17.448 5 18 5 z M 12 7 C 14.761 7 17 9.239 17 12 C 17 14.761 14.761 17 12 17 C 9.239 17 7 14.761 7 12 C 7 9.239 9.239 7 12 7 z M 12 9 A 3 3 0 0 0 9 12 A 3 3 0 0 0 12 15 A 3 3 0 0 0 15 12 A 3 3 0 0 0 12 9 z" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="24px" height="24px" class="social-icon"
+                fill="currentColor">
+                <path
+                  d="M 11 4 C 7.134 4 4 7.134 4 11 L 4 39 C 4 42.866 7.134 46 11 46 L 39 46 C 42.866 46 46 42.866 46 39 L 46 11 C 46 7.134 42.866 4 39 4 L 11 4 z M 13.085938 13 L 21.023438 13 L 26.660156 21.009766 L 33.5 13 L 36 13 L 27.789062 22.613281 L 37.914062 37 L 29.978516 37 L 23.4375 27.707031 L 15.5 37 L 13 37 L 22.308594 26.103516 L 13.085938 13 z M 16.914062 15 L 31.021484 35 L 34.085938 35 L 19.978516 15 L 16.914062 15 z" />
+              </svg>
             </div>
           </div>
+    
+          <div class="footer-form">
+            <h4 class="fw-bold">Share something about us!</h4>
+            <p>You can send a direct message to us here.</p>
+            <form class="form-inputs">
+              <div><input class="inputs mess-in" type="text" placeholder="Message"></div>
+              <div><input class="inputs email-in" type="email" placeholder="Email"></div>
+              <div><button class="submit-btn" type="submit">Send</button></div>
+            </form>
+          </div>
+    
+          <div class="quick-links">
+            <h4 class="fw-bold">Quick Links</h4>
+            <ul class="link-list">
+              <li>Log In</li>
+              <li>Search Bus Terminals</li>
+              <li>Help Centre</li>
+              <li>Available Trips</li>
+            </ul>
+          </div>
+    
+          <div class="accounts">
+            <h4 class="fw-bold">Accounts</h4>
+            <ul class="link-list">
+              <li>Passenger</li>
+              <li>Bus Driver / Conductor</li>
+              <li>Bus Company</li>
+              <li>Terminal Control</li>
+            </ul>
+          </div>
         </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="footer-inside">
-      <div class="footer-left">
-        <img src="../images/logos/logo-white.png" alt="FairFare logo" class="footer-logo" height="100" width="100">
-        <h4 class="bold-h">FAIR FARE</h4>
-        <p>Follow us on:</p>
-        <div class="social-icons">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px" class="social-icon"
-            fill="currentColor">
-            <path
-              d="M12,2C6.477,2,2,6.477,2,12c0,5.013,3.693,9.153,8.505,9.876V14.65H8.031v-2.629h2.474v-1.749 c0-2.896,1.411-4.167,3.818-4.167c1.153,0,1.762,0.085,2.051,0.124v2.294h-1.642c-1.022,0-1.379,0.969-1.379,2.061v1.437h2.995 l-0.406,2.629h-2.588v7.247C18.235,21.236,22,17.062,22,12C22,6.477,17.523,2,12,2z" />
-          </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px" class="social-icon"
-            fill="currentColor">
-            <path
-              d="M 8 3 C 5.239 3 3 5.239 3 8 L 3 16 C 3 18.761 5.239 21 8 21 L 16 21 C 18.761 21 21 18.761 21 16 L 21 8 C 21 5.239 18.761 3 16 3 L 8 3 z M 18 5 C 18.552 5 19 5.448 19 6 C 19 6.552 18.552 7 18 7 C 17.448 7 17 6.552 17 6 C 17 5.448 17.448 5 18 5 z M 12 7 C 14.761 7 17 9.239 17 12 C 17 14.761 14.761 17 12 17 C 9.239 17 7 14.761 7 12 C 7 9.239 9.239 7 12 7 z M 12 9 A 3 3 0 0 0 9 12 A 3 3 0 0 0 12 15 A 3 3 0 0 0 15 12 A 3 3 0 0 0 12 9 z" />
-          </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="24px" height="24px" class="social-icon"
-            fill="currentColor">
-            <path
-              d="M 11 4 C 7.134 4 4 7.134 4 11 L 4 39 C 4 42.866 7.134 46 11 46 L 39 46 C 42.866 46 46 42.866 46 39 L 46 11 C 46 7.134 42.866 4 39 4 L 11 4 z M 13.085938 13 L 21.023438 13 L 26.660156 21.009766 L 33.5 13 L 36 13 L 27.789062 22.613281 L 37.914062 37 L 29.978516 37 L 23.4375 27.707031 L 15.5 37 L 13 37 L 22.308594 26.103516 L 13.085938 13 z M 16.914062 15 L 31.021484 35 L 34.085938 35 L 19.978516 15 L 16.914062 15 z" />
-          </svg>
+      </footer>
+    
+      <footer class="bg-dark text-white py-2">
+        <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+          <p class="mb-1 mb-md-0 small">Terms and Policies • Privacy Notice</p>
+          <p class="mb-0 small">© Fair Fare 2025–2025</p>
         </div>
-      </div>
-
-      <div class="footer-form">
-        <h4 class="bold-h">Share something about us!</h4>
-        <p>You can send a direct message to us here.</p>
-        <form class="form-inputs">
-          <div><input class="inputs mess-in" type="text" placeholder="Message"></div>
-          <div><input class="inputs email-in" type="email" placeholder="Email"></div>
-          <div><button class="submit-btn" type="submit">Send</button></div>
-        </form>
-      </div>
-
-      <div class="quick-links">
-        <h4 class="bold-h">Quick Links</h4>
-        <ul class="link-list">
-          <li>Log In</li>
-          <li>Search Bus Terminals</li>
-          <li>Help Centre</li>
-          <li>Available Trips</li>
-        </ul>
-      </div>
-
-      <div class="accounts">
-        <h4 class="bold-h">Accounts</h4>
-        <ul class="link-list">
-          <li>Passenger</li>
-          <li>Bus Driver / Conductor</li>
-          <li>Bus Company</li>
-          <li>Terminal Control</li>
-        </ul>
-      </div>
-    </div>
-  </footer>
-
-  <footer class="bg-dark text-white py-2">
-    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
-      <p class="mb-1 mb-md-0 small">Terms and Policies • Privacy Notice</p>
-      <p class="mb-0 small"> Fair Fare 2025–2025</p>
-    </div>
-  </footer>
-
-  <script>
-    const menuBtn = document.querySelector('.menu-btn');
-    const mobNav = document.querySelector('.mob');
-
-    menuBtn.addEventListener('click', () => {
-      mobNav.classList.toggle('show'); // Show is used by Bootstrap for mobile menu visibility
-      menuBtn.classList.toggle('active');
-    });
-  </script>
-
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    document.getElementById("searchBtn").addEventListener("click", function () {
-      window.location.href = "search.html";
-    });
-
-    $(".logout").click(function (event) {
-      event.preventDefault();
-      window.location.href = "/pages/login.html";
-    });
-  </script>
-
-  <script>
-    $(document).ready(function() {
-      // Set tomorrow as default date
-      const tomorrow = new Date();
-      tomorrow.setDate(tomorrow.getDate() + 1);
-      const tomorrowStr = tomorrow.toISOString().split('T')[0];
-      $('#date').val(tomorrowStr);
-
-      // Handle quick search from route cards
-      $('.btn-outline-primary').click(function() {
-        const from = $(this).data('from');
-        const to = $(this).data('to');
-        
-        // Fill the form with route data
-        $('#pickup').val(from);
-        $('#dropoff').val(to);
-        
-        // Smooth scroll to search form
-        $('html, body').animate({
-          scrollTop: $('.booking-form').offset().top - 100
-        }, 800);
-        
-        // Focus date field for easy selection
-        $('#date').focus();
-      });
-
-      // Form validation and submission
-      $('.dest').submit(function(e) {
-        e.preventDefault();
-        
-        // Basic validation
-        const pickup = $('#pickup').val().trim();
-        const dropoff = $('#dropoff').val().trim();
-        const date = $('#date').val();
-        const passengers = $('#passengers').val();
-
-        if (!pickup || !dropoff || !date || !passengers) {
-          alert('Please fill in all required fields');
-          return;
-        }
-
-        // Here you would typically make an API call to search for buses
-        // For demo, we'll redirect to a results page with query parameters
-        const queryString = $.param({
-          from: pickup,
-          to: dropoff,
-          date: date,
-          passengers: passengers
-        });
-        
-        window.location.href = `search-results.html?${queryString}`;
-      });
-    });
-  </script>
+      </footer>
 </body>
-
 </html>
