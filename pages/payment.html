@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fair Fare - Payment (Bus)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link rel="stylesheet" href="../css/headfoot.css"> <!-- Adjust path if needed -->
+    <style>
+        /* --- Paste the EXACT SAME CSS from the previous passenger details page here --- */
+        :root {
+            --bs-primary: #00cde1;
+            --bs-secondary: #E18702;
+            --bs-primary-rgb: 0, 205, 225;
+            --bs-danger: #dc3545;
+            --bs-link-color: var(--bs-primary);
+             --bs-link-hover-color: color-mix(in srgb, var(--bs-primary) 85%, black);
+        }
+
+        .f-color {
+          color: var(--bs-primary);
+        }
+
+        .btn-primary {
+            --bs-btn-bg: var(--bs-primary);
+            --bs-btn-border-color: var(--bs-primary);
+            --bs-btn-hover-bg: color-mix(in srgb, var(--bs-primary) 85%, black);
+            --bs-btn-hover-border-color: color-mix(in srgb, var(--bs-primary) 80%, black);
+            --bs-btn-active-bg: color-mix(in srgb, var(--bs-primary) 80%, black);
+            --bs-btn-active-border-color: color-mix(in srgb, var(--bs-primary) 75%, black);
+            --bs-btn-focus-shadow-rgb: var(--bs-primary-rgb);
+             color: #fff;
+        }
+         .btn-primary:hover{
+             color:#fff;
+         }
+         /* Style for +/- buttons */
+        .passenger-control-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            line-height: 1;
+            font-size: 1rem;
+            padding: 0;
+        }
+        .passenger-count-display {
+            font-size: 1.2rem;
+            font-weight: bold;
+            min-width: 30px; /* Ensure space for number */
+            text-align: center;
+        }
+
+        body {
+            font-family: Montserrat, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .main-content {
+            padding-top: 2rem;
+            padding-bottom: 4rem;
+        }
+        .card {
+            border-radius: 0.5rem;
+            border: 1px solid #dee2e6;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            margin-bottom: 1.5rem;
+        }
+        .card-header {
+            background-color: var(--bs-primary);
+            color: white;
+            font-weight: bold;
+            border-top-left-radius: 0.5rem;
+            border-top-right-radius: 0.5rem;
+            padding: 0.75rem 1.25rem;
+        }
+        .welcome-box {
+            background-color: color-mix(in srgb, var(--bs-primary) 10%, #fff);
+            border: 1px solid var(--bs-primary);
+            border-radius: 0.375rem;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        .welcome-icon {
+            font-size: 1.5rem;
+            color: var(--bs-primary);
+            margin-right: 0.75rem;
+        }
+        .welcome-box a {
+             color: var(--bs-primary);
+             text-decoration: none;
+             font-weight: 500;
+        }
+         .welcome-box a:hover {
+             text-decoration: underline;
+         }
+        .required-field {
+            color: var(--bs-danger);
+            font-size: 0.875em;
+            margin-bottom: 1rem;
+        }
+        .form-label {
+            font-weight: 500;
+            font-size: 0.875rem;
+            color: #495057;
+        }
+        .form-control, .form-select {
+            font-size: 0.95rem;
+        }
+        .price-breakdown dt, .price-breakdown dd {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+        }
+         .price-breakdown dt {
+            color: #6c757d;
+         }
+        .price-breakdown dd {
+             font-weight: 500;
+             color: #495057;
+        }
+        .price-breakdown .discount dd {
+            color: #28a745; /* Green for discount */
+        }
+         .price-breakdown .free dd {
+             color: #28a745; /* Green for free */
+             font-weight: bold;
+         }
+        .price-breakdown .total-strikethrough {
+            text-decoration: line-through;
+            color: #6c757d;
+            font-size: 0.8em;
+        }
+         .price-breakdown .final-total {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: var(--bs-danger);
+         }
+        .trip-details-box {
+            border: 1px solid #dee2e6;
+            border-radius: 0.375rem;
+            padding: 1rem;
+        }
+        .trip-details-box .company {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        .trip-details-box .time {
+            font-weight: 500;
+        }
+        .trip-details-box .details-link, .policies-link {
+            font-size: 0.9rem;
+            text-decoration: none;
+             color: var(--bs-primary);
+        }
+        .trip-details-box .details-link:hover, .policies-link:hover {
+            text-decoration: underline;
+        }
+        .progress-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 0 15px;
+        }
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            list-style: none;
+            padding: 0;
+            position: relative;
+            margin: 0;
+        }
+        .progress-steps::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: calc((100% / 3) / 2);
+            width: calc(100% - (100% / 3));
+            height: 2px;
+            background-color: #dee2e6;
+            z-index: 1;
+        }
+        .progress-line-active {
+             position: absolute;
+             top: 15px;
+             left: calc((100% / 3) / 2);
+             height: 2px;
+             background-color: var(--bs-primary);
+             z-index: 2;
+             width: 0;
+             transition: width 0.4s ease-in-out;
+         }
+        .progress-step {
+            flex-basis: calc(100% / 3);
+            text-align: center;
+            position: relative;
+            z-index: 3;
+        }
+        .progress-step .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            line-height: 28px;
+            border-radius: 50%;
+            background-color: #fff;
+            color: #6c757d;
+            border: 1px solid #dee2e6;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+            position: relative;
+            z-index: 3;
+        }
+        .progress-step .step-label {
+            display: block;
+            font-size: 0.85rem;
+            color: #6c757d;
+            transition: color 0.3s;
+        }
+        .progress-step.active .step-number {
+            background-color: var(--bs-primary);
+            border-color: var(--bs-primary);
+            color: white;
+        }
+        .progress-step.active .step-label {
+            color: var(--bs-primary);
+            font-weight: bold;
+        }
+        /* --- IMPORTANT: Update Progress Bar Width for Step 2 --- */
+        .progress-steps[data-active-steps="1"] .progress-line-active { width: 0%; }
+        .progress-steps[data-active-steps="2"] .progress-line-active { width: calc(100% / 3); } /* Active line width */
+        .progress-steps[data-active-steps="3"] .progress-line-active { width: calc((100% / 3) * 2); }
+
+        .booking-conditions {
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+        /* --- Styles for Payment Options --- */
+        .payment-option {
+            border: 1px solid #dee2e6;
+            border-radius: 0.375rem;
+            padding: 1rem 1.25rem;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            background-color: #fff;
+        }
+        .payment-option:hover {
+            border-color: var(--bs-primary);
+        }
+        .payment-option input[type="radio"] {
+            margin-top: 0.2rem; /* Align radio better */
+        }
+        .payment-option .form-check-label {
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            width: 100%; /* Make label clickable across the width */
+        }
+        .payment-option-icon {
+            font-size: 1.5rem;
+            margin-left: auto; /* Push icon to the right */
+            color: #6c757d;
+        }
+         .payment-option input[type="radio"]:checked + .form-check-label .payment-option-icon {
+            color: var(--bs-primary); /* Change icon color when selected */
+         }
+         .payment-option input[type="radio"]:checked + .form-check-label {
+             /* Optional: Add subtle indication to label */
+         }
+        .payment-details {
+            border: 1px solid #e9ecef;
+            border-radius: 0.375rem;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            background-color: #fff;
+        }
+        .secure-connection-note {
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin-top: 1.5rem;
+            display: block; /* Make it block to align text */
+             text-align: center;
+        }
+        .secure-connection-note i {
+            color: #28a745; /* Green lock */
+        }
+
+        /* --- Existing Styles (keep these) --- */
+        .passenger-form-group { /* Keep for potential future use or consistency if needed */
+            border: 1px solid #e9ecef;
+            border-radius: 0.375rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            background-color: #fff;
+        }
+        .passenger-section-title {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+        .passenger-section-subtitle {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-bottom: 1rem;
+        }
+        .back-button {
+            position: absolute;
+            top: 100px; /* Adjust as needed based on header height */
+            left: 20px;
+            font-size: 1.5rem;
+            color: #6c757d;
+            text-decoration: none;
+            z-index: 10; /* Ensure it's clickable */
+        }
+        .back-button:hover {
+            color: #343a40;
+        }
+        .text-primary {
+            color: var(--bs-primary) !important;
+        }
+
+        .form-check-input:checked {
+            background-color: var(--bs-primary);
+            border-color: var(--bs-primary);
+        }
+        .form-check-input:focus {
+             box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.25);
+        }
+        /* --- End of Pasted CSS --- */
+    </style>
+</head>
+<body style="font-family: Montserrat, sans-serif;">
+    <header class="sticky-top bg-white bg-opacity-75 div-blur shadow-sm">
+        <!-- Header Content (Copy from previous page) -->
+        <nav class="navbar navbar-expand-md nav-pad">
+          <div class="container d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+              <img src="../images/logos/logo-color.png" alt="Logo" style="width: 50px; height: 50px;" class="me-2">
+              <h1 class="mb-0 fs-2 d-none fw-bold f-primary d-md-block">FAIR FARE</h1>
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+              aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link px-3 py-4 rounded" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link px-3 py-4 rounded" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link px-3 py-4 rounded" href="#">Contact</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link px-3 py-4 rounded text-danger logout" href="login.html">Log Out</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
+
+      <main class="main-content">
+        <div class="container">
+            <!-- Update href to point to the passenger details page -->
+            <a href="bookout.html" class="back-button" aria-label="Go back">
+                <i class="fas fa-chevron-left"></i>
+            </a>
+
+             <div class="progress-container">
+                 <!-- Update Title -->
+                 <h2 class="text-center mb-4 fs-1 f-color fw-bold">Payment Method</h2>
+                 <!-- Update Progress Bar State -->
+                <ul class="progress-steps" data-active-steps="2"> <!-- Set active steps to 2 -->
+                    <div class="progress-line-active"></div>
+                    <li class="progress-step active"> <!-- Step 1 remains active visually (past) -->
+                        <span class="step-number">1</span>
+                        <span class="step-label">Passenger Details</span>
+                    </li>
+                    <li class="progress-step active"> <!-- Step 2 is now the current active step -->
+                        <span class="step-number">2</span>
+                        <span class="step-label">Payment</span>
+                    </li>
+                    <li class="progress-step"> <!-- Step 3 is inactive -->
+                        <span class="step-number">3</span>
+                        <span class="step-label">Successful</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="row">
+                <!-- Left Column: Payment Options -->
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title mb-3">Choose your payment method</h5>
+                            <p class="required-field">*Required field</p>
+
+                            <form id="payment-form">
+                                <!-- Payment Options Radio Group -->
+                                <div class="mb-3">
+                                    <!-- GCash Option -->
+                                    <div class="payment-option form-check">
+                                        <input class="form-check-input" type="radio" name="paymentMethod" id="paymentGcash" value="gcash" required checked>
+                                        <label class="form-check-label" for="paymentGcash">
+                                            GCash
+                                            <i class="fa-solid fa-mobile-screen-button payment-option-icon"></i> <!-- Example GCash Icon -->
+                                        </label>
+                                    </div>
+
+                                    <!-- Debit Card Option -->
+                                    <div class="payment-option form-check">
+                                        <input class="form-check-input" type="radio" name="paymentMethod" id="paymentDebit" value="debit" required>
+                                        <label class="form-check-label" for="paymentDebit">
+                                            Debit Card
+                                            <i class="fas fa-credit-card payment-option-icon"></i>
+                                        </label>
+                                    </div>
+
+                                    <!-- Credit Card Option -->
+                                    <div class="payment-option form-check">
+                                        <input class="form-check-input" type="radio" name="paymentMethod" id="paymentCredit" value="credit" required>
+                                        <label class="form-check-label" for="paymentCredit">
+                                            Credit Card
+                                            <i class="fas fa-credit-card payment-option-icon"></i>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- GCash Instructions (Initially Visible if GCash is checked) -->
+                                <div id="gcash-instructions" class="payment-details">
+                                    <p class="text-center">You will be securely redirected to GCash to complete your payment.</p>
+                                    <img src="../images/gcash-logo.png" alt="GCash Logo" class="mx-auto d-block" style="max-height: 50px; margin-top: 1rem;"> <!-- Add a GCash logo if available -->
+                                </div>
+
+
+                                <!-- Card Details Form (Initially Hidden) -->
+                                <div id="card-details-form" class="payment-details" style="display: none;">
+                                    <h6 class="mb-3">Enter Card Details</h6>
+                                    <div class="mb-3">
+                                        <label for="cardNumber" class="form-label">Card Number *</label>
+                                        <input type="text" class="form-control" id="cardNumber" placeholder="---- ---- ---- ----" inputmode="numeric" pattern="[\d ]{16,22}" autocomplete="cc-number" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="cardHolderName" class="form-label">Cardholder Name *</label>
+                                        <input type="text" class="form-control" id="cardHolderName" placeholder="Juan Dela Cruz" autocomplete="cc-name" required>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="cardExpiry" class="form-label">Expiry Date (MM/YY) *</label>
+                                            <input type="text" class="form-control" id="cardExpiry" placeholder="MM / YY" inputmode="numeric" pattern="\d{2} */ *\d{2}" autocomplete="cc-exp" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="cardCvv" class="form-label">CVV/CVC *</label>
+                                            <input type="text" class="form-control" id="cardCvv" placeholder="123" inputmode="numeric" pattern="\d{3,4}" autocomplete="cc-csc" required>
+                                            <small class="form-text text-muted">3 or 4 digits on the back of your card.</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <span class="secure-connection-note">
+                                    <i class="fas fa-lock me-1"></i> Your connection is secure. Your payment information is encrypted.
+                                </span>
+
+                                <!-- Submit Button -->
+                                <div class="mt-4 text-end">
+                                     <!-- Update button text based on selection? Or keep generic -->
+                                     <button type="submit" id="pay-now-btn" class="btn btn-primary btn-lg">Pay Now</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                     <p class="mt-3 text-muted" style="font-size: 0.85rem;">
+                         By clicking "Pay Now", you agree to the <a href="#" class="text-primary">Terms & Conditions</a> and <a href="#" class="text-primary">Privacy Policy</a>.
+                     </p>
+                </div>
+
+                <!-- Right Column: Summary (Same as before, ensure values are updated if needed) -->
+                <div class="col-lg-4">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            Zamboanga City <i class="fas fa-arrow-right mx-1"></i> Davao City <br>
+                            <!-- Passenger count should reflect value from previous step -->
+                            <small id="passenger-summary-count">1 Passenger</small>
+                        </div>
+                         <div class="card-body p-3">
+                             <div class="trip-details-box">
+                                 <div class="d-flex justify-content-between align-items-center mb-1"> <span class="fw-bold">Zamboanga City <i class="fas fa-arrow-right mx-1"></i> Davao City</span> </div>
+                                 <div class="company mb-2"> <i class="fas fa-bus me-1"></i> Rural Transit </div>
+                                 <div class="time mb-2"> 08:00 - 20:30 · <i class="far fa-clock me-1"></i> 12h 30m </div>
+                             </div>
+                             <a href="#" class="policies-link d-block mt-2">Trip Policies</a>
+                         </div>
+                    </div>
+
+                    <div class="card mb-3">
+                        <div class="card-body price-breakdown">
+                            <h5 class="card-title mb-3">Price breakdown</h5>
+                             <!-- Values should reflect final calculation from previous step -->
+                            <dl class="mb-1">
+                                <dt id="breakdown-passengers-label">Passenger x 1</dt>
+                                <dd id="breakdown-passengers-price">₱ 3,509.00</dd>
+                                <dt>Base fare</dt>
+                                <dd id="breakdown-base-fare">₱ 3,509.00</dd>
+                                <dt>Taxes and fees</dt>
+                                <dd id="breakdown-taxes">₱ 0.00</dd>
+                                <div class="discount">
+                                    <dt>Discount</dt>
+                                    <dd id="breakdown-discount">-₱ 0.00</dd>
+                                </div>
+                                <div class="free">
+                                    <dt>Processing cost</dt>
+                                    <dd>FREE</dd>
+                                </div>
+                            </dl>
+                             <hr>
+                             <dl class="mb-0">
+                                 <dt class="total-strikethrough">Total</dt>
+                                 <dd class="total-strikethrough" id="breakdown-total-strikethrough">₱ 3,509.00</dd>
+                                 <dt class="fw-bold">Total Payable</dt> <!-- Changed label slightly -->
+                                 <dd class="final-total" id="breakdown-final-total">₱ 3,509.00</dd>
+                             </dl>
+                        </div>
+                    </div>
+
+                     <div class="card">
+                         <div class="card-body booking-conditions">
+                             <h6 class="fw-bold text-dark mb-2">Booking conditions</h6>
+                             <p class="mb-0">* Please check the bus operator's official website or contact them for the latest trip details, terminal information, and terms and conditions of carriage.</p>
+                         </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+      </main>
+
+      <footer class="footer">
+        <!-- Footer Content (Copy from previous page) -->
+        <div class="footer-inside">
+          <div class="footer-left">
+            <img src="../images/logos/logo-white.png" alt="FairFare logo" class="footer-logo" height="100" width="100">
+            <h4 class="fw-bold">FAIR FARE</h4>
+            <p>Follow us on:</p>
+            <div class="social-icons">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px" class="social-icon" fill="currentColor"><path d="M12,2C6.477,2,2,6.477,2,12c0,5.013,3.693,9.153,8.505,9.876V14.65H8.031v-2.629h2.474v-1.749 c0-2.896,1.411-4.167,3.818-4.167c1.153,0,1.762,0.085,2.051,0.124v2.294h-1.642c-1.022,0-1.379,0.969-1.379,2.061v1.437h2.995 l-0.406,2.629h-2.588v7.247C18.235,21.236,22,17.062,22,12C22,6.477,17.523,2,12,2z" /></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px" class="social-icon" fill="currentColor"><path d="M 8 3 C 5.239 3 3 5.239 3 8 L 3 16 C 3 18.761 5.239 21 8 21 L 16 21 C 18.761 21 21 18.761 21 16 L 21 8 C 21 5.239 18.761 3 16 3 L 8 3 z M 18 5 C 18.552 5 19 5.448 19 6 C 19 6.552 18.552 7 18 7 C 17.448 7 17 6.552 17 6 C 17 5.448 17.448 5 18 5 z M 12 7 C 14.761 7 17 9.239 17 12 C 17 14.761 14.761 17 12 17 C 9.239 17 7 14.761 7 12 C 7 9.239 9.239 7 12 7 z M 12 9 A 3 3 0 0 0 9 12 A 3 3 0 0 0 12 15 A 3 3 0 0 0 15 12 A 3 3 0 0 0 12 9 z" /></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="24px" height="24px" class="social-icon" fill="currentColor"><path d="M 11 4 C 7.134 4 4 7.134 4 11 L 4 39 C 4 42.866 7.134 46 11 46 L 39 46 C 42.866 46 46 42.866 46 39 L 46 11 C 46 7.134 42.866 4 39 4 L 11 4 z M 13.085938 13 L 21.023438 13 L 26.660156 21.009766 L 33.5 13 L 36 13 L 27.789062 22.613281 L 37.914062 37 L 29.978516 37 L 23.4375 27.707031 L 15.5 37 L 13 37 L 22.308594 26.103516 L 13.085938 13 z M 16.914062 15 L 31.021484 35 L 34.085938 35 L 19.978516 15 L 16.914062 15 z" /></svg>
+            </div>
+          </div>
+          <div class="footer-form">
+            <h4 class="fw-bold">Share something about us!</h4>
+            <p>You can send a direct message to us here.</p>
+            <form class="form-inputs">
+              <div><input class="inputs mess-in" type="text" placeholder="Message"></div>
+              <div><input class="inputs email-in" type="email" placeholder="Email"></div>
+              <div><button class="submit-btn" type="submit">Send</button></div>
+            </form>
+          </div>
+          <div class="quick-links">
+            <h4 class="fw-bold">Quick Links</h4>
+            <ul class="link-list"> <li>Log In</li> <li>Search Bus Terminals</li> <li>Help Centre</li> <li>Available Trips</li> </ul>
+          </div>
+          <div class="accounts">
+            <h4 class="fw-bold">Accounts</h4>
+            <ul class="link-list"> <li>Passenger</li> <li>Bus Driver / Conductor</li> <li>Bus Company</li> <li>Terminal Control</li> </ul>
+          </div>
+        </div>
+      </footer>
+      <footer class="bg-dark text-white py-2">
+        <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+          <p class="mb-1 mb-md-0 small">Terms and Policies • Privacy Notice</p>
+          <p class="mb-0 small">© Fair Fare 2025–2025</p>
+        </div>
+      </footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const paymentMethodRadios = document.querySelectorAll('input[name="paymentMethod"]');
+        const cardDetailsForm = document.getElementById('card-details-form');
+        const gcashInstructions = document.getElementById('gcash-instructions');
+        const payNowBtn = document.getElementById('pay-now-btn');
+
+        // --- Function to handle showing/hiding payment details ---
+        const togglePaymentDetails = () => {
+            const selectedMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+
+            if (selectedMethod === 'debit' || selectedMethod === 'credit') {
+                cardDetailsForm.style.display = 'block';
+                gcashInstructions.style.display = 'none';
+                // Make card fields required only when visible
+                cardDetailsForm.querySelectorAll('input').forEach(input => input.required = true);
+                payNowBtn.textContent = 'Pay Now'; // Or specific like "Pay with Card"
+            } else if (selectedMethod === 'gcash') {
+                cardDetailsForm.style.display = 'none';
+                gcashInstructions.style.display = 'block';
+                // Make card fields not required when hidden
+                cardDetailsForm.querySelectorAll('input').forEach(input => input.required = false);
+                 payNowBtn.textContent = 'Pay with GCash'; // Update button text
+            } else {
+                 // Handle other methods if added
+                cardDetailsForm.style.display = 'none';
+                gcashInstructions.style.display = 'none';
+                 cardDetailsForm.querySelectorAll('input').forEach(input => input.required = false);
+                 payNowBtn.textContent = 'Pay Now';
+            }
+        };
+
+        // --- Add event listeners to radio buttons ---
+        paymentMethodRadios.forEach(radio => {
+            radio.addEventListener('change', togglePaymentDetails);
+        });
+
+        // --- Initial setup on page load ---
+        togglePaymentDetails(); // Call once to set initial state based on default checked radio
+
+
+        // --- Placeholder for Form Submission ---
+        const paymentForm = document.getElementById('payment-form');
+        paymentForm.addEventListener('submit', (event) => {
+            event.preventDefault(); // Prevent default form submission for now
+
+            const selectedMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+
+            // Basic validation check (HTML5 required attribute handles most)
+            if (!paymentForm.checkValidity()) {
+                event.stopPropagation();
+                paymentForm.classList.add('was-validated'); // Optional: Show Bootstrap validation styles
+                console.log('Form is invalid');
+                return;
+            }
+
+            console.log('Form submitted!');
+            console.log('Selected payment method:', selectedMethod);
+
+            // **IMPORTANT:** Here you would typically:
+            // 1. Gather all form data (including card details if applicable).
+            // 2. Send the data securely to your backend server using fetch() or Axios.
+            // 3. The backend would process the payment with the chosen gateway (GCash API, Stripe, PayMongo, etc.).
+            // 4. Based on the backend response, redirect the user to the success/failure page or display a message.
+
+            // For this example, we'll simulate redirecting to a success page after a short delay.
+            payNowBtn.disabled = true;
+            payNowBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...';
+
+            setTimeout(() => {
+                // Replace with the actual URL of your success page
+                window.location.href = 'successful.html';
+                 console.log("Redirecting to success page...");
+            }, 2000); // Simulate 2 seconds processing time
+        });
+
+        // --- Optional: Input formatting/validation helpers ---
+        // Basic space formatting for card number
+        const cardNumberInput = document.getElementById('cardNumber');
+        if(cardNumberInput) {
+            cardNumberInput.addEventListener('input', (e) => {
+                e.target.value = e.target.value.replace(/[^\d]/g, '').replace(/(.{4})/g, '$1 ').trim();
+            });
+        }
+
+        // Basic formatting for expiry date
+         const cardExpiryInput = document.getElementById('cardExpiry');
+         if (cardExpiryInput) {
+             cardExpiryInput.addEventListener('input', (e) => {
+                let value = e.target.value.replace(/[^\d]/g, '');
+                if (value.length > 2) {
+                    value = value.substring(0, 2) + ' / ' + value.substring(2, 4);
+                }
+                 e.target.value = value.trim();
+             });
+         }
+
+        // --- Retrieve and display summary data (if passed from previous page) ---
+        // In a real app, you'd get this data (e.g., from localStorage, URL params, or server)
+        // For now, the placeholder values in the HTML are used.
+        // Example using localStorage:
+        /*
+        const summaryData = JSON.parse(localStorage.getItem('bookingSummary'));
+        if (summaryData) {
+            document.getElementById('passenger-summary-count').textContent = `${summaryData.passengerCount} Passenger${summaryData.passengerCount > 1 ? 's' : ''}`;
+            document.getElementById('breakdown-passengers-label').textContent = `Passenger${summaryData.passengerCount > 1 ? 's' : ''} x ${summaryData.passengerCount}`;
+            document.getElementById('breakdown-passengers-price').textContent = `₱ ${summaryData.totalBaseFare.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`;
+            document.getElementById('breakdown-base-fare').textContent = `₱ ${summaryData.totalBaseFare.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`;
+            document.getElementById('breakdown-discount').textContent = `-₱ ${summaryData.totalDiscount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`;
+            document.getElementById('breakdown-total-strikethrough').textContent = `₱ ${summaryData.totalBaseFare.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`;
+            document.getElementById('breakdown-final-total').textContent = `₱ ${summaryData.finalTotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}`;
+        }
+        */
+    });
+</script>
+
+</body>
+</html>

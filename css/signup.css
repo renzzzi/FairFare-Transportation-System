@@ -1,0 +1,83 @@
+:root {
+    --bs-primary: #00cde1;
+    --bs-secondary: #E18702;
+    --bs-primary-rgb: 0, 205, 225;
+    --bs-danger: #dc3545;
+    --bs-link-color: var(--bs-primary);
+     --bs-link-hover-color: color-mix(in srgb, var(--bs-primary) 85%, black);
+}
+
+.f-color {
+  color: var(--bs-primary);
+}
+
+.btn-primary {
+    --bs-btn-bg: var(--bs-primary);
+    --bs-btn-border-color: var(--bs-primary);
+    --bs-btn-hover-bg: color-mix(in srgb, var(--bs-primary) 85%, black);
+    --bs-btn-hover-border-color: color-mix(in srgb, var(--bs-primary) 80%, black);
+    --bs-btn-active-bg: color-mix(in srgb, var(--bs-primary) 80%, black);
+    --bs-btn-active-border-color: color-mix(in srgb, var(--bs-primary) 75%, black);
+    --bs-btn-focus-shadow-rgb: var(--bs-primary-rgb);
+     color: #fff;
+}
+ .btn-primary:hover{
+     color:#fff;
+ }
+
+body {
+    font-family: Montserrat, sans-serif;
+    background-color: #f8f9fa; /* Light background for contrast */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.main-content {
+    flex-grow: 1; /* Allows main content to fill space */
+    padding-top: 3rem; /* More space below header */
+    padding-bottom: 4rem;
+}
+.card {
+    border-radius: 0.5rem;
+    border: 1px solid #dee2e6;
+    /* Removed default margin-bottom */
+    margin-bottom: 1.5rem; /* Add back margin for spacing between cards if needed */
+}
+.form-label {
+    font-weight: 500;
+    font-size: 0.875rem;
+    color: #495057;
+}
+.form-control, .form-select, .form-check-input { /* Include form-check-input */
+    font-size: 0.95rem;
+}
+.text-primary {
+     color: var(--bs-primary) !important;
+}
+/* --- Styles for Verification Section --- */
+.verification-option {
+    padding: 0.75rem 1rem;
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+    margin-bottom: 0.75rem;
+    background-color: #fff;
+}
+.verification-option .form-check-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    font-weight: 500;
+}
+ .verification-option .contact-info {
+     font-size: 0.9rem;
+     color: #6c757d;
+     margin-left: 0.5rem;
+ }
+ .form-check-input:checked { /* Copied from payment page for consistency */
+    background-color: var(--bs-primary);
+    border-color: var(--bs-primary);
+}
+.form-check-input:focus {
+     box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.25);
+}

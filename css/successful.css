@@ -1,0 +1,190 @@
+:root {
+    --bs-primary: #00cde1;
+    --bs-secondary: #E18702;
+    --bs-primary-rgb: 0, 205, 225;
+    --bs-danger: #dc3545;
+    --bs-link-color: var(--bs-primary);
+     --bs-link-hover-color: color-mix(in srgb, var(--bs-primary) 85%, black);
+}
+
+.f-color {
+  color: var(--bs-primary);
+}
+
+.btn-primary {
+    --bs-btn-bg: var(--bs-primary);
+    --bs-btn-border-color: var(--bs-primary);
+    --bs-btn-hover-bg: color-mix(in srgb, var(--bs-primary) 85%, black);
+    --bs-btn-hover-border-color: color-mix(in srgb, var(--bs-primary) 80%, black);
+    --bs-btn-active-bg: color-mix(in srgb, var(--bs-primary) 80%, black);
+    --bs-btn-active-border-color: color-mix(in srgb, var(--bs-primary) 75%, black);
+    --bs-btn-focus-shadow-rgb: var(--bs-primary-rgb);
+     color: #fff;
+}
+ .btn-primary:hover{
+     color:#fff;
+ }
+/* Style for +/- buttons (can be kept for consistency or removed if not used) */
+.passenger-control-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    line-height: 1;
+    font-size: 1rem;
+    padding: 0;
+}
+.passenger-count-display {
+    font-size: 1.2rem;
+    font-weight: bold;
+    min-width: 30px; /* Ensure space for number */
+    text-align: center;
+}
+
+body {
+    font-family: Montserrat, sans-serif;
+    background-color: #f8f9fa;
+}
+.main-content {
+    padding-bottom: 4rem;
+}
+.card {
+    border-radius: 0.5rem;
+    border: 1px solid #dee2e6;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    margin-bottom: 1.5rem;
+}
+.card-header {
+    background-color: var(--bs-primary);
+    color: white;
+    font-weight: bold;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    padding: 0.75rem 1.25rem;
+}
+
+/* --- Progress Bar Styles (Keep These) --- */
+.progress-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 0 15px;
+}
+.progress-steps {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    padding: 0;
+    position: relative;
+    margin: 0;
+}
+.progress-steps::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: calc((100% / 3) / 2);
+    width: calc(100% - (100% / 3));
+    height: 2px;
+    background-color: #dee2e6;
+    z-index: 1;
+}
+.progress-line-active {
+     position: absolute;
+     top: 15px;
+     left: calc((100% / 3) / 2);
+     height: 2px;
+     background-color: var(--bs-primary);
+     z-index: 2;
+     width: 0;
+     transition: width 0.4s ease-in-out;
+ }
+.progress-step {
+    flex-basis: calc(100% / 3);
+    text-align: center;
+    position: relative;
+    z-index: 3;
+}
+.progress-step .step-number {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    line-height: 28px;
+    border-radius: 50%;
+    background-color: #fff;
+    color: #6c757d;
+    border: 1px solid #dee2e6;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+    position: relative;
+    z-index: 3;
+}
+.progress-step .step-label {
+    display: block;
+    font-size: 0.85rem;
+    color: #6c757d;
+    transition: color 0.3s;
+}
+.progress-step.active .step-number {
+    background-color: var(--bs-primary);
+    border-color: var(--bs-primary);
+    color: white;
+}
+.progress-step.active .step-label {
+    color: var(--bs-primary);
+    font-weight: bold;
+}
+/* --- IMPORTANT: Update Progress Bar Width for Step 3 --- */
+.progress-steps[data-active-steps="1"] .progress-line-active { width: 0%; }
+.progress-steps[data-active-steps="2"] .progress-line-active { width: calc(100% / 3); }
+.progress-steps[data-active-steps="3"] .progress-line-active { width: calc((100% / 3) * 2); } /* Active line width for step 3 */
+
+
+/* --- Styles for Success Message --- */
+.success-card-body {
+    text-align: center;
+    padding: 2.5rem 1.5rem; /* More padding */
+}
+.success-icon {
+    font-size: 4.5rem; /* Larger icon */
+    color: var(--bs-primary);
+    margin-bottom: 1.5rem;
+}
+.success-heading {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #343a40; /* Darker text */
+}
+.success-message {
+    font-size: 1rem;
+    color: #495057; /* Slightly lighter text */
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+ .success-message strong { /* Style for the email address */
+    color: var(--bs-primary);
+    font-weight: 600;
+ }
+.success-reminder {
+     font-size: 0.9rem;
+     color: #6c757d;
+     margin-bottom: 2rem;
+}
+.home-button {
+    padding: 0.75rem 1.5rem; /* Larger button */
+    font-size: 1rem;
+}
+
+/* --- Styles from payment page (can be kept or cleaned up if unused) --- */
+/* Example: Remove if not needed */
+/*
+.payment-option, .payment-details, .secure-connection-note,
+.back-button, .welcome-box, .required-field,
+.price-breakdown, .trip-details-box, .booking-conditions,
+.form-check-input:checked, .form-check-input:focus {
+     display: none; /* Hide elements not relevant to success page */
+/* } */
+/* Hide back button specifically */
+.back-button {
+    display: none;
+}
