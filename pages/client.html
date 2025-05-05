@@ -36,9 +36,6 @@
                   <a class="nav-link px-3 py-4 rounded" href="#">Home</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link px-3 py-4 rounded" href="#">About</a>
-                </li>
-                <li class="nav-item">
                   <a class="nav-link px-3 py-4 rounded" href="history.html">Booking History</a>
                 </li>
                 <!-- Log Out Button -->
@@ -52,75 +49,72 @@
     </header>
 
       <main>
-        <div class="first-section p-4 bg-primary">
-            <div class="bg-wpic">
-              <h2 class="fw-bold text-center fs-3 text-white">Book Your Dream Bus Trip Now!</h2>
-              <p class="lead text-center text-white mb-0">Quick, easy booking with the best fares guaranteed.</p>
-            </div>
-        </div>
         <div class="second-section p-4">
-            <div class="booking-container">
-              <div class="booking-form">
-                <h3 class="fw-bold text-center f-primary mb-4">Where would you like to go?</h3>
-                <form class="dest">
-                  <div class="travel-input row d-flex align-items-center justify-content-center gap-3">
-                    <div class="col-12 col-md-3 mb-3">
-                      <label for="pickup" class="form-label">From (Terminal/City)</label>
-                      <div class="input-group">
-                        <span class="input-group-text bg-light">
-                          <i class="bi bi-geo-alt"></i>
-                        </span>
-                        <input type="text" id="pickup" name="pickup" required class="form-control" placeholder="Enter departure city (e.g. Manila)">
-                      </div>
-                    </div>
-                    <div class="col-12 col-md-3 mb-3">
-                      <label for="dropoff" class="form-label">To (Terminal/City)</label>
-                      <div class="input-group">
-                        <span class="input-group-text bg-light">
-                          <i class="bi bi-geo-alt"></i>
-                        </span>
-                        <input type="text" id="dropoff" name="dropoff" required class="form-control" placeholder="Enter destination city (e.g. Cebu)">
-                      </div>
-                    </div>
-                    <div class="col-12 col-md-2 mb-3">
-                      <label for="date" class="form-label">Date</label>
-                      <div class="input-group">
-                        <span class="input-group-text bg-light">
-                          <i class="bi bi-calendar"></i>
-                        </span>
-                        <input type="date" id="date" name="date" required class="form-control">
-                      </div>
-                    </div>
-                    <div class="col-12 col-md-2 mb-3">
-                      <label for="passengers" class="form-label">Passengers</label>
-                      <div class="input-group">
-                        <span class="input-group-text bg-light">
-                          <i class="bi bi-person"></i>
-                        </span>
-                        <select id="passengers" name="passengers" required class="form-select">
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                          <option value="5">5</option>
-                          <option value="6">6</option>
-                          <option value="7">7</option>
-                          <option value="8">8</option>
-                          <option value="9">9</option>
-                          <option value="10">10</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-12 col-md-2 mb-3 d-flex align-items-end">
-                      <button type="submit" class="btn btn-primary w-100 py-2" id="searchBtn" href="../pages/search.html">
-                        <i class="bi bi-search me-2"></i>Search Buses
-                      </button>
+          <div class="booking-container">
+            <div class="booking-form">
+              <h3 class="fw-bold text-center f-primary mb-4">Where would you like to go?</h3>
+              <!-- **** ADD ID HERE **** -->
+              <form class="dest" id="bookingForm">
+                <div class="travel-input row d-flex align-items-center justify-content-center gap-3">
+                  <div class="col-12 col-md-3 mb-3">
+                    <label for="pickup" class="form-label">From (Terminal/City)</label>
+                    <div class="input-group">
+                      <span class="input-group-text bg-light">
+                        <i class="bi bi-geo-alt"></i>
+                      </span>
+                      <input type="text" id="pickup" name="pickup" required class="form-control" placeholder="Enter departure city (e.g. Manila)">
                     </div>
                   </div>
-                </form>
-              </div>
+                  <div class="col-12 col-md-3 mb-3">
+                    <label for="dropoff" class="form-label">To (Terminal/City)</label>
+                    <div class="input-group">
+                      <span class="input-group-text bg-light">
+                        <i class="bi bi-geo-alt"></i>
+                      </span>
+                      <input type="text" id="dropoff" name="dropoff" required class="form-control" placeholder="Enter destination city (e.g. Cebu)">
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-2 mb-3">
+                    <label for="date" class="form-label">Date</label>
+                    <div class="input-group">
+                      <span class="input-group-text bg-light">
+                        <i class="bi bi-calendar"></i>
+                      </span>
+                      <input type="date" id="date" name="date" required class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-2 mb-3">
+                    <label for="passengers" class="form-label">Passengers</label>
+                    <div class="input-group">
+                      <span class="input-group-text bg-light">
+                        <i class="bi bi-person"></i>
+                      </span>
+                      <!-- **** MAKE SURE THIS ID MATCHES JS **** -->
+                      <select id="passengers" name="passengers" required class="form-select">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-2 mb-3 d-flex align-items-end">
+                    <!-- **** REMOVED Href - SUBMIT HANDLES IT **** -->
+                    <button type="submit" class="btn btn-primary w-100 py-2" id="searchBtn">
+                      <i class="bi bi-search me-2"></i>Search Buses
+                    </button>
+                  </div>
+                </div>
+              </form>
             </div>
-        </div>
+          </div>
+      </div>
 
 
           <section class="suggested-bus py-5 bg-light">
@@ -294,5 +288,41 @@
           <p class="mb-0 small">© Fair Fare 2025–2025</p>
         </div>
       </footer>
+      <script>
+        $(document).ready(function() {
+          $('.suggested-bus .btn-outline-primary[data-from]').on('click', function(event) {
+            event.preventDefault();
+            var fromLocation = $(this).data('from');
+            var toLocation = $(this).data('to');
+            $('#pickup').val(fromLocation);
+            $('#dropoff').val(toLocation);
+            $('html, body').animate({
+                scrollTop: $('.booking-form').offset().top - 80 
+            }, 500);
+          });
+
+          // Set today's date as minimum for date input
+          var today = new Date().toISOString().split('T')[0];
+          $('#date').attr('min', today);
+
+          $('#bookingForm').on('submit', function(event) {
+            event.preventDefault(); 
+
+            var pickup = $('#pickup').val();
+            var dropoff = $('#dropoff').val();
+            var date = $('#date').val();
+            var passengers = $('#passengers').val(); 
+
+            if (!pickup || !dropoff || !date || !passengers) {
+                alert('Please fill in all search fields.');
+                return; // Stop if fields are missing
+            }
+
+            // Redirect to search.html with query parameters
+            var searchUrl = `search.html?from=${encodeURIComponent(pickup)}&to=${encodeURIComponent(dropoff)}&date=${date}&passengers=${passengers}`;
+            window.location.href = searchUrl;
+        });
+      });
+      </script>
 </body>
 </html>
