@@ -1,0 +1,69 @@
+:root {
+    --bs-primary: #00cde1;
+    --bs-secondary: #E18702;
+    --bs-primary-rgb: 0, 205, 225;
+    --bs-danger: #dc3545;
+  }
+
+  .bg-primary {
+      background-color: var(--bs-primary) !important;
+      color: white;
+  }
+
+  .f-color {
+      color: var(--bs-primary) !important;
+  }
+
+  .btn-back {
+        background-color: var(--bs-primary) !important;
+        color: white !important;
+        border-radius: 0.375rem;
+        text-decoration: none;
+        border: 1px solid var(--bs-primary); /* Add border for hover effect */
+        transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease; /* Smooth transition */
+  }
+
+  .btn-back:hover {
+        border-color: var(--bs-primary); /* Keep border color on hover */
+        background-color: white !important;
+        color: var(--bs-primary) !important;
+  }
+
+  .btn-primary {
+      background-color: var(--bs-primary) !important;
+      border-color: var(--bs-primary) !important;
+      padding: 0.5rem 1.5rem;
+  }
+
+  /* Styling for the details section */
+   #tripDetailsContainer .card {
+       border: 1px solid #e9ecef; /* Slightly lighter border for cards */
+   }
+   #tripDetailsContainer .card-header {
+       background-color: #f8f9fa; /* Light grey header */
+       font-weight: 600; /* Semi-bold headers */
+       border-bottom: 1px solid #e9ecef;
+   }
+   #tripDetailsContainer dt { /* Styling for definition term */
+       font-weight: 600;
+       color: #6c757d; /* Muted color */
+   }
+   #tripDetailsContainer dd { /* Styling for definition description */
+       margin-bottom: 0.75rem;
+   }
+
+   /* Style for the back button icon alignment */
+   .btn-back svg {
+        vertical-align: middle; /* Helps align SVG with text */
+   }
+
+   /* Optional: Style for Cancel Button */
+   .btn-cancel-booking {
+        /* Add specific styles if needed, e.g., width */
+   }
+
+   /* Blur effect for header */
+   .div-blur {
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px); /* For Safari */
+   }
