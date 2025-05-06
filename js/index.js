@@ -16,3 +16,20 @@ document.addEventListener("DOMContentLoaded", function () {
 		$("#messageSentModal").modal("show");
 	});
 });
+
+// BURGER ICON
+
+$(document).ready(function () {
+	$(".navbar-toggler").on("click", function () {
+		var target = $(this).data("target");
+		$(target).toggleClass("collapse");
+	});
+
+	$("#navbarSupportedContent").on("show.bs.collapse", function () {
+		$(".navbar").addClass("navbar-blur");
+	});
+
+	$("#navbarSupportedContent").on("hide.bs.collapse", function () {
+		$(".navbar").removeClass("navbar-blur");
+	});
+});
