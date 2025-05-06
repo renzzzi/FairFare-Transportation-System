@@ -14,6 +14,9 @@ let routes = [
     { id: 5, from: "Cagayan de Oro ", to: "Zamboanga", distance: 4312 },
 ];
 
+let editingBusId = null;
+let editingRouteId = null;
+
 function populateBusListTable(buses) {
     const tableBody = document.querySelector("#busListTable tbody");
     if (!tableBody) return;
@@ -76,7 +79,7 @@ function populateRouteListTable(routes) {
         row.insertCell().textContent = route.distance;
 
         const actionsCell = row.insertCell();
-         const editButton = document.createElement('button');
+        const editButton = document.createElement('button');
         editButton.className = 'btn btn-primary btn-sm editRouteBtn';
         editButton.textContent = 'Edit';
         editButton.dataset.id = route.id;
@@ -94,143 +97,185 @@ function populateRouteListTable(routes) {
     updateDashboardStats();
 }
 
-let editingBusId = null;
+// Called when "Edit" button in bus table is clicked
 function editBus(busId) {
-    editingBusId = busId;
     const bus = buses.find(b => b.id === busId);
     if (bus) {
+        editingBusId = busId;
         $('#busName').val(bus.name);
         $('#busType').val(bus.type);
         $('#busCapacity').val(bus.capacity);
-        $('#addBusForm button[type="submit"]').text('Update Bus');
+        $('#busModalLabel').text('Edit Bus');
+        $('#saveBusBtn').text('Update Bus');
+        $('#busModal').modal('show');
     }
 }
 
- let editingRouteId = null;
+// Called when "Edit" button in route table is clicked
 function editRoute(routeId) {
-    editingRouteId = routeId;
     const route = routes.find(r => r.id === routeId);
     if (route) {
+        editingRouteId = routeId;
         $('#routeFrom').val(route.from);
         $('#routeTo').val(route.to);
         $('#routeDistance').val(route.distance);
-        $('#addRouteForm button[type="submit"]').text('Update Route');
+        $('#routeModalLabel').text('Edit Route');
+        $('#saveRouteBtn').text('Update Route');
+        $('#routeModal').modal('show');
     }
 }
 
-
-function addBus(newBus) {
+// Handles both adding a new bus and initiating an update for an existing bus
+function addBus(busData) { // busData is { name, type, capacity }
     if (editingBusId) {
-        updateBus(editingBusId, newBus);
-        editingBusId = null;
-         $('#addBusForm button[type="submit"]').text('Save Bus');
+        updateBus(editingBusId, busData);
     } else {
-        newBus.id = Math.max(0, ...buses.map(b => b.id)) + 1;
+        const newBus = { ...busData, id: Math.max(0, ...buses.map(b => b.id)) + 1 };
         buses.push(newBus);
     }
-
     populateBusListTable(buses);
     updateDashboardStats();
 }
 
-function updateBus(busId, updatedBus) {
-    buses = buses.map(bus => (bus.id === busId ? { ...bus, ...updatedBus } : bus));
-    populateBusListTable(buses);
-    updateDashboardStats();
+// Updates an existing bus in the 'buses' array
+function updateBus(busId, updatedBusData) {
+    buses = buses.map(bus => (bus.id === busId ? { ...bus, ...updatedBusData } : bus));
+    // populateBusListTable and updateDashboardStats are called by addBus
 }
 
 function deleteBus(busId) {
-    buses = buses.filter(bus => bus.id !== busId);
-    populateBusListTable(buses);
-    updateDashboardStats();
+    if (confirm('Are you sure you want to delete this bus?')) {
+        buses = buses.filter(bus => bus.id !== busId);
+        populateBusListTable(buses);
+        updateDashboardStats();
+    }
 }
 
-function addRoute(newRoute) {
-     if (editingRouteId) {
-        updateRoute(editingRouteId, newRoute);
-        editingRouteId = null;
-         $('#addRouteForm button[type="submit"]').text('Save Route');
+// Handles both adding a new route and initiating an update for an existing route
+function addRoute(routeData) { // routeData is { from, to, distance }
+    if (editingRouteId) {
+        updateRoute(editingRouteId, routeData);
     } else {
-        newRoute.id = Math.max(0, ...routes.map(r => r.id)) + 1;
+        const newRoute = { ...routeData, id: Math.max(0, ...routes.map(r => r.id)) + 1 };
         routes.push(newRoute);
     }
-   
     populateRouteListTable(routes);
     updateDashboardStats();
 }
 
-function updateRoute(routeId, updatedRoute) {
-    routes = routes.map(route => (route.id === routeId ? { ...route, ...updatedRoute } : route));
-    populateRouteListTable(routes);
-    updateDashboardStats();
+// Updates an existing route in the 'routes' array
+function updateRoute(routeId, updatedRouteData) {
+    routes = routes.map(route => (route.id === routeId ? { ...route, ...updatedRouteData } : route));
+    // populateRouteListTable and updateDashboardStats are called by addRoute
 }
 
 function deleteRoute(routeId) {
-    routes = routes.filter(route => route.id !== routeId);
-    populateRouteListTable(routes);
-    updateDashboardStats();
+    if (confirm('Are you sure you want to delete this route?')) {
+        routes = routes.filter(route => route.id !== routeId);
+        populateRouteListTable(routes);
+        updateDashboardStats();
+    }
 }
 
 function updateDashboardStats() {
-    document.getElementById("totalBusesDashboard").textContent = buses.length;
-    document.getElementById("activeRoutesDashboard").textContent = routes.length; // Assuming all routes are active
+    // Ensure these elements exist in your full HTML if you're using them
+    const totalBusesEl = document.getElementById("totalBusesDashboard");
+    const activeRoutesEl = document.getElementById("activeRoutesDashboard");
+    if (totalBusesEl) totalBusesEl.textContent = buses.length;
+    if (activeRoutesEl) activeRoutesEl.textContent = routes.length;
 }
 
 $(document).ready(function () {
     $('#bus').hide();
-    $('#manage-routes').hide();
+    // $('#manage-routes').hide(); // This ID was not in the provided HTML for a section. Assume 'bus' section contains both.
 
     $('#manageBusesButton').click(function () {
         $('#bus').show();
-        $('#dashboardSection, #manageTripsSection, #salesReportSection, #availableResourcesSection, #manage-passengers, #passenger-requests').hide();
+        $('#dashboardSection, #manageTripsSection, #salesReportSection, #availableResourcesSection, #manage-passengers, #passenger-requests, #report').hide();
         populateBusListTable(buses);
+        populateRouteListTable(routes); // Populate routes as well if they are in the same section
     });
 
-    $('#manageRoutesButton').click(function () {
-        $('#manage-routes').show();
-        $('#dashboardSection, #manageTripsSection, #salesReportSection, #availableResourcesSection, #manage-passengers, #passenger-requests, #bus').hide();
-        populateRouteListTable(routes);
-    });
-
+    // If you have a separate button/section for routes:
+    // $('#manageRoutesButton').click(function () {
+    //     $('#manage-routes').show(); // Ensure this section ID exists
+    //     $('#dashboardSection, #manageTripsSection, #salesReportSection, #availableResourcesSection, #manage-passengers, #passenger-requests, #bus, #report').hide();
+    //     populateRouteListTable(routes);
+    // });
 
 
     // --- Modal Interactions ---
-    /*$('#addBusButton').click(function() {
-        $('#addBusModal').modal('show');
-    });*/
+
+    // Open Bus Modal for ADDING a new bus
+    $('#openAddBusModalBtn').click(function() {
+        editingBusId = null;
+        $('#addBusForm')[0].reset();
+        $('#busModalLabel').text('Add New Bus');
+        $('#saveBusBtn').text('Save Bus');
+        $('#busModal').modal('show');
+    });
+
+    // Open Route Modal for ADDING a new route
+    $('#openAddRouteModalBtn').click(function() {
+        editingRouteId = null;
+        $('#addRouteForm')[0].reset();
+        $('#routeModalLabel').text('Add New Route');
+        $('#saveRouteBtn').text('Save Route');
+        $('#routeModal').modal('show');
+    });
 
 
-
-    $('#addBusForm').submit(function(event) { //listen to submit
+    // Handle Bus Form Submission (for both Add and Edit)
+    $('#addBusForm').submit(function(event) {
         event.preventDefault();
         const busName = $('#busName').val();
         const busType = $('#busType').val();
-        const busCapacity = $('#busCapacity').val();
+        const busCapacity = parseInt($('#busCapacity').val());
 
-        if (busName && busType && busCapacity) {
-            const newBus = { name: busName, type: busType, capacity: parseInt(busCapacity) };
-            addBus(newBus);
-            $('#addBusForm')[0].reset();
+        if (busName && busType && !isNaN(busCapacity) && busCapacity > 0) {
+            const busData = { name: busName, type: busType, capacity: busCapacity };
+            addBus(busData); // This function now handles add or update logic
+
+            $('#busModal').modal('hide');
+            // Form is reset when modal is opened for "add new"
+            // editingBusId is set to null when modal is opened for "add new" or after successful edit below
         } else {
-            alert('Please fill in all bus details.'); // Basic validation
+            alert('Please fill in all bus details correctly (capacity must be a positive number).');
         }
     });
 
+    // Handle Route Form Submission (for both Add and Edit)
     $('#addRouteForm').submit(function(event) {
         event.preventDefault();
         const routeFrom = $('#routeFrom').val();
         const routeTo = $('#routeTo').val();
-        const routeDistance = $('#routeDistance').val();
+        const routeDistance = parseInt($('#routeDistance').val());
 
-        if (routeFrom && routeTo && routeDistance) {
-            const newRoute = { from: routeFrom, to: routeTo, distance: parseInt(routeDistance) };
-            addRoute(newRoute);
-            $('#addRouteForm')[0].reset();
+        if (routeFrom && routeTo && !isNaN(routeDistance) && routeDistance > 0) {
+            const routeData = { from: routeFrom, to: routeTo, distance: routeDistance };
+            addRoute(routeData); // This function now handles add or update logic
+
+            $('#routeModal').modal('hide');
+            // Form is reset when modal is opened for "add new"
+            // editingRouteId is set to null when modal is opened for "add new" or after successful edit below
         } else {
-            alert('Please fill in all route details.');
+            alert('Please fill in all route details correctly (distance must be a positive number).');
         }
     });
+
+    // Clear editing state when modals are hidden (covers cancel/close button too)
+    $('#busModal').on('hidden.bs.modal', function () {
+        editingBusId = null;
+        $('#addBusForm')[0].reset(); // Also reset form on any close
+    });
+
+    $('#routeModal').on('hidden.bs.modal', function () {
+        editingRouteId = null;
+        $('#addRouteForm')[0].reset(); // Also reset form on any close
+    });
+
+    // Initial population
     updateDashboardStats();
-    populateBusListTable(buses);  // Initial population of bus list
-    populateRouteListTable(routes); // Initial population of route list
+    populateBusListTable(buses);
+    populateRouteListTable(routes);
 });

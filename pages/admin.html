@@ -257,31 +257,11 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <!-- ADD BUS -->
-                            <h5 class="card-title text-dark">Add New Bus</h5>
-                            <form id="addBusForm" class="mb-4">
-                                <div class="form-row">
-                                    <div class="form-group col-md-4">
-                                        <label for="busName">Bus Name</label>
-                                        <input type="text" class="form-control" id="busName"
-                                            placeholder="e.g., Super Cruiser" required>
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label for="busType">Bus Type</label>
-                                        <input type="text" class="form-control" id="busType"
-                                            placeholder="e.g., AC, Non-AC" required>
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label for="busCapacity">Capacity</label>
-                                        <input type="number" class="form-control" id="busCapacity"
-                                            placeholder="e.g., 40, 50" required>
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label>&nbsp;</label> <button type="submit" class="btn btn-primary mt-2">Save
-                                            Bus</button>
-                                    </div>
-                                </div>
-                            </form>
+                            <!-- ADD BUS BUTTON -->
+                            <button type="button" class="btn btn-success mb-3" id="openAddBusModalBtn">
+                                Add New Bus
+                            </button>
+
                             <!-- BUS TABLE -->
                             <h5 class="card-title text-dark">Bus List</h5>
                             <div class="table-responsive">
@@ -306,34 +286,18 @@
                     </div>
                 </div>
             </div>
+
             <!-- MANAGE ROUTES -->
             <h2>Manage Routes</h2>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <!-- ADD ROUTE -->
-                            <h5 class="card-title text-dark">Add New Route</h5>
-                            <form id="addRouteForm" class="mb-4">
-                                <div class="form-row">
-                                    <div class="form-group col-md-3">
-                                        <label for="routeFrom">From</label>
-                                        <input type="text" class="form-control" id="routeFrom" required>
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label for="routeTo">To</label>
-                                        <input type="text" class="form-control" id="routeTo" required>
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label for="routeDistance">Distance (KM)</label>
-                                        <input type="number" class="form-control" id="routeDistance" required>
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label>&nbsp;</label>
-                                        <button type="submit" class="btn btn-primary mt-2">Save Route</button>
-                                    </div>
-                                </div>
-                            </form>
+                            <!-- ADD ROUTE BUTTON -->
+                            <button type="button" class="btn btn-success mb-3" id="openAddRouteModalBtn">
+                                Add New Route
+                            </button>
+
                             <!-- ROUTE TABLE -->
                             <h5 class="card-title text-dark">Route List</h5>
                             <div class="table-responsive">
@@ -354,32 +318,102 @@
                                     </tbody>
                                 </table>
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- Add/Edit Bus Modal -->
+        <div class="modal fade" id="busModal" tabindex="-1" role="dialog" aria-labelledby="busModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="busModalLabel">Add New Bus</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="addBusForm">
+                            <div class="form-group">
+                                <label for="busName">Bus Name</label>
+                                <input type="text" class="form-control" id="busName" placeholder="e.g., Super Cruiser" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="busType">Bus Type</label>
+                                <input type="text" class="form-control" id="busType" placeholder="e.g., AC, Non-AC" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="busCapacity">Capacity</label>
+                                <input type="number" class="form-control" id="busCapacity" placeholder="e.g., 40, 50" required>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" form="addBusForm" class="btn btn-primary" id="saveBusBtn">Save Bus</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add/Edit Route Modal -->
+        <div class="modal fade" id="routeModal" tabindex="-1" role="dialog" aria-labelledby="routeModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="routeModalLabel">Add New Route</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="addRouteForm">
+                            <div class="form-group">
+                                <label for="routeFrom">From</label>
+                                <input type="text" class="form-control" id="routeFrom" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="routeTo">To</label>
+                                <input type="text" class="form-control" id="routeTo" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="routeDistance">Distance (KM)</label>
+                                <input type="number" class="form-control" id="routeDistance" required>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" form="addRouteForm" class="btn btn-primary" id="saveRouteBtn">Save Route</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- REPORTS -->
          <!-- REPORT TABLE -->
-        <div class="row card-body">
-            <h5 class="card-title">Supervisor Reports</h5>
-            <table class="table table-striped" id="reports-table">
-                <thead>
-                    <tr>
-                        <th>Supervisor ID</th>
-                        <th>Report Title</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </div>
         <!-- REPORT CHART -->
         <section id="report" class="dashboard" style="display: none;">
             <h2>Reports</h2>
+
+            <!-- Supervisor Reports Table -->
+            <div class="row card-body">
+                <h5 class="card-title">Supervisor Reports</h5>
+                <table class="table table-striped" id="reports-table">
+                    <thead>
+                        <tr>
+                            <th>Supervisor ID</th>
+                            <th>Report Title</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+
             <div class="row">
                 <div class="col-md-6">
                     <div class="card">
@@ -409,7 +443,7 @@
             </div>
         </section>
 
-        <!-- CUSTOMER SERVICE -->
+
         <section id="customerservice" class="dashboard" style="display: none;">
             <h2>Passenger Requests / Complaints</h2>
             <div class="row">
@@ -422,7 +456,7 @@
                                     <thead>
                                         <tr>
                                             <th>User ID
-                                                <button class="sort-button" onclick="sortTable(0)">&#x21D5;</button>
+                                                <button class="sort-button" onclick="sortTable(0)">⇕</button>
                                             </th>
                                             <th>Type</th>
                                             <th>Message</th>
