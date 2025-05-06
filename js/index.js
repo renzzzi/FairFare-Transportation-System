@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 $(document).ready(function () {
 	$(".navbar-toggler").on("click", function () {
-		var target = $(this).data("target");
+		let target = $(this).data("target");
 		$(target).toggleClass("collapse");
 	});
 
