@@ -236,41 +236,37 @@
       <script>
         document.addEventListener('DOMContentLoaded', function() {
             // --- DOM Element References ---
+            // (Keep existing references)
             const sidebarLinks = document.querySelectorAll('#sidebar ul li a[data-target]');
             const contentSections = document.querySelectorAll('.content-section');
             const sidebarCollapseBtn = document.getElementById('sidebarCollapseBtn');
             const sidebar = document.getElementById('sidebar');
             const viewManifestLinks = document.querySelectorAll('.view-manifest-link');
-            const contentArea = document.getElementById('content'); // Main content area for delegation
+            const contentArea = document.getElementById('content');
 
-            // Table Bodies
             const bookedTbody = document.getElementById('booked-clients-tbody');
             const arrivedTbody = document.getElementById('arrived-clients-tbody');
-            const unarrivedTbody = document.getElementById('unarrived-clients-tbody'); // Added reference
+            const unarrivedTbody = document.getElementById('unarrived-clients-tbody');
 
-            // Acknowledge Modal
             const acknowledgeModalEl = document.getElementById('acknowledgeModal');
             const acknowledgeModalInstance = acknowledgeModalEl ? new bootstrap.Modal(acknowledgeModalEl) : null;
             const confirmAcknowledgeBtn = document.getElementById('confirmAcknowledgeBtn');
             const acknowledgeTripBtn = document.getElementById('acknowledge-trip-btn');
 
-            // Trip Status Confirm Modal
             const tripStatusConfirmModalEl = document.getElementById('tripStatusConfirmModal');
             const tripStatusConfirmModalInstance = tripStatusConfirmModalEl ? new bootstrap.Modal(tripStatusConfirmModalEl) : null;
             const confirmModalTitle = document.getElementById('confirmModalTitle');
             const confirmModalBody = document.getElementById('confirmModalBody');
             const confirmStatusBtn = document.getElementById('confirmStatusBtn');
 
-            // Passenger Detail Modal --- References updated ---
             const passengerDetailModalEl = document.getElementById('passengerDetailModal');
             const passengerDetailModalInstance = passengerDetailModalEl ? new bootstrap.Modal(passengerDetailModalEl) : null;
             const detailName = document.getElementById('detail-name');
             const detailTicketId = document.getElementById('detail-ticket-id');
-            const detailStatusBadge = document.getElementById('detail-status-badge'); // Changed ID for clarity
+            const detailStatusBadge = document.getElementById('detail-status-badge');
             const detailAge = document.getElementById('detail-age');
             const detailContact = document.getElementById('detail-contact');
 
-            // Trip Status Elements
             const departBtn = document.getElementById('depart-now-btn');
             const arrivedBtn = document.getElementById('arrived-btn');
             const undoBtn = document.getElementById('undo-status-btn');
@@ -283,10 +279,10 @@
             // --- State Variables ---
             let currentTripState = 'PENDING';
             let previousTripState = null;
-            let actionToConfirm = null;
-            let nextArrivedIndex = 2; // Start index for dynamically added arrived passengers
+            let actionToConfirm = null; // Variable to store the action ('DEPARTED' or 'ARRIVED')
+            let nextArrivedIndex = arrivedTbody ? arrivedTbody.rows.length + 1 : 1; // Calculate starting index dynamically
 
-           // --- Sample Passenger Data Store (Keep existing) ---
+           // --- Sample Passenger Data Store ---
            const passengerDataStore = {
                "101": { name: "Juan Dela Cruz", ticketId: "FF100724A", status: "Booked", age: 30, contact: "+639171111111" },
                "102": { name: "Maria Clara", ticketId: "FF100724B", status: "Booked", age: 25, contact: "+639172222222" },
@@ -296,26 +292,23 @@
                "106": { name: "Simoun Ibarra", ticketId: "FF100724F", status: "Pending Arrival", age: 38, contact: "+639176666666" }
            };
 
-            // --- Helper Function to get current time ---
+            // --- Helper Functions ---
             function getCurrentTimestamp() {
                 return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
             }
 
-            // --- Helper Function to create status badge HTML ---
             function createStatusBadge(status) {
-                switch(status.toLowerCase()) {
+                switch(status?.toLowerCase()) { // Added optional chaining for safety
                     case 'booked': return '<span class="badge bg-info">Booked</span>';
                     case 'arrived': return '<span class="badge bg-success">Arrived</span>';
                     case 'pending arrival': return '<span class="badge bg-warning text-dark">Pending Arrival</span>';
                     case 'no show': return '<span class="badge bg-danger">No Show</span>';
-                    default: return `<span class="badge bg-secondary">${status}</span>`;
+                    default: return `<span class="badge bg-secondary">${status || 'Unknown'}</span>`;
                 }
             }
 
-
-            // --- Core Functions (Keep existing showContentSection, updateTripStatusUI) ---
+            // --- Core Functions ---
             function showContentSection(targetId) {
-                // (Implementation remains the same as provided before)
                 if (!targetId) return;
                 let foundTarget = false;
                 contentSections.forEach(section => {
@@ -330,139 +323,183 @@
                 sidebarLinks.forEach(link => {
                     link.parentElement.classList.toggle('active', link.getAttribute('data-target') === targetId);
                 });
-                 // Ensure content scrolls to top when changing sections
-                 if(contentArea) contentArea.scrollTop = 0;
+                if(contentArea) contentArea.scrollTop = 0;
             }
 
             function updateTripStatusUI(newState) {
-                // (Implementation remains the same as provided before)
-                 currentTripState = newState;
-                [progressDeparture, progressTraveling, progressArrived].forEach(el => { if(el){ el.classList.remove('status-pending', 'status-active', 'status-complete'); el.textContent = ''; }});
+                // Store the current state BEFORE updating, only if it's a valid transition forward
+                if ((newState === 'DEPARTED' && currentTripState === 'PENDING') || (newState === 'ARRIVED' && currentTripState === 'DEPARTED')) {
+                    previousTripState = currentTripState;
+                } else if (newState === previousTripState) {
+                     // If we are undoing, clear the previous state so we can't undo further back for now
+                     previousTripState = null;
+                }
+
+                currentTripState = newState;
+
+                // Reset progress bars
+                [progressDeparture, progressTraveling, progressArrived].forEach(el => {
+                    if(el){
+                         el.classList.remove('status-pending', 'status-active', 'status-complete');
+                         el.textContent = '';
+                    }
+                });
+
+                // Reset visibility of buttons and messages
                 if(actionButtonsContainer) actionButtonsContainer.style.display = 'block';
                 if(completeMessage) completeMessage.style.display = 'none';
                 if(departBtn) departBtn.style.display = 'none';
                 if(arrivedBtn) arrivedBtn.style.display = 'none';
-                if(undoBtn) undoBtn.style.display = previousTripState ? 'inline-block' : 'none';
+                if(undoBtn) undoBtn.style.display = previousTripState ? 'inline-block' : 'none'; // Show undo only if there's a state to go back to
 
+                // Apply styles based on the new state
                 switch (currentTripState) {
                     case 'PENDING':
                         if(progressDeparture) { progressDeparture.classList.add('status-active'); progressDeparture.textContent = 'PENDING DEPARTURE'; }
                         if(progressTraveling) progressTraveling.classList.add('status-pending');
                         if(progressArrived) progressArrived.classList.add('status-pending');
-                        if(departBtn) departBtn.style.display = 'inline-block';
-                        if(undoBtn) undoBtn.style.display = 'none';
+                        if(departBtn) departBtn.style.display = 'inline-block'; // Show Depart button
+                        if(undoBtn) undoBtn.style.display = 'none'; // Cannot undo from PENDING
                         break;
                     case 'DEPARTED':
                         if(progressDeparture) { progressDeparture.classList.add('status-complete'); progressDeparture.textContent = 'DEPARTED'; }
                         if(progressTraveling) { progressTraveling.classList.add('status-active'); progressTraveling.textContent = 'TRAVELING'; }
                         if(progressArrived) progressArrived.classList.add('status-pending');
-                        if(arrivedBtn) arrivedBtn.style.display = 'inline-block';
+                        if(arrivedBtn) arrivedBtn.style.display = 'inline-block'; // Show Arrived button
                         break;
                     case 'ARRIVED':
                         if(progressDeparture) { progressDeparture.classList.add('status-complete'); progressDeparture.textContent = 'DEPARTED'; }
                         if(progressTraveling) { progressTraveling.classList.add('status-complete'); progressTraveling.textContent = 'TRAVELING'; }
                         if(progressArrived) { progressArrived.classList.add('status-complete'); progressArrived.textContent = 'ARRIVED'; }
-                        if(actionButtonsContainer) actionButtonsContainer.style.display = 'none';
-                        if(completeMessage) completeMessage.style.display = 'block';
-                        // Keep undo button visible even after arrival if previous state exists
-                        if(undoBtn) undoBtn.style.display = previousTripState ? 'inline-block' : 'none';
+                        if(actionButtonsContainer) actionButtonsContainer.style.display = 'none'; // Hide button container
+                        if(completeMessage) completeMessage.style.display = 'block'; // Show complete message
+                        // Undo button visibility is handled above based on previousTripState
                         break;
                 }
+                console.log("Trip State Updated To:", currentTripState, "Previous State:", previousTripState);
             }
 
 
             // --- Event Listeners Setup ---
 
-            // Sidebar Navigation & Mobile Close (Keep existing)
+            // Sidebar Navigation
             if (sidebarLinks.length > 0) {
-                sidebarLinks.forEach(link => {
+                 sidebarLinks.forEach(link => {
+                     link.addEventListener('click', function(event) {
+                         event.preventDefault();
+                         const targetId = this.getAttribute('data-target');
+                         if (targetId) {
+                             showContentSection(targetId);
+                         } else {
+                             console.warn("Sidebar link clicked without data-target attribute.");
+                         }
+                     });
+                 });
+            }
+
+            // "View Manifest" Button(s) Link
+            if (viewManifestLinks.length > 0) {
+                 viewManifestLinks.forEach(link => {
                     link.addEventListener('click', function(event) {
                         event.preventDefault();
                         const targetId = this.getAttribute('data-target');
-                        if (targetId) {
-                            showContentSection(targetId);
-                            // Mobile sidebar closing logic (removed as it's now a bottom bar)
-                            // if (window.innerWidth <= 768 && sidebar && sidebar.classList.contains('active')) {
-                            //     sidebar.classList.remove('active');
-                            // }
+                        if(targetId) showContentSection(targetId);
+                    });
+                 });
+            }
+
+            // Mobile Sidebar Toggle Button (for desktop > 768px)
+            if (sidebarCollapseBtn && sidebar) {
+                 sidebarCollapseBtn.addEventListener('click', function () {
+                     sidebar.classList.toggle('active');
+                 });
+            }
+
+            // Acknowledge Trip Modal Confirmation
+            if (confirmAcknowledgeBtn && acknowledgeModalInstance && acknowledgeTripBtn) {
+                 confirmAcknowledgeBtn.addEventListener('click', () => {
+                     console.log("Trip Acknowledged/Accepted!");
+                     acknowledgeTripBtn.disabled = true;
+                     acknowledgeTripBtn.innerHTML = '<i class="fas fa-check-double"></i> Trip Accepted';
+                     acknowledgeModalInstance.hide();
+                     showContentSection('#booked-clients-section');
+                 });
+            }
+
+             // --- Trip Status Modal Trigger Setup --- CORRECTED ---
+            [departBtn, arrivedBtn].forEach(button => {
+                if (button) {
+                    button.addEventListener('click', (event) => { // Added event parameter
+                        const clickedButton = event.currentTarget; // Use currentTarget
+                        actionToConfirm = clickedButton.dataset.action; // Store the action ('DEPARTED' or 'ARRIVED')
+
+                        // Configure and show the confirmation modal
+                        if (actionToConfirm === 'DEPARTED' && confirmModalTitle && confirmModalBody && confirmStatusBtn) {
+                            confirmModalTitle.textContent = 'Confirm Departure';
+                            confirmModalBody.innerHTML = 'Mark trip as <strong>departed</strong>? This will update the status to Traveling.';
+                            confirmStatusBtn.className = 'btn btn-warning'; // Match button color
+                            confirmStatusBtn.innerHTML = '<i class="fas fa-check me-1"></i>Yes, Depart';
+                            if(tripStatusConfirmModalInstance) tripStatusConfirmModalInstance.show(); // Show modal
+                        } else if (actionToConfirm === 'ARRIVED' && confirmModalTitle && confirmModalBody && confirmStatusBtn) {
+                            confirmModalTitle.textContent = 'Confirm Arrival';
+                            confirmModalBody.innerHTML = 'Mark trip as <strong>arrived</strong>? This will complete the trip status.';
+                            confirmStatusBtn.className = 'btn btn-info'; // Match button color
+                            confirmStatusBtn.innerHTML = '<i class="fas fa-check me-1"></i>Yes, Arrived';
+                            if(tripStatusConfirmModalInstance) tripStatusConfirmModalInstance.show(); // Show modal
                         } else {
-                            console.warn("Sidebar link clicked without data-target attribute.");
+                            console.error("Could not configure confirmation modal. Action:", actionToConfirm);
                         }
                     });
-                });
-            }
-
-            // "View Manifest" Button(s) Link (Keep existing)
-            if (viewManifestLinks.length > 0) {
-                viewManifestLinks.forEach(link => {
-                   link.addEventListener('click', function(event) {
-                       event.preventDefault();
-                       const targetId = this.getAttribute('data-target');
-                       if(targetId) showContentSection(targetId);
-                   });
-                });
-            }
-
-            // Mobile Sidebar Toggle Button (Keep existing - only for >768px now)
-            if (sidebarCollapseBtn && sidebar) {
-                sidebarCollapseBtn.addEventListener('click', function () {
-                     // Toggle margin instead of class for desktop fly-out if needed
-                     // Or keep using a class if you prefer
-                     sidebar.classList.toggle('active'); // Assuming 'active' still controls visibility/position > 768px
-                });
-            }
-
-            // Acknowledge Trip Modal Confirmation (Keep existing)
-            if (confirmAcknowledgeBtn && acknowledgeModalInstance && acknowledgeTripBtn) {
-                confirmAcknowledgeBtn.addEventListener('click', () => {
-                    console.log("Trip Acknowledged/Accepted!");
-                    acknowledgeTripBtn.disabled = true;
-                    acknowledgeTripBtn.innerHTML = '<i class="fas fa-check-double"></i> Trip Accepted';
-                    acknowledgeModalInstance.hide();
-                     // Maybe auto-navigate to booked clients?
-                     showContentSection('#booked-clients-section');
-                });
-            }
-
-            // Setup for Trip Status Modal Trigger Buttons (Keep existing)
-            [departBtn, arrivedBtn].forEach(button => {
-                 if (button) { button.addEventListener('click', () => { /* ... */ }); } // Unchanged
+                }
             });
 
-            // Trip Status Modal Confirmation Button Click (Keep existing)
+            // --- Trip Status Modal Confirmation Button Click --- CORRECTED ---
             if (confirmStatusBtn && tripStatusConfirmModalInstance) {
-                 confirmStatusBtn.addEventListener('click', () => { /* ... */ }); // Unchanged
+                confirmStatusBtn.addEventListener('click', () => {
+                    if (actionToConfirm) {
+                        console.log(`Confirming action: ${actionToConfirm}`);
+                        // Update the UI based on the stored action
+                        updateTripStatusUI(actionToConfirm);
+                        actionToConfirm = null; // Reset the action after confirmation
+                        tripStatusConfirmModalInstance.hide(); // Hide the modal
+                    } else {
+                        console.error("Confirm button clicked but no action was stored.");
+                    }
+                });
             }
 
-            // Undo Trip Status Button (Keep existing)
+            // Undo Trip Status Button --- CORRECTED ---
             if (undoBtn) {
-                 undoBtn.addEventListener('click', () => { /* ... */ }); // Unchanged
+                undoBtn.addEventListener('click', () => {
+                    if (previousTripState !== null) {
+                        console.log(`Undoing status change. Reverting to: ${previousTripState}`);
+                        const stateToRevertTo = previousTripState;
+                        // Clear previousTripState BEFORE updating UI to prevent immediate re-undo
+                        previousTripState = null;
+                        updateTripStatusUI(stateToRevertTo); // Revert to the stored previous state
+                    } else {
+                        console.log("Nothing to undo.");
+                    }
+                });
             }
 
-            // --- Client Action Buttons (Event Delegation on Content Area) - UPDATED ---
+            // --- Client Action Buttons (Event Delegation) ---
+            // (Keep existing implementation - it seems correct)
             if(contentArea && bookedTbody && arrivedTbody && unarrivedTbody) {
                 contentArea.addEventListener('click', function(event) {
                     const targetButton = event.target.closest('.action-btn');
-                    if (!targetButton) return; // Exit if click wasn't on an action button
-
+                    if (!targetButton) return;
                     const row = targetButton.closest('tr');
-                    if (!row) return; // Exit if button wasn't in a row
-
+                    if (!row) return;
                     const passengerId = row.dataset.passengerId;
-                    if (!passengerId) return; // Exit if row has no passenger ID
+                    if (!passengerId) return;
+                    const passengerInfo = passengerDataStore[passengerId] || {};
 
-                    const passengerInfo = passengerDataStore[passengerId] || {}; // Get data from store
-
-                    // --- MARK ARRIVED ACTION ---
+                    // MARK ARRIVED
                     if (targetButton.classList.contains('mark-arrived')) {
-                        console.log(`Marking passenger ${passengerId} (${passengerInfo.name}) as arrived.`);
-
-                        // 1. Get data from the original row
                         const name = row.querySelector('.passenger-name')?.textContent || passengerInfo.name || 'N/A';
                         const ticketId = row.querySelector('.ticket-id')?.textContent || passengerInfo.ticketId || 'N/A';
                         const timestamp = getCurrentTimestamp();
-
-                        // 2. Create the new row HTML for the arrived table
                         const newRowHtml = `
                             <tr data-passenger-id="${passengerId}">
                                 <th scope="row">${nextArrivedIndex}</th>
@@ -475,48 +512,26 @@
                                     <button class="btn btn-sm btn-outline-secondary action-btn view-details"><i class="fas fa-eye fa-xs me-1"></i> Details</button>
                                 </td>
                             </tr>`;
-
-                        // 3. Append to the arrived table body
-                        arrivedTbody.insertAdjacentHTML('beforeend', newRowHtml);
-                        nextArrivedIndex++; // Increment index for the next arrival
-
-                        // 4. Update status in data store (important for Details modal)
+                        if (arrivedTbody) arrivedTbody.insertAdjacentHTML('beforeend', newRowHtml);
+                        nextArrivedIndex++;
                         if(passengerDataStore[passengerId]) passengerDataStore[passengerId].status = 'Arrived';
-
-                        // 5. Remove the original row
                         row.remove();
-
-                        // Optional: Add visual feedback (e.g., flash the new row)
                     }
-                    // --- VIEW DETAILS ACTION ---
+                    // VIEW DETAILS
                     else if (targetButton.classList.contains('view-details')) {
-                        console.log(`View details for passenger ${passengerId} (${passengerInfo.name}).`);
-
-                        // Populate the modal
                         if(detailName) detailName.textContent = passengerInfo.name || 'N/A';
                         if(detailTicketId) detailTicketId.textContent = passengerInfo.ticketId || 'N/A';
-                        if(detailStatusBadge) detailStatusBadge.innerHTML = createStatusBadge(passengerInfo.status || 'N/A'); // Use helper
+                        if(detailStatusBadge) detailStatusBadge.innerHTML = createStatusBadge(passengerInfo.status || 'N/A');
                         if(detailAge) detailAge.textContent = passengerInfo.age ? `${passengerInfo.age} years old` : 'N/A';
                         if(detailContact) detailContact.textContent = passengerInfo.contact || 'N/A';
-
-                        // Show the modal
-                        if (passengerDetailModalInstance) {
-                            passengerDetailModalInstance.show();
-                        }
+                        if (passengerDetailModalInstance) passengerDetailModalInstance.show();
                     }
-                    // --- MARK UNARRIVED ACTION ---
+                    // MARK UNARRIVED
                     else if (targetButton.classList.contains('mark-unarrived')) {
-                         console.log(`Marking passenger ${passengerId} (${passengerInfo.name}) back to unarrived/booked.`);
-
-                        // 1. Get data from the arrived row
                         const name = row.querySelector('.passenger-name')?.textContent || passengerInfo.name || 'N/A';
                         const ticketId = row.querySelector('.ticket-id')?.textContent || passengerInfo.ticketId || 'N/A';
-
-                         // 2. Create the new row HTML for the booked table (or unarrived if logic dictates)
-                         // Let's put them back in 'Booked' for simplicity here.
-                         // Find next available index for booked table
-                         const nextBookedIndex = (bookedTbody.rows.length || 0) + 1;
-                         const newRowHtml = `
+                        const nextBookedIndex = (bookedTbody?.rows.length || 0) + 1;
+                        const newRowHtml = `
                             <tr data-passenger-id="${passengerId}">
                                 <th scope="row">${nextBookedIndex}</th>
                                 <td class="passenger-name">${name}</td>
@@ -527,29 +542,18 @@
                                     <button class="btn btn-sm btn-outline-secondary action-btn view-details"><i class="fas fa-eye fa-xs me-1"></i> Details</button>
                                 </td>
                             </tr>`;
-
-                         // 3. Append to the booked table body
-                         bookedTbody.insertAdjacentHTML('beforeend', newRowHtml);
-
-                         // 4. Update status in data store
-                         if(passengerDataStore[passengerId]) passengerDataStore[passengerId].status = 'Booked';
-
-                         // 5. Remove the original row from arrived
-                         row.remove();
-
-                         // Note: This doesn't re-number the arrived list. For full robustness, re-numbering on add/remove would be needed.
+                        if (bookedTbody) bookedTbody.insertAdjacentHTML('beforeend', newRowHtml);
+                        if(passengerDataStore[passengerId]) passengerDataStore[passengerId].status = 'Booked';
+                        row.remove();
+                        // Note: This doesn't re-number arrived list indices.
                     }
-                    // --- MARK NO SHOW ACTION ---
+                    // MARK NO SHOW
                     else if (targetButton.classList.contains('mark-noshow')) {
-                        console.log(`Marking passenger ${passengerId} (${passengerInfo.name}) as No Show.`);
-                        const actionsCell = row.querySelector('.actions-cell');
-                        if(actionsCell) {
-                            actionsCell.innerHTML = `<span class="text-danger fw-bold"><i class="fas fa-user-slash me-1"></i> No Show</span>`;
-                        }
-                         // Update status in data store
+                         const actionsCell = row.querySelector('.actions-cell');
+                         if(actionsCell) {
+                             actionsCell.innerHTML = `<span class="text-danger fw-bold"><i class="fas fa-user-slash me-1"></i> No Show</span>`;
+                         }
                          if(passengerDataStore[passengerId]) passengerDataStore[passengerId].status = 'No Show';
-                        // Remove row or move to a dedicated 'No Show' table if needed
-                        // For now, just changing the actions cell in the 'Unarrived' list.
                     }
                 });
             } else {
@@ -557,7 +561,7 @@
             }
 
             // --- Initial Setup ---
-            updateTripStatusUI(currentTripState);
+            updateTripStatusUI(currentTripState); // Initialize UI based on default state
             showContentSection('#assigned-trip-section'); // Start on assigned trip section
 
         }); // End DOMContentLoaded
