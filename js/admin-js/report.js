@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize the report section to be hidden
     const reportSection = document.getElementById('report');
     if (reportSection) {
-        reportSection.style.display = 'none'; // This will be controlled by your main navigation logic
+        reportSection.style.display = 'none';
     }
 
     // --- Supervisor Reports Table ---
@@ -16,41 +16,50 @@ document.addEventListener('DOMContentLoaded', function() {
     const reportsTableBody = document.querySelector('#reports-table tbody');
     if (reportsTableBody) {
         reportsTableBody.innerHTML = ''; // Clear existing rows if any
+
         reportsData.forEach(report => {
             const row = reportsTableBody.insertRow();
 
-            row.insertCell().textContent = report.id;
-            row.insertCell().textContent = report.title;
+            row.insertCell().textContent = report.id;       // Column 1: Supervisor ID
+            row.insertCell().textContent = report.title;   // Column 2: Report Title
 
-            const statusCell = row.insertCell();
-            const statusButton = document.createElement('button');
-            statusButton.classList.add('btn', 'btn-sm');
+            const statusTextCell = row.insertCell();        // Column 3: Status (Text + Background)
+            const actionsCell = row.insertCell();           // Column 4: Actions (Button)
 
-            // Function to update button appearance and text based on status
-            const updateButtonAppearance = (button, currentStatus) => {
+            const actionButton = document.createElement('button');
+            actionButton.classList.add('btn', 'btn-sm');
+
+            // Function to update status text, its background, and button appearance
+            const updateReportRowAppearance = (currentStatus) => {
+                statusTextCell.textContent = currentStatus; // Set text content of the status cell
+
                 if (currentStatus === 'Unseen') {
-                    button.textContent = 'Mark as Seen';
-                    button.classList.remove('btn-success');
-                    button.classList.add('btn-warning');
-                } else {
-                    button.textContent = 'Mark as Unseen';
-                    button.classList.remove('btn-warning');
-                    button.classList.add('btn-success');
+                    // Apply styles for 'Unseen' status
+                    statusTextCell.className = 'status-cell status-unseen'; // Class for BG color and text styling
+                    actionButton.textContent = 'Mark as Seen';
+                    actionButton.classList.remove('btn-success', 'text-white');
+                    actionButton.classList.add('btn-warning', 'text-dark'); // text-dark for better contrast on yellow
+                } else { // 'Seen'
+                    // Apply styles for 'Seen' status
+                    statusTextCell.className = 'status-cell status-seen';   // Class for BG color and text styling
+                    actionButton.textContent = 'Mark as Unseen';
+                    actionButton.classList.remove('btn-warning', 'text-dark');
+                    actionButton.classList.add('btn-success', 'text-white');
                 }
             };
 
-            updateButtonAppearance(statusButton, report.status); // Set initial appearance
+            updateReportRowAppearance(report.status); // Set initial appearance
 
-            statusButton.addEventListener('click', () => {
+            actionButton.addEventListener('click', () => {
                 // Toggle status in the data array
                 report.status = (report.status === 'Unseen') ? 'Seen' : 'Unseen';
-                // Update the button's appearance
-                updateButtonAppearance(statusButton, report.status);
-                console.log(`Report ${report.id} status changed to ${report.status}`);
+                // Update the row's appearance
+                updateReportRowAppearance(report.status);
+                // console.log(`Report ${report.id} status changed to ${report.status}`);
                 // In a real app, you'd likely send an update to the server here.
             });
 
-            statusCell.appendChild(statusButton);
+            actionsCell.appendChild(actionButton);
         });
     }
 
@@ -196,7 +205,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         position: 'top',
                     },
                     title: {
-                        display: false, // The h3 is already there
+                        display: false,
                         text: 'Customer Demographics'
                     }
                 }
@@ -204,27 +213,18 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Event listener for the time range selector
     const timeRangeSelector = document.getElementById('seatsbooked-timerange');
     if (timeRangeSelector) {
         timeRangeSelector.addEventListener('change', function() {
             renderSalesRevenueChart(this.value);
         });
-        // Initial render of sales chart
-        renderSalesRevenueChart(timeRangeSelector.value);
+        renderSalesRevenueChart(timeRangeSelector.value); // Initial render
     } else {
-        // Fallback if selector not found, render with default
-        renderSalesRevenueChart('1y');
+        renderSalesRevenueChart('1y'); // Fallback
     }
 
+    renderCustomerDemographicsChart(); // Initial render
 
-    // Initial render of demographics chart
-    renderCustomerDemographicsChart();
-
-
-    // Expose functions to render charts if the report section becomes visible later
-    // This is useful if charts are initialized while the parent section is display:none
-    // You would call these when you make the #report section visible.
     window.renderReportCharts = function() {
         if (timeRangeSelector) {
             renderSalesRevenueChart(timeRangeSelector.value);
@@ -233,10 +233,4 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         renderCustomerDemographicsChart();
     };
-
-    // Example: If you have a button to show the report section:
-    // document.getElementById('showReportsButton').addEventListener('click', () => {
-    //     document.getElementById('report').style.display = 'block'; // or 'flex', etc.
-    //     window.renderReportCharts(); // Re-render charts when section is visible
-    // });
 });

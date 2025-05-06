@@ -35,25 +35,30 @@ function populateTable() {
         row.insertCell().textContent = item.submitted;
 
         const actionsCell = row.insertCell();
-        const select = document.createElement("select");
-        select.className = "form-control form-control-sm";
-        select.onchange = function() {
-            updateStatus(this, item.id);
-        };
+        actionsCell.className = "actions-buttons-container"; // For styling the container
 
-        ["Pending", "Reviewed", "Resolved"].forEach(option => {
-            const optionElement = document.createElement("option");
-            optionElement.value = option;
-            optionElement.textContent = option;
-            if (option === item.status) {
-                optionElement.selected = true;
+        const statuses = ["Pending", "Reviewed", "Resolved"];
+        statuses.forEach(statusOption => {
+            const button = document.createElement("button");
+            button.textContent = statusOption;
+            // Add some basic classes for styling (e.g., if you use Bootstrap)
+            // You might need to add CSS for these classes if not using a framework
+            button.className = `btn btn-sm action-status-btn btn-${statusOption.toLowerCase()}`;
+            button.style.marginRight = "4px"; // Basic spacing
+
+            if (item.status === statusOption) {
+                button.disabled = true; // Disable button for the current status
             }
-            select.appendChild(optionElement);
+
+            button.onclick = function() {
+                updateItemStatus(item.id, statusOption);
+            };
+            actionsCell.appendChild(button);
         });
-        actionsCell.appendChild(select);
     });
     updatePendingCount(); //update count
 }
+
 //SORTING
 function sortTable(n) {
     var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
@@ -67,6 +72,10 @@ function sortTable(n) {
             shouldSwitch = false;
             x = rows[i].getElementsByTagName("TD")[n];
             y = rows[i + 1].getElementsByTagName("TD")[n];
+            // Check if x and y are valid and have innerHTML
+            if (!x || !y || typeof x.innerHTML === 'undefined' || typeof y.innerHTML === 'undefined') {
+                continue; // Skip if cells are not as expected
+            }
             if (dir == "asc") {
                 if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
                     shouldSwitch = true;
@@ -76,37 +85,56 @@ function sortTable(n) {
                 if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
                     shouldSwitch = true;
                     break;
-            }
-        }
-            if (shouldSwitch) {
-                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                switching = true;
-                switchcount++;
-            } else {
-                if (switchcount == 0 && dir == "asc") {
-                    dir = "desc";
-                    switching = true;
                 }
             }
+        } // Added missing closing curly brace for the for loop
+        if (shouldSwitch) {
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+            switchcount++;
+        } else {
+            if (switchcount == 0 && dir == "asc") {
+                dir = "desc";
+                switching = true;
+            }
         }
-    }   
+    }
 }
-// UPDATE
-function updateStatus(selectElement, id) {
-    const status = selectElement.value;
-    const row = selectElement.parentNode.parentNode;
 
-    requests = requests.map(item => {
-        if (item.id === id) {
-            return { ...item, status: status };
-        }
-        return item;
-    });
+// UPDATE item status (called by action buttons)
+function updateItemStatus(itemId, newStatus) {
+    // 1. Update the in-memory 'requests' array
+    const itemIndex = requests.findIndex(req => req.id === itemId);
+    if (itemIndex === -1) {
+        console.error("Item not found in requests array:", itemId);
+        return;
+    }
+    requests[itemIndex].status = newStatus;
 
-    row.querySelector(".status").textContent = status;
-    row.querySelector(".status").className = "status " + status.toLowerCase();
-    row.setAttribute("data-status", status); //update data-status
+    const tableBody = document.querySelector("#requests-table tbody");
+    const row = Array.from(tableBody.rows).find(r => r.getAttribute("data-id") === itemId);
 
+    if (row) {
+        const statusCell = row.cells[3];
+        statusCell.textContent = newStatus;
+        statusCell.className = "status " + newStatus.toLowerCase();
+
+        // Update data-status attribute on the row itself
+        row.setAttribute("data-status", newStatus);
+
+        const actionButtons = row.cells[5].querySelectorAll(".action-status-btn");
+        actionButtons.forEach(button => {
+            if (button.textContent === newStatus) {
+                button.disabled = true;
+            } else {
+                button.disabled = false;
+            }
+        });
+    } else {
+        console.warn(`Row with id ${itemId} not found for DOM update. Consider repopulating.`);
+    }
+
+    // 3. Update pending count
     updatePendingCount();
 }
 

@@ -389,3 +389,159 @@ th a:hover {
     border-radius: 5px;
     cursor: pointer;
 }
+.actions-buttons-container .action-status-btn {
+    padding: 5px 7px;
+    font-size: 0.875em; 
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 4px;
+    color: white; 
+    min-width: 80px; 
+    text-align: center;
+    font-weight: 400;
+}
+
+.actions-buttons-container .action-status-btn:hover:not(:disabled) {
+    opacity: 0.85; 
+}
+
+/* --- Button Colors --- */
+
+.actions-buttons-container .btn-pending {
+    background-color: #e59c9c;
+    border-color: #c7aeae;
+    color: #ffffff; 
+}
+.actions-buttons-container .btn-pending:hover:not(:disabled) {
+    background-color: #c06c6c;
+    border-color: #752121;
+}
+
+.actions-buttons-container .btn-reviewed {
+    background-color: #ecd820;
+    border-color: #c2bf76;
+    color: white;
+}
+.actions-buttons-container .btn-reviewed:hover:not(:disabled) {
+    background-color:#c0bd57;
+    border-color: #fffee4;
+}
+
+.actions-buttons-container .btn-resolved {
+    background-color: #28a745; 
+    border-color: #28a745;
+    color: white;
+}
+.actions-buttons-container .btn-resolved:hover:not(:disabled) {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+.actions-buttons-container .action-status-btn:disabled {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: #fff;
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.status.pending, .status.reviewed, .status.resolved{
+    font-weight: bold;
+}
+
+.status-cell {
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle !important; 
+    padding: 0.75rem; 
+}
+
+.status-unseen {
+    background-color: #fff3cd; 
+}
+
+.status-seen {
+    background-color: #cadad3;
+}
+
+#reports-table .btn {
+    min-width: 130px;
+}
+.passenger-status-cell {
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle !important;
+    padding: 0.75rem;
+}
+
+.passenger-status-active {
+    background-color: #cadad3; 
+}
+
+.passenger-status-inactive {
+    background-color: #fff3cd;
+}
+
+#passengerAccountsTable th{
+    text-align: center;
+    vertical-align: top; 
+}
+
+#passengerAccountsTable .actions-cell,
+#passengerAccountsTable td:last-child { 
+    white-space: nowrap; 
+}
+
+#passengerAccountsTable .btn {
+    margin: 2px; 
+}
+
+#passengerAccountsTable td,
+#passengerAccountsTable th {
+    vertical-align: middle;
+}
+
+.btn i.fas {
+    margin-right: 4px;
+}
+.status-cell {
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle !important;
+    padding: 0.5rem 0.75rem;
+}
+
+.status-active-bg {
+    background-color: #d1e7dd;
+}
+.status-inactive-bg {
+    background-color: #e9ecef;
+}
+
+.status-approved-bg {
+    background-color: #b0c7df;
+}
+.status-pending-bg {
+    background-color: #fff3cd;
+}
+.status-rejected-bg {
+    background-color: #f8d7da;
+}
+
+/* Center all table cell and header content */
+#supervisorAccountsTable td,
+#supervisorAccountsTable th {
+    vertical-align: middle;
+}
+
+#supervisorAccountsTable th {
+    text-align: center;
+}
+
+#supervisorAccountsTable td.text-nowrap {
+    white-space: nowrap;
+}
+#supervisorAccountsTable td.text-nowrap .btn {
+    margin: 0.09rem;
+}
