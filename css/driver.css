@@ -1,0 +1,191 @@
+
+        :root {
+            --bs-primary: #00cde1;
+            --bs-secondary: #E18702;
+            --bs-primary-rgb: 0, 205, 225;
+            --sidebar-bg: var(--bs-primary);
+            --sidebar-header-bg: color-mix(in srgb, var(--bs-primary) 85%, black);
+            --sidebar-link-hover-bg: color-mix(in srgb, var(--bs-primary) 90%, black);
+            --sidebar-link-active-bg: color-mix(in srgb, var(--bs-primary) 80%, black);
+            --sidebar-text-color: #fff;
+            --sidebar-link-color: #e0fbfc;
+            --sidebar-link-active-color: #fff;
+            --sidebar-icon-color: #e0fbfc;
+            --sidebar-icon-active-color: #fff;
+            --bottom-nav-height: 60px; /* Define bottom nav height */
+        }
+
+        .f-primary{
+            color: var(--bs-primary);
+        }
+
+        html, body { height: 100%; overflow: hidden; }
+        body {
+            font-family: Montserrat, sans-serif;
+            display: flex;
+            flex-direction: column;
+            background-color: #f8f9fa;
+        }
+
+        header {
+             position: sticky; top: 0; z-index: 1030; /* Higher z-index than bottom bar */
+             height: 56px;
+             flex-shrink: 0; background-color: rgba(255, 255, 255, 0.75);
+             -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+             box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,.075);
+        }
+        #navbarContent .navbar-nav { align-items: center; }
+        #navbarContent .nav-item { display: flex; align-items: center; }
+        #navbarContent .navbar-text, #navbarContent .nav-link { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+
+        .wrapper {
+            display: flex; flex: 1; overflow: hidden;
+            height: calc(100% - 56px);
+        }
+
+        #sidebar {
+            width: 250px; flex-shrink: 0; background: var(--sidebar-bg);
+            color: var(--sidebar-text-color); transition: margin-left 0.3s, width 0.3s, height 0.3s, bottom 0.3s; /* Added transitions */
+            overflow-y: auto; height: 100%; z-index: 1000; /* Ensure it's above content */
+        }
+
+        #content {
+            flex-grow: 1; padding: 20px; overflow-y: auto; height: 100%;
+            transition: padding-bottom 0.3s; /* Smooth transition for padding */
+        }
+
+        #sidebar .sidebar-header { padding: 20px; background: var(--sidebar-header-bg); text-align: center; border-bottom: 1px solid var(--sidebar-header-bg); }
+        #sidebar .sidebar-header h5 { margin-bottom: 0; font-weight: 600; color: var(--sidebar-text-color); }
+        #sidebar ul.components { padding: 20px 0; border-bottom: 1px solid var(--sidebar-header-bg); margin-bottom: 0; list-style: none; }
+        #sidebar ul li a {
+            padding: 12px 20px; font-size: 1.0em; display: flex; /* Use flex for alignment */
+            align-items: center; /* Vertically center icon and text */
+            color: var(--sidebar-link-color); text-decoration: none; transition: all 0.3s;
+            border-left: 3px solid transparent; cursor: pointer;
+        }
+        #sidebar ul li a i { margin-right: 10px; width: 20px; text-align: center; color: var(--sidebar-icon-color); transition: margin 0.3s; /* Smooth transition for icon margin */ }
+        #sidebar ul li a .link-text { /* Added class for text */
+           flex-grow: 1; /* Allow text to take remaining space */
+           transition: opacity 0.2s, visibility 0.2s; /* Smooth hide/show */
+           opacity: 1;
+           visibility: visible;
+        }
+        #sidebar ul li a:hover { color: var(--sidebar-link-active-color); background: var(--sidebar-link-hover-bg); border-left-color: #fff; }
+        #sidebar ul li.active > a { color: var(--sidebar-link-active-color); background: var(--sidebar-link-active-bg); border-left-color: #fff; }
+        #sidebar ul li.active > a i { color: var(--sidebar-icon-active-color); }
+
+        /* Table Styling */
+        .manifest-table-wrapper { max-height: 400px; overflow-y: auto; border: 1px solid #dee2e6; border-radius: .375rem; margin-bottom: 1rem; }
+        .table thead { position: sticky; top: 0; z-index: 1; background-color: #e9ecef; }
+        .table td .action-btn { white-space: nowrap; margin-bottom: 0.25rem; margin-right: 0.25rem; }
+        .table td:last-child { min-width: 150px; }
+
+        /* Progress Bar Styling (unchanged) */
+        .trip-progress-container { padding: 1.5rem; background-color: #fff; border-radius: .375rem; border: 1px solid #dee2e6; margin-bottom: 1.5rem; }
+        .progress-labels { display: flex; justify-content: space-between; font-size: 0.85rem; color: #6c757d; margin-bottom: 0.5rem; padding: 0 5%; }
+        .progress { height: 25px; font-size: .8rem; border-radius: .375rem; overflow: visible; }
+        .progress-bar { font-weight: 600; color: #fff; text-align: center; white-space: nowrap; display: flex; align-items: center; justify-content: center; transition: background-color .6s ease, color .6s ease; position: relative; border-right: 2px solid #fff; }
+        .progress-bar:last-child { border-right: none; }
+        .progress-bar.status-pending { background-color: #6c757d; }
+        .progress-bar.status-active { background-color: #ffc107; color: #333; }
+        .progress-bar.status-complete { background-color: #198754; }
+        #trip-action-buttons { text-align: center; margin-top: 1.5rem; }
+        #trip-complete-message { font-weight: bold; color: #198754; text-align: center; margin-top: 1.5rem; }
+        #undo-status-btn { margin-left: 10px; }
+
+        /* Hide/show content sections */
+        .content-section { display: none; }
+        .content-section.active { display: block; }
+
+        /* Table cell formatting (unchanged) */
+         .table td, .table th { vertical-align: middle; padding: 0.6rem 0.75rem; }
+         .table th:first-child, .table td:first-child { width: 50px; text-align: center; }
+         .table th:nth-child(2), .table td:nth-child(2) { min-width: 150px; }
+         .table th:nth-child(3), .table td:nth-child(3) { min-width: 120px; font-family: monospace; font-size: 0.85em; }
+         .table th:nth-child(4), .table td:nth-child(4) { min-width: 100px; text-align: center; }
+         .table th:last-child { text-align: right; }
+         .table td:last-child { min-width: 180px; text-align: right; white-space: nowrap; }
+         .table td .action-btn { margin-left: 0.25rem; margin-bottom: 0; }
+
+        /* ---- Mobile Specific Styles (< 769px) ---- */
+        @media (max-width: 768px) {
+            body { /* Adjust body flex for bottom bar */
+                padding-bottom: var(--bottom-nav-height); /* Add padding to prevent content overlap */
+            }
+
+            .wrapper {
+                 height: calc(100% - 56px - var(--bottom-nav-height)); /* Adjust wrapper height */
+                 flex-direction: column; /* Stack sidebar(now bottombar) and content */
+            }
+
+             #sidebarCollapseBtn { display: none; } /* Hide hamburger in header */
+
+            #sidebar {
+                order: 2; /* Make bottom bar appear after content */
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: var(--bottom-nav-height); /* Set fixed height */
+                overflow-y: hidden; /* Hide vertical scroll */
+                z-index: 1025; /* Below header, above content scroll */
+                border-top: 1px solid var(--sidebar-header-bg); /* Add top border */
+                margin-left: 0 !important; /* Override any inline styles/JS */
+            }
+
+            #sidebar .sidebar-header { display: none; } /* Hide header in bottom bar */
+
+            #sidebar ul.components {
+                display: flex;
+                flex-direction: row; /* Arrange items horizontally */
+                justify-content: space-around; /* Distribute items evenly */
+                align-items: center; /* Center items vertically */
+                height: 100%;
+                padding: 0;
+                border-bottom: none; /* Remove bottom border */
+            }
+
+            #sidebar ul li {
+                flex-grow: 1; /* Allow items to take equal space */
+                height: 100%; /* Make list item fill height */
+            }
+
+            #sidebar ul li a {
+                flex-direction: column; /* Stack icon and text (though text is hidden) */
+                justify-content: center; /* Center content vertically */
+                align-items: center; /* Center content horizontally */
+                padding: 5px 0; /* Adjust padding */
+                height: 100%; /* Fill list item height */
+                border-left: none; /* Remove left border */
+                border-top: 3px solid transparent; /* Use top border for active state */
+                font-size: 0.85em; /* Slightly smaller font if needed */
+            }
+            #sidebar ul li a:hover {
+                background: var(--sidebar-link-hover-bg);
+                border-left-color: transparent; /* No left border on hover */
+                border-top-color: #fff; /* Highlight top border on hover */
+            }
+             #sidebar ul li.active > a {
+                background: var(--sidebar-link-active-bg);
+                 border-left-color: transparent; /* No left border when active */
+                 border-top-color: #fff; /* Use top border for active */
+             }
+
+            #sidebar ul li a i {
+                margin-right: 0; /* Remove margin */
+                margin-bottom: 3px; /* Add space below icon */
+                font-size: 1.2em; /* Make icons slightly larger */
+            }
+             #sidebar ul li a .link-text { /* Hide the text */
+                opacity: 0;
+                visibility: hidden;
+                font-size: 0.7em; /* Can keep for accessibility or very small screens */
+                height: 0;
+                overflow: hidden;
+             }
+
+            #content {
+                /* Adjust content padding if necessary, handled by body padding-bottom */
+                 padding-bottom: 1rem; /* Ensure some space at the very bottom */
+            }
+        }
