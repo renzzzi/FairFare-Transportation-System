@@ -450,7 +450,7 @@
       <div class="footer-form">
         <h4 class="bold-h">Share something about us!</h4>
         <p>You can send a direct message to us here.</p>
-        <form class="form-inputs">
+        <form id="messageForm" class="form-inputs">
           <div><input required class="inputs mess-in" type="text" placeholder="Message"></div>
           <div><input required class="inputs email-in" type="email" placeholder="Email"></div>
           <div><button class="submit-btn" type="submit">Send</button></div>
@@ -492,7 +492,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header border-0">
-          <h5 class="modal-title" id="successModalLabel">Subscribed successfully!</h5>
+          <h5 class="modal-title" id="subscribedLabel">Subscribed successfully!</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -506,7 +506,36 @@
             </svg>
           </div>
           <p>Thank you for subscribing to our newsletter!</p>
-          <p class="text-muted">Please check your email for updates.</p>
+          <p class="text-muted">You’ll receive updates, insights, and news all in your inbox.</p>
+        </div>
+        <div data-dismiss="modal" class="modal-footer border-0 justify-content-center">
+          <a href="" class="btn btn-primary px-4">Okay</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MESSAGE SENT MODAL -->
+  <div class="modal fade" id="messageSentModal" tabindex="-1" role="dialog" aria-labelledby="subscribed modal"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header border-0">
+          <h5 class="modal-title" id="messageSentLabel">Thanks for reaching out!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body text-center">
+          <div class="mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor"
+              class="bi bi-check-circle-fill text-success" viewBox="0 0 16 16">
+              <path
+                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+            </svg>
+          </div>
+          <p>Thanks for contacting us. Your message has been received.</p>
+          <p class="text-muted">You’ll hear from us soon — keep an eye on your inbox.</p>
         </div>
         <div data-dismiss="modal" class="modal-footer border-0 justify-content-center">
           <a href="" class="btn btn-primary px-4">Okay</a>
