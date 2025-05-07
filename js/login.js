@@ -10,7 +10,7 @@ $(document).ready(function () {
         const clientusername = "client@test";
         const clientpassword = "1234";
 
-        const tsusername = "supervisor@test";
+        const tsusername = "driver@test";
         const tspassword = "1234";
 
         if (username === adminusername && password === adminpassword) {
@@ -20,11 +20,10 @@ $(document).ready(function () {
             window.location.href = "client.html";
         }
         else if (username === tsusername && password === tspassword) {
-            window.location.href = "supervisor.html";
+            window.location.href = "driver.html";
         }
         else {
             alert("Incorrect username or password, please try again");
-            //window.location.href = "index.html"; //Removed redirect to index.html
         }
     });
 });
